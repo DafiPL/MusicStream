@@ -141,7 +141,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Album i = new Album(rs.getInt("albimID"),
+                Album i = new Album(rs.getInt("albumID"),
                         rs.getInt("genreID"),
                         rs.getInt("artistID"),
                         rs.getString("albumName"),
@@ -152,7 +152,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                 albums.add(i);
             }
         } catch (SQLException e) {
-            System.out.println("Exception occured in the getAllBooks() method: " + e.getMessage());
+            System.out.println("Exception occured in the getAllAlbums() method: " + e.getMessage());
         } finally {
             try {
                 if (rs != null) {

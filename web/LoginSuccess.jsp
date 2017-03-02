@@ -130,7 +130,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
             
         
     <div class="row">
-        <div class ="col-xs-12 col-sm-4 col-md-4">
+        <div class ="col-xs-12 col-sm-4 col-md-3">
             <div class ="customDIV"> LEft SIde Bar <br>
                 
              <div class="col-xs-12 col-sm-12 col-md-12">
@@ -181,7 +181,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
         
         
         
-         <div class ="col-xs-12 col-sm-4 col-md-6">
+         <div class ="col-xs-12 col-sm-4 col-md-7">
              <div class ="customDIV"> MIDDLE SECTIONS  </div>
                  
          </div>

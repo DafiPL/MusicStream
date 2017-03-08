@@ -14,7 +14,7 @@ and open the template in the editor.
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-        <link href="css/common.css" rel="stylesheet">
+        <link href="css/layout.css" rel="stylesheet">
 
 
         <!-- Website Font style -->
@@ -33,6 +33,8 @@ and open the template in the editor.
                 font-family: 'Oxygen', sans-serif;
                 background-size: cover;
             }
+            
+            
         </style>
                    <SCRIPT LANGUAGE="JavaScript">
             
@@ -140,7 +142,25 @@ and open the template in the editor.
             </div><!-- /.container-fluid -->
         </nav>
 
-        <div class="container">
+            <div class="row">
+        <div class ="col-xs-12 col-sm-4 col-md-2">
+            <div class ="customDIV"> LEft SIde Bar <br>
+                
+        
+            
+            
+            
+            </div>
+                
+        </div>
+        
+        
+        
+        
+        
+         <div class ="col-xs-12 col-sm-4 col-md-8">
+             <div class ="customDIV"> MIDDLE Section <br>
+             
             <div class="row main">
                 <div class="main-login main-center">
                     <h5>Sign up</h5>
@@ -249,7 +269,55 @@ and open the template in the editor.
                        
                 </div>
             </div>
-        </div>
+        
+             
+             
+             
+             </div>
+                 
+         </div>
+          <div class ="col-xs-12 col-sm-4 col-md-2">
+              <div class ="customDIV"> RIGHT SIde Bar  </div></div>
+      
+    </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
 
 
 

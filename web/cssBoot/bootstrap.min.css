@@ -49,6 +49,7 @@ form.info {
 
 
 
+
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
@@ -205,3 +206,12 @@ form.info {
                 text-align: center;
             }
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+/*# LAYOUT */
+.customDIV{
+    margin:3px;
+    min-height: 1000px;
+    background-color: silver;
+    text-align: center;
+    font-size: large;
+}

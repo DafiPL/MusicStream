@@ -28,6 +28,7 @@ public class Member {
     private String salt;
     private Date date;
     private Date expiryDate;
+    private String dbImage;
     
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 static SecureRandom rnd = new SecureRandom();
@@ -47,7 +48,7 @@ public Member() {
          this.salt = salt;
     }
 
-    public Member(String username, String firstName, String SecondName, String userType,String password, long phone, String email, String addressLine1, String town, String county, String salt, Date date, Date expiryDate) {
+    public Member(String username, String firstName, String SecondName, String userType,String password, long phone, String email, String addressLine1, String town, String county, String salt, Date date, Date expiryDate, String dbImage) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = SecondName;
@@ -61,6 +62,7 @@ public Member() {
         this.salt = salt;
         this.date =date;
         this.expiryDate = expiryDate;
+        this.dbImage = dbImage;
     }
        public Member(String username, String firstName, String SecondName, String userType,String password, long phone, String email, String addressLine1, String town, String county, String salt) {
         this.username = username;
@@ -233,6 +235,14 @@ public String randomString( int len ){
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    public void setDbImage(String dbImage) {
+        this.dbImage = dbImage;
+    }
+
+    public String getDbImage() {
+        return dbImage;
     }
     
 

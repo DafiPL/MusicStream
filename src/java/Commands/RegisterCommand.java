@@ -67,7 +67,7 @@ public class RegisterCommand implements Command {
                 java.sql.Date expriyDate = new java.sql.Date(calendar.getTime().getTime());
                 Date expireDate = (Date) expriyDate;
 
-                Member u = new Member(username, fname, lname, usertpye, pass, phoneConvert, email, adress, town, county, theSalt, todaysDate, expireDate);
+                Member u = new Member(username, fname, lname, usertpye, pass, phoneConvert, email, adress, town, county, theSalt, todaysDate, expireDate, "./images/avatar.png");
                 int addMember = memDao.addMember(u);
                 HttpSession session = request.getSession();
 

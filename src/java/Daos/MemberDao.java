@@ -182,7 +182,9 @@ public class MemberDao extends Dao implements MemberDaoInterface {
                         rs.getString("county"),
                         rs.getString("saltGen"),
                         rs.getDate("registerDate"),
-                         rs.getDate("expiryDate"));
+                         rs.getDate("expiryDate"),
+                        rs.getString("Avatar"));
+                
             }
 
         } catch (SQLException e) {
@@ -217,7 +219,7 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         Member m2 = null;
         for (int i = 0; i < m.size(); i++) {
             if (m.get(i).getUsername().equalsIgnoreCase(username)) {
-                m2 = new Member(m.get(i).getUsername(), m.get(i).getFirstName(), m.get(i).getLastName(), m.get(i).getUserType(), m.get(i).getPassword(), m.get(i).getPhone(), m.get(i).getEmail(), m.get(i).getAddressLine1(), m.get(i).getTown(), m.get(i).getCounty(), m.get(i).getSalt(), m.get(i).getDate(), m.get(i).getExpiryDate());
+                m2 = new Member(m.get(i).getUsername(), m.get(i).getFirstName(), m.get(i).getLastName(), m.get(i).getUserType(), m.get(i).getPassword(), m.get(i).getPhone(), m.get(i).getEmail(), m.get(i).getAddressLine1(), m.get(i).getTown(), m.get(i).getCounty(), m.get(i).getSalt(), m.get(i).getDate(), m.get(i).getExpiryDate(),  m.get(i).getDbImage());
             }
         }
         return m2;
@@ -288,7 +290,7 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO members(username, firstName, lastName, userType, password, phone, email, addressLine1, town, county, saltGen, registerDate, expiryDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
+            ps = con.prepareStatement("INSERT INTO members(username, firstName, lastName, userType, password, phone, email, addressLine1, town, county, saltGen, registerDate, expiryDate, Avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)");
 
             ps.setString(1, m.getUsername());
             ps.setString(2, m.getFirstName());
@@ -303,6 +305,8 @@ public class MemberDao extends Dao implements MemberDaoInterface {
             ps.setString(11, m.getSalt());
              ps.setDate(12, (Date) m.getDate());
                ps.setDate(13, (Date) m.getExpiryDate());
+               ps.setString(14,  m.getDbImage());
+               
 
             rs = ps.executeUpdate();
 

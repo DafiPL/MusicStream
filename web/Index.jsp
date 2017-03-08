@@ -125,6 +125,61 @@ and open the template in the editor.
 
 
 
+<div class="row">
+        <div class ="col-xs-12 col-sm-4 col-md-2">
+            <div class ="customDIV"> LEft SIde Bar <br>
+                
+        
+            
+            
+            </div>
+                
+        </div>
+        
+        
+        
+        
+        
+         <div class ="col-xs-12 col-sm-4 col-md-8">
+             <div class ="customDIV"> MIDDLE SECTIONS <br>
+             
+
+
+
+
+
+</div>
+                 
+         </div>
+          <div class ="col-xs-12 col-sm-4 col-md-2">
+              <div class ="customDIV"> RIGHT SIde Bar  </div></div>
+      
+    </div>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            
+
+
+
+
+
+
+
+
+
 
 
 

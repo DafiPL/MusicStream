@@ -10,6 +10,11 @@ html {
       -ms-text-size-adjust: 100%;
        background-image: url("images/headphonesBackground.jpg");
 }
+
+
+td.highlight {
+    background-color: red !important;
+}
 body {
   margin: 0;
  background-image: url("images/headphonesBackground.jpg");

@@ -44,6 +44,11 @@ Please login/register here!: <a href="index.jsp">Index</a>
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+          <link href='https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js' rel='stylesheet' type='text/css'>
+        
+        <!-- Data Tables  -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
         <style>
 
             body, html{
@@ -56,6 +61,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
             }
             
         </style>
+      
                   
     </head>
     <body>
@@ -248,7 +254,26 @@ Please login/register here!: <a href="index.jsp">Index</a>
         
         
          <div class ="col-xs-12 col-sm-4 col-md-7">
-             <div class ="customDIV"> MIDDLE SECTIONS  </div>
+             <div class ="customDIV"> MIDDLE SECTIONS 
+            
+       
+       
+        
+        
+        
+        
+        
+        
+        
+       
+             
+          
+             
+             
+             
+             
+             
+             </div>
                  
          </div>
           <div class ="col-xs-12 col-sm-4 col-md-2">

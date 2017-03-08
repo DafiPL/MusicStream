@@ -18,8 +18,9 @@ public class Album {
    private double amountInStock;
    private String albumFormat;
    private String releaseDate;
+     private String albumImage;
 
-    public Album(int albumID, int genreID, int artistID, String albumName, double albumPrice, double amountInStock, String albumFormat, String releaseDate) {
+    public Album(int albumID, int genreID, int artistID, String albumName, double albumPrice, double amountInStock, String albumFormat, String releaseDate, String albumImage) {
         this.albumID = albumID;
         this.genreID = genreID;
         this.artistID = artistID;
@@ -28,6 +29,7 @@ public class Album {
         this.amountInStock = amountInStock;
         this.albumFormat = albumFormat;
         this.releaseDate = releaseDate;
+        this.albumImage = albumImage;
     }
    
    public Album() {
@@ -39,6 +41,14 @@ public class Album {
         this.amountInStock = 2;
         this.albumFormat = "";
         this.releaseDate = "";
+    }
+
+    public void setAlbumImage(String albumImage) {
+        this.albumImage = albumImage;
+    }
+
+    public String getAlbumImage() {
+        return albumImage;
     }
 
     public int getAlbumID() {

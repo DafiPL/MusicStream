@@ -148,7 +148,8 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                         rs.getDouble("albumPrice"),
                         rs.getDouble("amountInStock"),
                         rs.getString("albumFormat"),
-                        rs.getString("releaseDate"));
+                        rs.getString("releaseDate"),
+                         rs.getString("albumImage"));
                 albums.add(i);
             }
         } catch (SQLException e) {
@@ -203,7 +204,8 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                         rs.getDouble("albumPrice"),
                         rs.getDouble("amountInStock"),
                         rs.getString("albumFormat"),
-                        rs.getString("releaseDate"));
+                        rs.getString("releaseDate"),
+                        rs.getString("albumImage"));
                 albums.add(i);
             }
         } catch (SQLException e) {

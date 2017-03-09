@@ -15,12 +15,12 @@ public class Album {
    private int artistID;
    private String albumName;
    private double albumPrice;
-   private double amountInStock;
+   private int amountInStock;
    private String albumFormat;
    private String releaseDate;
      private String albumImage;
 
-    public Album(int albumID, int genreID, int artistID, String albumName, double albumPrice, double amountInStock, String albumFormat, String releaseDate, String albumImage) {
+    public Album(int albumID, int genreID, int artistID, String albumName, double albumPrice, int amountInStock, String albumFormat, String releaseDate, String albumImage) {
         this.albumID = albumID;
         this.genreID = genreID;
         this.artistID = artistID;
@@ -91,11 +91,11 @@ public class Album {
         this.albumPrice = albumPrice;
     }
 
-    public double getAmountInStock() {
+    public int getAmountInStock() {
         return amountInStock;
     }
 
-    public void setAmountInStock(double amountInStock) {
+    public void setAmountInStock(int amountInStock) {
         this.amountInStock = amountInStock;
     }
 

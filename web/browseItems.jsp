@@ -118,7 +118,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
         <div class ="col-xs-12 col-sm-4 col-md-3">
             <div class ="customDIV"> LEft SIde Bar <br>
                 
-             <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
@@ -131,16 +131,40 @@ Please login/register here!: <a href="index.jsp">Index</a>
                         <small><cite title="<%=member.getTown()%>"><%=member.getTown()%> <i class="glyphicon glyphicon-map-marker">
                         </i></cite></small>
                         <p>
-                            <i class="glyphicon glyphicon-envelope"></i><%=member.getEmail()%>
+                           
+                            
+                            <small><cite title="<%=member.getEmail()%>"><%=member.getEmail()%> <i class="glyphicon glyphicon-envelope">
+                        </i></cite></small>
                                 
                             <br />
-                            <i class="glyphicon glyphicon-pencil"></i><%=member.getFirstName()%>  <%=member.getLastName()%>
+                            <small><cite title="<%=member.getFirstName()%>"><%=member.getFirstName()%> <i class="glyphicon glyphicon-pencil">
+                        </i></cite></small>
+                            
+                            
+                            
+                            
+                            
+                           
                             <br />
-                            <i class="glyphicon glyphicon-phone"></i><%=member.getPhone()%></p>
+                        
+                        
+                        
+                          <small><cite title="<%=member.getPhone()%>"><%=member.getPhone()%> <i class="glyphicon glyphicon-phone">
+                        </i></cite></small>
                         <!-- Split button -->
                         <div class="btn-group">
-                            <a href="LoginSuccess.jsp" class="btn btn-default">Go to My Profile</a>
-                            
+                            <button type="button" class="btn btn-primary">
+                                Social</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span><span class="sr-only">Social</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="https://plus.google.com">Google +</a></li>
+                                <li><a href="https://www.facebook.com">Facebook</a></li>
+                                <li class="divider"></li>
+                                
+                            </ul>
                         </div>
                     </div>
                 </div>

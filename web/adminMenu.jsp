@@ -128,7 +128,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
         <div class ="col-xs-12 col-sm-4 col-md-3">
             <div class ="customDIV"> LEft SIde Bar <br>
                 
-             <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
@@ -141,12 +141,26 @@ Please login/register here!: <a href="index.jsp">Index</a>
                         <small><cite title="<%=member.getTown()%>"><%=member.getTown()%> <i class="glyphicon glyphicon-map-marker">
                         </i></cite></small>
                         <p>
-                            <i class="glyphicon glyphicon-envelope"></i><%=member.getEmail()%>
+                           
+                            
+                            <small><cite title="<%=member.getEmail()%>"><%=member.getEmail()%> <i class="glyphicon glyphicon-envelope">
+                        </i></cite></small>
                                 
                             <br />
-                            <i class="glyphicon glyphicon-pencil"></i><%=member.getFirstName()%>  <%=member.getLastName()%>
+                            <small><cite title="<%=member.getFirstName()%>"><%=member.getFirstName()%> <i class="glyphicon glyphicon-pencil">
+                        </i></cite></small>
+                            
+                            
+                            
+                            
+                            
+                           
                             <br />
-                            <i class="glyphicon glyphicon-phone"></i><%=member.getPhone()%></p>
+                        
+                        
+                        
+                          <small><cite title="<%=member.getPhone()%>"><%=member.getPhone()%> <i class="glyphicon glyphicon-phone">
+                        </i></cite></small>
                         <!-- Split button -->
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary">
@@ -183,6 +197,9 @@ Please login/register here!: <a href="index.jsp">Index</a>
                 <div class="span3 well" style = "width: 90%; margin-left: 5%;">
       <legend>Admin Menu</legend>
       <form action="FrontController" method="post">
+          <h2>
+              Delete
+          </h2>
 		<select name="choice" >
                     <option value="">Choose an option to delete</option>
                     <option value="song">Song</option>

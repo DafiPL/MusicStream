@@ -42,7 +42,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
             ps.setInt(3, a.getArtistID());
             ps.setString(4, a.getAlbumName());
             ps.setDouble(5, a.getAlbumPrice());
-            ps.setDouble(6, a.getAmountInStock());
+            ps.setInt(6, a.getAmountInStock());
             ps.setString(7, a.getAlbumFormat());
             ps.setString(8, a.getReleaseDate());
 
@@ -146,7 +146,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                         rs.getInt("artistID"),
                         rs.getString("albumName"),
                         rs.getDouble("albumPrice"),
-                        rs.getDouble("amountInStock"),
+                        rs.getInt("amountInStock"),
                         rs.getString("albumFormat"),
                         rs.getString("releaseDate"),
                          rs.getString("albumImage"));
@@ -202,7 +202,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                         rs.getInt("artistID"),
                         rs.getString("albumName"),
                         rs.getDouble("albumPrice"),
-                        rs.getDouble("amountInStock"),
+                        rs.getInt("amountInStock"),
                         rs.getString("albumFormat"),
                         rs.getString("releaseDate"),
                         rs.getString("albumImage"));

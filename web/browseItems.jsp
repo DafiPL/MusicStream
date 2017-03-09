@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <% session = request.getSession(false);
     Object resultValue = session.getAttribute("userLogin");
     Member member = (Member) resultValue;
@@ -16,18 +10,18 @@ Please login/register here!: <a href="index.jsp">Index</a>
 } else {
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<link href="Css/common.css" rel="stylesheet" type="text/css"/>
+
+
+<%@page import="java.util.Collections"%>
 <%@page import="Dtos.Member"%>
 <%@page import="Dtos.Album"%>
-<%@page import="Daos.AlbumDao"%>
-<%@page import="Dtos.Order"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Daos.OrderDao"%>
-
-<html lang="en">
+<%@page import="Daos.AlbumDao"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
     <head>
-        <meta charset="utf-8">
+       <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -35,18 +29,27 @@ Please login/register here!: <a href="index.jsp">Index</a>
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-        <link href="css/common.css" rel="stylesheet">
-
-
-        <!-- Website Font style -->
+       <link href="cssBoot/bootstrap.css" rel="stylesheet">
+    
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+     
+      <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link href="Css/common.css" rel="stylesheet" type="text/css"/>
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-        <!-- Data Tables  -->
-   
-        <style>
+ 
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+        <script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+            </script>
+              <style>
 
             body, html{
 
@@ -58,13 +61,25 @@ Please login/register here!: <a href="index.jsp">Index</a>
             }
             
         </style>
-      
-                  
+            
     </head>
     <body>
-        <h1 style ="color: white">Your Profile Page</h1>
+
+          <%
+
+            String userType = member.getUserType();
+            if (userType.equals("user")) {
+        %>
        
-        <nav class="navbar navbar-default navbar-inverse" role="navigation">
+                <%
+           
+
+           AlbumDao albumDao = new AlbumDao("musicdb");
+            ArrayList<Album> albums = albumDao.getAllAlbums();
+
+
+        %>
+         <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -81,22 +96,13 @@ Please login/register here!: <a href="index.jsp">Index</a>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="login.html">Log In!</a></li>
-                        <li><a href="Register.jsp">Register</a></li>
+                        <li><a href="Register.jsp">Register?</a></li>
                         <li><a href="forgotResetPassword.jsp">Forgot Password?</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse <span class="caret"></span></a>
-                            <ul  class="dropdown-menu" role="menu">
-                                <li><a href="browseItems.jsp">Shop</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
+                       
                     </ul>
-              
+                     <ul class="nav navbar-nav navbar-right">
+        <li><a href="LoginSuccess.jsp">My Profile</a></li>
+      </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
@@ -108,32 +114,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
             </div><!-- /.container-fluid -->
         </nav>
 
-        
-            
-             <%
-
-            String userType = member.getUserType();
-            if (userType.equals("user")) {
-        %>
-       
-                <%
-            OrderDao orderDao = new OrderDao("musicdb");
-            ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
-
-           AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-
-
-        %>
-
-            
-            
-            
-            
-            
-            
-        
-    <div class="row">
+          <div class="row">
         <div class ="col-xs-12 col-sm-4 col-md-3">
             <div class ="customDIV"> LEft SIde Bar <br>
                 
@@ -158,18 +139,8 @@ Please login/register here!: <a href="index.jsp">Index</a>
                             <i class="glyphicon glyphicon-phone"></i><%=member.getPhone()%></p>
                         <!-- Split button -->
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary">
-                                Social</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span><span class="sr-only">Social</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="https://plus.google.com">Google +</a></li>
-                                <li><a href="https://www.facebook.com">Facebook</a></li>
-                                <li class="divider"></li>
-                                
-                            </ul>
+                            <a href="LoginSuccess.jsp" class="btn btn-default">Go to My Profile</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -189,7 +160,44 @@ Please login/register here!: <a href="index.jsp">Index</a>
          <div class ="col-xs-12 col-sm-4 col-md-7">
              <div class ="customDIV"> MIDDLE SECTIONS 
              
+                 <table id="example" class="display" width="100%" cellspacing="0">
+        <thead >
+            <tr>
+               <th>Album ID</th>
+                    <th>Album Name</th>
+                    <th>Album Price</th>
+                    <th>Album Stock</th>
+                    <th>Format</th>
+                    <th>Release Date</th>
+                    <th>Cover</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+              <%                for (Album a : albums) {
+                %>
+                <tr>
+
+
+
+                    <td><%=a.getAlbumID()%></td>
+                    <td><%=a.getAlbumName()%></td>
+                    <td><%=a.getAlbumPrice()%></td>
+                    <td><%=a.getAmountInStock()%></td>
+                    <td><%=a.getAlbumFormat()%></td>
+                    <td><%=a.getReleaseDate()%></td>
+                    <td> <img src="<%=a.getAlbumImage()%>" alt="" height="42" width="42"></td>
+
+                </tr>
+                <%
+                    }
+                %>
+        </tbody>
                 
+                
+              
+                
+            </table>
 
              
              
@@ -209,19 +217,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
               <div class ="customDIV"> RIGHT SIde Bar  </div></div>
       
     </div>
-
-
-     
-        
-
-
-        
-
-       
-        
-
-
-        <%
+         <%
                 } else if (userType.equals("admin")) {
                 %>
                 <a href="adminMenu.jsp">Admin Menu</a>
@@ -229,32 +225,11 @@ Please login/register here!: <a href="index.jsp">Index</a>
                 }
             
         %>
+        <% }%>
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+        
+        
     </body>
 </html>
-<%
-    }
-%>
+
+

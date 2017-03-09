@@ -6,11 +6,14 @@
 package CommandFactory;
 
 import Commands.Command;
+import Commands.EditCommand;
 import Commands.LogOutCommand;
 import Commands.LoginCommand;
 import Commands.RegisterCommand;
+import Commands.SearchCommand;
 import Commands.deleteAlbumCommand;
 import Commands.deleteArtistCommand;
+import Commands.deleteCommand;
 import Commands.deleteGenreCommand;
 import Commands.deleteMemberCommand;
 import Commands.deleteSongCommand;
@@ -28,16 +31,12 @@ public class CommandFactory {
             return new LogOutCommand();
         } else if (action.equals("register")) {
             return new RegisterCommand();
-        } else if (action.equals("deletesong")) {
-            return new deleteSongCommand();
-        } else if (action.equals("deletealbum")) {
-            return new deleteAlbumCommand();
-        } else if (action.equals("deleteartist")) {
-            return new deleteArtistCommand();
-        } else if (action.equals("deletegenre")) {
-            return new deleteGenreCommand();
-        } else if (action.equals("deletemember")) {
-            return new deleteMemberCommand();
+        } else if (action.equals("delete")) {
+            return new deleteCommand();
+        } else if (action.equals("search")) {
+            return new SearchCommand();
+        }  else if (action.equals("edit")) {
+            return new EditCommand();
         } 
         else {
             return null;

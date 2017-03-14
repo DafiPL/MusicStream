@@ -179,7 +179,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
      * , then closing
      *
      * @param title
-     * @return user enters title of an item they want to display query searches
+     * @return user enters title of an item they want to display query ides
      * through the db to see if the title exists and displays details if doesn't
      * exists gets error. exception handling
      */

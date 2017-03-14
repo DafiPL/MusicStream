@@ -338,7 +338,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
                         <div style="width:100%;border-top:1px solid silver">
                             <p style="padding:15px;">
                                 <small>
-                                    <div class="list-group col-xs-6 cols-sm-12 col-md-12">
+                                    <div class="list-group col-xs-12 cols-sm-12 col-md-12">
                                         <a  class="list-group-item active">
                                             <h4 class="list-group-item-heading"> Album Artist: </h4>
                                             <p class="list-group-item-text"><%=artistDao.getArtistById(selectedAlbum.getArtistID()).getArtistName()%></p>
@@ -367,7 +367,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
 
 
 
-                                <div class="list-group col-xs-6 cols-sm-12 col-md-12">
+                                <div class="list-group col-xs-12 cols-sm-12 col-md-12">
                                     <a class="list-group-item active">
                                         <h4 class="list-group-item-heading">Album Name: </h4>
                                         <p class="list-group-item-text"> <%=selectedAlbum.getAlbumName()%></p>

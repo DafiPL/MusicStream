@@ -35,16 +35,17 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO albums(albumID, genreID, artistID, albumName, albumPrice, amountInStock, albumFormat, releaseDate) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO albums(albumID, genreID, artistID, albumName, albumPrice, amountInStock, albumFormat, releaseDate, albumImage) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            ps.setInt(1, a.getAlbumID());
-            ps.setInt(2, a.getGenreID());
-            ps.setInt(3, a.getArtistID());
-            ps.setString(4, a.getAlbumName());
-            ps.setDouble(5, a.getAlbumPrice());
-            ps.setInt(6, a.getAmountInStock());
-            ps.setString(7, a.getAlbumFormat());
-            ps.setString(8, a.getReleaseDate());
+            
+            ps.setInt(1, a.getGenreID());
+            ps.setInt(2, a.getArtistID());
+            ps.setString(3, a.getAlbumName());
+            ps.setDouble(4, a.getAlbumPrice());
+            ps.setInt(5, a.getAmountInStock());
+            ps.setString(6, a.getAlbumFormat());
+            ps.setString(7, a.getReleaseDate());
+            ps.setString(8, a.getAlbumImage());
 
             rs = ps.executeUpdate();
 

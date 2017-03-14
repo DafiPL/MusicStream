@@ -42,7 +42,6 @@ public class MemberDao extends Dao implements MemberDaoInterface {
      * This(@code ArrayList) may be empty where no members are present in the
      * database.
      */
-    
     //This Method can be sql injected
     @Override
     public ArrayList<Member> searchForMmeber(String username) {
@@ -69,7 +68,7 @@ public class MemberDao extends Dao implements MemberDaoInterface {
                         rs.getString("town"),
                         rs.getString("county"),
                         rs.getString("saltGen")
-                         );
+                );
                 members.add(m);
 
             }
@@ -94,10 +93,11 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         return members;
     }
 
-     /**
-     * Returns a Array list (members) of (@code Member) objects based on the information
-     * in the database. All member entry in the members table are selected from
-     * the database and stored as( Member) objects in a ( ArrayList members).
+    /**
+     * Returns a Array list (members) of (@code Member) objects based on the
+     * information in the database. All member entry in the members table are
+     * selected from the database and stored as( Member) objects in a (
+     * ArrayList members).
      *
      * @return The (@code ArrayList) of all members entry in the members table.
      * This(@code ArrayList) may be empty where no members are present in the
@@ -154,20 +154,20 @@ public class MemberDao extends Dao implements MemberDaoInterface {
      */
     @Override
     public Member checkLogin(String username, String password) {
-         Connection con = null;
+        Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Member m = null;
-        
-        try{
+
+        try {
             con = getConnection();
 
             String query = "Select * from Members WHERE username = ? AND password = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, password);
-            
-            rs = ps.executeQuery(); 
+
+            rs = ps.executeQuery();
 
             while (rs.next()) {
                 m = new Member(rs.getString("username"),
@@ -182,9 +182,9 @@ public class MemberDao extends Dao implements MemberDaoInterface {
                         rs.getString("county"),
                         rs.getString("saltGen"),
                         rs.getDate("registerDate"),
-                         rs.getDate("expiryDate"),
+                        rs.getDate("expiryDate"),
                         rs.getString("Avatar"));
-                
+
             }
 
         } catch (SQLException e) {
@@ -219,7 +219,7 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         Member m2 = null;
         for (int i = 0; i < m.size(); i++) {
             if (m.get(i).getUsername().equalsIgnoreCase(username)) {
-                m2 = new Member(m.get(i).getUsername(), m.get(i).getFirstName(), m.get(i).getLastName(), m.get(i).getUserType(), m.get(i).getPassword(), m.get(i).getPhone(), m.get(i).getEmail(), m.get(i).getAddressLine1(), m.get(i).getTown(), m.get(i).getCounty(), m.get(i).getSalt(), m.get(i).getDate(), m.get(i).getExpiryDate(),  m.get(i).getDbImage());
+                m2 = new Member(m.get(i).getUsername(), m.get(i).getFirstName(), m.get(i).getLastName(), m.get(i).getUserType(), m.get(i).getPassword(), m.get(i).getPhone(), m.get(i).getEmail(), m.get(i).getAddressLine1(), m.get(i).getTown(), m.get(i).getCounty(), m.get(i).getSalt(), m.get(i).getDate(), m.get(i).getExpiryDate(), m.get(i).getDbImage());
             }
         }
         return m2;
@@ -251,7 +251,7 @@ public class MemberDao extends Dao implements MemberDaoInterface {
 
             while (rs.next()) {
                 Member m = new Member(rs.getString("username"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("userType"), rs.getString("password"), rs.getInt("phone"), rs.getString("email"), rs.getString("addressLine1"), rs.getString("town"), rs.getString("county"), rs.getString("saltGen")
-                       );
+                );
                 members.add(m);
             }
         } catch (SQLException e) {
@@ -303,10 +303,9 @@ public class MemberDao extends Dao implements MemberDaoInterface {
             ps.setString(9, m.getTown());
             ps.setString(10, m.getCounty());
             ps.setString(11, m.getSalt());
-             ps.setDate(12, (Date) m.getDate());
-               ps.setDate(13, (Date) m.getExpiryDate());
-               ps.setString(14,  m.getDbImage());
-               
+            ps.setDate(12, (Date) m.getDate());
+            ps.setDate(13, (Date) m.getExpiryDate());
+            ps.setString(14, m.getDbImage());
 
             rs = ps.executeUpdate();
 
@@ -342,11 +341,10 @@ public class MemberDao extends Dao implements MemberDaoInterface {
      * @return The {@code rs} contained the number of rows affected after
      * deleting by using the id, (@code 0}, or {@code -1}otherwise.
      */
-    
     //This Method can be sql injected
     @Override
     public int deleteUser(String username) {
-      //  Member m = getUserByUsername(username);
+        //  Member m = getUserByUsername(username);
         int rs = 0;
 
         if (username != null) {
@@ -378,17 +376,15 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         }
         return rs;
     }
- 
-    
-    /**
-     *Gets the salt value of a  user matching the code supplied as a parameter.
-     * @param username      
-     *  The username of a member to be found in the database.
 
-     * @return
-     * String salt of the given user matching the supplied username
-     * 
-     * 
+    /**
+     * Gets the salt value of a user matching the code supplied as a parameter.
+     *
+     * @param username The username of a member to be found in the database.
+     *
+     * @return String salt of the given user matching the supplied username
+     *
+     *
      */
     public String getSaltbyUsername(String username) {
         ArrayList<Member> members = this.getAllMembers();
@@ -401,30 +397,29 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         }
         return salt;
     }
-    
-    
-    
 
     /**
-     *Updates a members password in the database by
-     * matching the username and password supplied as a parameter
-     * 
-     * @param newpass  The new password to be updated into the database.
-     * @param username  The username of a member to be found in the database.
-     * @param oldpass  The password of a member to be found in the database.
-     * @return
-     * RowsEffected which is the number of entries changed in the database
-     */
-   
-
-    /**Updates a members password in the database by
-     * matching the username and password(automaticly generated and sent via email) supplied as a parameter
+     * Updates a members password in the database by matching the username and
+     * password supplied as a parameter
      *
-     * @param newpass The new generated password to be updated into the database.
+     * @param newpass The new password to be updated into the database.
      * @param username The username of a member to be found in the database.
-     * @param email The Email of a member to be found in the database. used to verify member
-     * @return
-     * RowsEffected which is the number of entries changed in the database.
+     * @param oldpass The password of a member to be found in the database.
+     * @return RowsEffected which is the number of entries changed in the
+     * database
+     */
+    /**
+     * Updates a members password in the database by matching the username and
+     * password(automaticly generated and sent via email) supplied as a
+     * parameter
+     *
+     * @param newpass The new generated password to be updated into the
+     * database.
+     * @param username The username of a member to be found in the database.
+     * @param email The Email of a member to be found in the database. used to
+     * verify member
+     * @return RowsEffected which is the number of entries changed in the
+     * database.
      */
     public int forgotPassowrd(String newpass, String username, String email) {
         Connection con = null;
@@ -461,14 +456,16 @@ public class MemberDao extends Dao implements MemberDaoInterface {
 
         return rowsAffected;
     }
-    
-   
 
     /**
-     *Updates a members salt value by username used to update salt when a password is reset
+     * Updates a members salt value by username used to update salt when a
+     * password is reset
+     *
      * @param salt new salt generated to be updated in the database.
-     * @param username  The username of a member to be found in the database to make sure salt is updated for the right user.
-     * @return RowsEffected which is the number of entries changed in the database.
+     * @param username The username of a member to be found in the database to
+     * make sure salt is updated for the right user.
+     * @return RowsEffected which is the number of entries changed in the
+     * database.
      */
     public int updateSalt(String salt, String username) {
         Connection con = null;
@@ -483,7 +480,6 @@ public class MemberDao extends Dao implements MemberDaoInterface {
             ps = con.prepareStatement(query);
             ps.setString(1, salt);
             ps.setString(2, username);
-          
 
             rowsAffected = ps.executeUpdate();
 
@@ -505,21 +501,19 @@ public class MemberDao extends Dao implements MemberDaoInterface {
 
         return rowsAffected;
     }
-    
-    
-    
-    
+
     /**
-     *Gets the user expiry date by matching the username supplied as a parameter.
+     * Gets the user expiry date by matching the username supplied as a
+     * parameter.
+     *
      * @param username The username of a member to be found in the database.
-     * @return
-     * Date object with the date for a specified user.
+     * @return Date object with the date for a specified user.
      */
     public Date getExpriyDate(String username) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-Date date = null;
+        Date date = null;
         try {
             con = getConnection();
 
@@ -527,16 +521,12 @@ Date date = null;
 
             ps = con.prepareStatement(query);
             ps.setString(1, username);
-           
 
             rs = ps.executeQuery();
-while (rs.next()) {
+            while (rs.next()) {
                 date = rs.getDate("expiryDate");
             }
-            
-            
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Exception occured in the ExpiryDate() method: " + e.getMessage());
         } finally {
@@ -555,12 +545,17 @@ while (rs.next()) {
 
         return date;
     }
-    
-    /**Updates the expiry date for a member matching the username supplied in the parameter 
+
+    /**
+     * Updates the expiry date for a member matching the username supplied in
+     * the parameter
      *
-     * @param date new expiry date to be updated in the dataabase in case of password reset.
-     * @param username  username The username of a member to be found in the database.
-     * @return RowsEffected which is the number of entries changed in the database.
+     * @param date new expiry date to be updated in the dataabase in case of
+     * password reset.
+     * @param username username The username of a member to be found in the
+     * database.
+     * @return RowsEffected which is the number of entries changed in the
+     * database.
      */
     public int updateExpiryDate(java.util.Date date, String username) {
         Connection con = null;
@@ -573,9 +568,8 @@ while (rs.next()) {
             String query = "UPDATE members SET expiryDate = ?  WHERE username = ?";
 
             ps = con.prepareStatement(query);
-            ps.setDate(1,(Date) date);
+            ps.setDate(1, (Date) date);
             ps.setString(2, username);
-          
 
             rowsAffected = ps.executeUpdate();
 
@@ -598,10 +592,52 @@ while (rs.next()) {
         return rowsAffected;
     }
 
-  
-
     
-    
+    @Override
+    public int editAllMemberDetailsByUsername(String username, String Textvalue, int choice) {
 
+        Connection con = null;
+        PreparedStatement ps = null;
+        int rowsAffected = 0;
+
+        try {
+            con = getConnection();
+
+            if (choice == 1) {
+                String query = "UPDATE members SET username = ? WHERE username = ?";
+
+                ps = con.prepareStatement(query);
+                ps.setString(1, Textvalue);
+                ps.setString(2, username);
+
+                rowsAffected = ps.executeUpdate();
+            } else if (choice == 2) {
+                String query = "UPDATE members SET firstName = ? WHERE username = ?";
+
+                ps = con.prepareStatement(query);
+                ps.setString(1, Textvalue);
+                ps.setString(2, username);
+
+                rowsAffected = ps.executeUpdate();
+            }  
+            
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
+                e.getMessage();
+            }
+        }
+
+        return rowsAffected;
+    }
 }
-

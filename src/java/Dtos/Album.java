@@ -10,16 +10,28 @@ package Dtos;
  * @author kevin
  */
 public class Album {
-   private int albumID;
-   private int genreID;
-   private int artistID;
-   private String albumName;
-   private double albumPrice;
-   private int amountInStock;
-   private String albumFormat;
-   private String releaseDate;
-     private String albumImage;
 
+    private int albumID;
+    private int genreID;
+    private int artistID;
+    private String albumName;
+    private double albumPrice;
+    private int amountInStock;
+    private String albumFormat;
+    private String releaseDate;
+    private String albumImage;
+    
+ public Album(int genreID, int artistID, String albumName, double albumPrice, int amountInStock, String albumFormat, String releaseDate, String albumImage) {
+        this.genreID = genreID;
+        this.artistID = artistID;
+        this.albumName = albumName;
+        this.albumPrice = albumPrice;
+        this.amountInStock = amountInStock;
+        this.albumFormat = albumFormat;
+        this.releaseDate = releaseDate;
+        this.albumImage = albumImage;
+    }
+ 
     public Album(int albumID, int genreID, int artistID, String albumName, double albumPrice, int amountInStock, String albumFormat, String releaseDate, String albumImage) {
         this.albumID = albumID;
         this.genreID = genreID;
@@ -31,8 +43,10 @@ public class Album {
         this.releaseDate = releaseDate;
         this.albumImage = albumImage;
     }
+
    
-   public Album() {
+
+    public Album() {
         this.albumID = 1;
         this.genreID = 1;
         this.artistID = 1;
@@ -144,9 +158,5 @@ public class Album {
     public String toString() {
         return "Album{" + "albumID=" + albumID + ", genreID=" + genreID + ", artistID=" + artistID + ", albumName=" + albumName + ", albumPrice=" + albumPrice + ", amountInStock=" + amountInStock + ", albumFormat=" + albumFormat + ", releaseDate=" + releaseDate + '}';
     }
-   
-   
-   
-           
-    
+
 }

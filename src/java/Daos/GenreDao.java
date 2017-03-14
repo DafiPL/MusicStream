@@ -35,10 +35,9 @@ public class GenreDao extends Dao implements GenreDaoInterface {
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO genre(genreID, genreName) VALUES (NULL, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO genre(genreID, genreName) VALUES (NULL, ?)");
 
-            ps.setInt(1, g.getId());
-            ps.setString(2, g.getGenre());
+            ps.setString(1, g.getGenre());
 
             rs = ps.executeUpdate();
 

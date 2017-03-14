@@ -49,7 +49,8 @@ public class EditCommand implements Command {
                     } else if (choice.equals("1") || choice.equals("2")) {
                         int convertValue = Integer.valueOf(newvalue);
                         rs = songDao.editAllSongDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }   break;
+                    }
+                    break;
                 case 2:
                     AlbumDao albumDao = new AlbumDao("musicdb");
                     if (choice.equals("4") || choice.equals("7") || choice.equals("8")) {
@@ -57,31 +58,27 @@ public class EditCommand implements Command {
                     } else if (choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("5") || choice.equals("6")) {
                         int convertValue = Integer.valueOf(newvalue);
                         rs = albumDao.editAllAlbumDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }   break;
+                    }
+                    break;
                 case 3:
                     ArtistDao artistDao = new ArtistDao("musicdb");
                     if (choice.equals("2") || choice.equals("4") || choice.equals("5")) {
                         rs = artistDao.editAllArtistDetailsById(convertitemId, newvalue, 0, convertChoice);
-                    } else if (choice.equals("1") || choice.equals("3") ) {
+                    } else if (choice.equals("1") || choice.equals("3")) {
                         int convertValue = Integer.valueOf(newvalue);
                         rs = artistDao.editAllArtistDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }   break;
+                    }
+                    break;
                 case 4:
                     GenreDao genreDao = new GenreDao("musicdb");
-                    if (choice.equals("2") ) {
+                    if (choice.equals("2")) {
                         rs = genreDao.editAllGenreDetailsById(convertitemId, newvalue, 0, convertChoice);
-                    } else if (choice.equals("1") ) {
+                    } else if (choice.equals("1")) {
                         int convertValue = Integer.valueOf(newvalue);
                         rs = genreDao.editAllGenreDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }   break;
-                case 5:
-                    MemberDao memberDao = new MemberDao("musicdb");
-                    if (choice.equals("1") || choice.equals("7")) {
-//                    rs = memberDao.editAllMemberDetailsByUsername(username, newvalue, 0, convertChoice);
-                    } else if (choice.equals("4") || choice.equals("2") || choice.equals("3") || choice.equals("5") || choice.equals("6")) {
-                        int convertValue = Integer.valueOf(newvalue);
-//                    rs = memberDao.editAllMemberDetailsByUsername(username, "", convertValue, convertChoice);
-                    }   break;
+                    }
+                    break;
+
                 default:
                     break;
             }

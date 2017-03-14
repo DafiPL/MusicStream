@@ -5,6 +5,7 @@
  */
 package CommandFactory;
 
+import Commands.AddCommand;
 import Commands.Command;
 import Commands.EditCommand;
 import Commands.LogOutCommand;
@@ -37,6 +38,8 @@ public class CommandFactory {
             return new SearchCommand();
         }  else if (action.equals("edit")) {
             return new EditCommand();
+        } else if (action.equals("add")) {
+            return new AddCommand();
         } 
         else {
             return null;

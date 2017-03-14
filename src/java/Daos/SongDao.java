@@ -34,12 +34,12 @@ public class SongDao extends Dao implements SongDaoInterface{
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO Songs(SongID, albumID, songName, songRelease) VALUES (NULL, ?, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO songs(albumID, songName, songRelease) VALUES (NULL, ?, ?, ?)");
 
-            ps.setInt(1, s.getId());
-            ps.setInt(2, s.getAlbum_id());
-            ps.setString(3, s.getSongName());
-            ps.setString(4, s.getSongRelease());
+            
+            ps.setInt(1, s.getAlbum_id());
+            ps.setString(2, s.getSongName());
+            ps.setString(3, s.getSongRelease());
             
 
             rs = ps.executeUpdate();

@@ -15,6 +15,13 @@ public class Song {
     private String songName;
     private String songRelease;
 
+    public Song(int album_id, String songName, String songRelease) {
+        
+        this.album_id = album_id;
+        this.songName = songName;
+        this.songRelease = songRelease;
+    }
+    
     public Song(int id, int album_id, String songName, String songRelease) {
         this.id = id;
         this.album_id = album_id;
@@ -28,6 +35,8 @@ public class Song {
         this.songName = "coming homw";
         this.songRelease = "";
     }
+
+    
     
     public int getId() {
         return id;

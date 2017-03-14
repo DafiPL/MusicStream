@@ -229,7 +229,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
                                 <option value="member">Member</option>
                             </select>
 
-                            <input class="span3" name="itemName" placeholder="Item Name" type="text" /> </td> 
+                            <input class="span3" name="itemName" placeholder="Item Name" type="text" /> 
                             <input class="btn btn-warning" type="submit" value="Search" />
                             <input type="hidden" name ="action" value="search" />
                         </form>
@@ -238,7 +238,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
 
                     <div class="span3 well" style = "width: 90%; margin-left: 5%;">
 
-                        <form action="FrontController" method="post">
+                        <form action="AddItem.jsp" method="post">
                             <legend>Add item by Choice</legend>
                             <select name="addchoice" >
                                 <option value="">Choose an option to add</option>
@@ -246,12 +246,11 @@ Please login/register here!: <a href="index.jsp">Index</a>
                                 <option value="album">Album</option>
                                 <option value="artist">Artist</option> 
                                 <option value="genre">Genre</option>
-                                <option value="member">Member</option>
+                                
                             </select>
 
-                            <input class="span3" name="itemName" placeholder="Item Name" type="text" /> </td> 
                             <input class="btn btn-warning" type="submit" value="Add" />
-                            <input type="hidden" name ="action" value="add" />
+                            
                         </form>
                     </div>
 
@@ -342,39 +341,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
                         </form>
                     </div>
 
-                    <div class="span3 well" style = "width: 90%; margin-left: 5%;">
-
-                        <form action="FrontController" method="post">
-                            <legend>Edit Member by choice</legend>
-
-                            <select name="editchoice" >
-                                <option value="">Choose an option to edit</option>
-                                <option value="1">Username</option>
-                                <option value="2">First Name</option>
-                                <option value="3">Last Name</option> 
-                                <option value="4">User Type </option>
-                                <option value="5">Password </option>
-                                <option value="6">Phone </option>
-                                <option value="7">Email </option>
-                                <option value="8">Address Line 1 </option>
-                                <option value="9">Town </option>
-                                <option value="10">Country </option>
-                                <option value="11">Salt Gen </option>
-                                <option value="12">Register Date </option>
-                                <option value="13">Expiry Date </option>>
-                            </select>
-
-                            <input class="span3" name="username" placeholder="Member ID" type="text" /> </td> 
-
-                            <input class="span3" name="value" placeholder="New Value" type="text" /> </td> 
-                            </tr>
-                            </table>
-                            <input class="btn btn-warning" type="submit" value="Edit Member" />
-                            <input type="hidden" name ="action" value="edit" />
-                            <input type="hidden" name ="control" value="5" />
-                        </form>
-                    </div>
-                    </body>
+                    
 
 
 

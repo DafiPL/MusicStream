@@ -87,7 +87,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse <span class="caret"></span></a>
                             <ul  class="dropdown-menu" role="menu">
                                 <li><a href="browseItems.jsp">Shop</a></li>
-                                <li><a href="#">Another action</a></li>
+                                <li><a href="albumDetailPage.jsp">Product  Detail</a></li>
                                 <li><a href="#">Something else here</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
@@ -173,12 +173,13 @@ Please login/register here!: <a href="index.jsp">Index</a>
                         <!-- Split button -->
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary">
-                                Social</button>
+                                Options</button>
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span><span class="sr-only">Social</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Twitter</a></li>
+                                <li> <input class= "a"type="submit" value="Logout Here"/>
+            <input type="hidden" name="action" value="logout"/></li>
                                 <li><a href="https://plus.google.com">Google +</a></li>
                                 <li><a href="https://www.facebook.com">Facebook</a></li>
                                 <li class="divider"></li>

@@ -1,4 +1,8 @@
 
+html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;
+ background-image: url("images/headphonesBackground.jpg");}
+body{margin:0;
+  background-image: url("images/headphonesBackground.jpg");}
 
 ul.dropdown-cart{
     min-width:250px;
@@ -39,3 +43,5 @@ ul.dropdown-cart li .item-right{
 ul.dropdown-cart li .item-right button{
     margin-top:14px;
 }
+
+

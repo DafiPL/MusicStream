@@ -12,6 +12,7 @@ import Commands.LogOutCommand;
 import Commands.LoginCommand;
 import Commands.RegisterCommand;
 import Commands.SearchCommand;
+import Commands.albumDetailCommand;
 import Commands.deleteAlbumCommand;
 import Commands.deleteArtistCommand;
 import Commands.deleteCommand;
@@ -40,6 +41,9 @@ public class CommandFactory {
             return new EditCommand();
         } else if (action.equals("add")) {
             return new AddCommand();
+        } 
+        else if (action.equals("albumDetail")) {
+            return new albumDetailCommand();
         } 
         else {
             return null;

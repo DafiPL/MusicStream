@@ -25,7 +25,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Your Profile</title>
+        <title>Shop</title>
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
@@ -151,21 +151,11 @@ Please login/register here!: <a href="index.jsp">Index</a>
                         
                           <small><cite title="<%=member.getPhone()%>"><%=member.getPhone()%> <i class="glyphicon glyphicon-phone">
                         </i></cite></small>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">
-                                Social</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span><span class="sr-only">Social</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="https://plus.google.com">Google +</a></li>
-                                <li><a href="https://www.facebook.com">Facebook</a></li>
-                                <li class="divider"></li>
-                                
-                            </ul>
-                        </div>
+                        <br>
+                      
+                <input class= "a"type="submit" value="Logout Here"/>
+            <input type="hidden" name="action" value="logout"/>
+                    
                     </div>
                 </div>
             </div>
@@ -194,6 +184,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
                     <th>Format</th>
                     <th>Release Date</th>
                     <th>Cover</th>
+                    <th>BUY NOW!!!</th>
             </tr>
         </thead>
         
@@ -211,7 +202,18 @@ Please login/register here!: <a href="index.jsp">Index</a>
                     <td><%=a.getAlbumFormat()%></td>
                     <td><%=a.getReleaseDate()%></td>
                     <td> <img src="<%=a.getAlbumImage()%>" alt="" height="42" width="42"></td>
+                      <td>   <form action="FrontController" method="post">
+                       
 
+
+
+                        <div class="form-group ">
+                            <input type="hidden"  name="albumName" id="albumName" value ="<%=a.getAlbumID()%>"/>
+                            <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy" />
+                            <input type="hidden" name ="action" value="albumDetail" />
+                        </div>
+
+                    </form></td>
                 </tr>
                 <%
                     }

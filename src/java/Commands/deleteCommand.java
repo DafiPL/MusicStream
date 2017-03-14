@@ -25,7 +25,7 @@ public class deleteCommand implements Command {
         HttpSession session = request.getSession();
 
         String choice = request.getParameter("choice");
-        String Id = request.getParameter("itemId");
+        String Id = request.getParameter("deleteItem");
 
         int id = Integer.parseInt(Id);
 
@@ -58,7 +58,7 @@ public class deleteCommand implements Command {
             } else if (choice.endsWith("member")) {
                 MemberDao memberDao = new MemberDao("musicdb");
 
-//                rs = memberDao.deleteUser(id);
+                rs = memberDao.deleteUser(Id);
 
             }
 

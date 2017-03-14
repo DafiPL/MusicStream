@@ -230,7 +230,7 @@ public class SongDao extends Dao implements SongDaoInterface{
             con = getConnection();
 
             if (choice == 1) {
-                String query = "UPDATE Songs SET albumID = ? WHERE SongID = ?";
+                String query = "UPDATE Songs SET songID = ? WHERE SongID = ?";
 
                 ps = con.prepareStatement(query);
                 ps.setDouble(1, NumericValue);
@@ -238,6 +238,14 @@ public class SongDao extends Dao implements SongDaoInterface{
 
                 rowsAffected = ps.executeUpdate();
             } else if (choice == 2) {
+                String query = "UPDATE Songs SET albumID = ? WHERE SongID = ?";
+
+                ps = con.prepareStatement(query);
+                 ps.setDouble(1, NumericValue);
+                ps.setInt(2, id);
+
+                rowsAffected = ps.executeUpdate();
+            } else if (choice == 3) {
                 String query = "UPDATE Songs SET songName = ? WHERE SongID = ?";
 
                 ps = con.prepareStatement(query);
@@ -245,12 +253,12 @@ public class SongDao extends Dao implements SongDaoInterface{
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
-            } else if (choice == 3) {
+            } else if (choice == 4) {
                 String query = "UPDATE Songs SET songRelease = ? WHERE SongID = ?";
 
                 ps = con.prepareStatement(query);
                  ps.setString(1, Textvalue);
-                ps.setInt(3, id);
+                ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
             }

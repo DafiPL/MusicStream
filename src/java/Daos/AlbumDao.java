@@ -27,7 +27,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
     public AlbumDao(String databaseName) {
         super(databaseName);
     }
-    
+
     @Override
     public int addAlbum(Album a) {
         Connection con = null;
@@ -71,7 +71,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
         }
         return rs;
     }
-    
+
     @Override
     public Album getAlbumById(int albumID) {
         ArrayList<Album> albums = this.getAllAlbums();
@@ -149,7 +149,7 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                         rs.getInt("amountInStock"),
                         rs.getString("albumFormat"),
                         rs.getString("releaseDate"),
-                         rs.getString("albumImage"));
+                        rs.getString("albumImage"));
                 albums.add(i);
             }
         } catch (SQLException e) {
@@ -240,22 +240,32 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
             con = getConnection();
 
             if (choice == 1) {
-                String query = "UPDATE albums SET grenreID = ? WHERE albumID = ?";
+                String query = "UPDATE albums SET albumID = ? WHERE albumID = ?";
 
+                int myInt = (int) NumericValue;
                 ps = con.prepareStatement(query);
-                ps.setDouble(1, NumericValue);
+                ps.setInt(1, myInt);
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
             } else if (choice == 2) {
-                String query = "UPDATE albums SET artistID = ? WHERE albumID = ?";
+                String query = "UPDATE albums SET genreID = ? WHERE albumID = ?";
 
+                int myInt = (int) NumericValue;
                 ps = con.prepareStatement(query);
-                ps.setDouble(1, NumericValue);
+                ps.setInt(1, myInt);
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
             } else if (choice == 3) {
+                String query = "UPDATE albums SET artistID = ? WHERE albumID = ?";
+                int myInt = (int) NumericValue;
+                ps = con.prepareStatement(query);
+                ps.setInt(1, myInt);
+                ps.setInt(2, id);
+
+                rowsAffected = ps.executeUpdate();
+            } else if (choice == 4) {
                 String query = "UPDATE albums SET albumName = ? WHERE albumID = ?";
 
                 ps = con.prepareStatement(query);
@@ -263,15 +273,15 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
-            } else if (choice == 4) {
+            } else if (choice == 5) {
                 String query = "UPDATE albums SET albumPrice = ? WHERE albumID = ?";
-                int myInt = (int) NumericValue;
+
                 ps = con.prepareStatement(query);
-                ps.setInt(1, myInt);
+                ps.setDouble(1, NumericValue);
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
-            } else if (choice == 5) {
+            } else if (choice == 6) {
                 String query = "UPDATE albums SET amountInStock = ? WHERE albumID = ?";
                 int myInt = (int) NumericValue;
                 ps = con.prepareStatement(query);
@@ -279,16 +289,13 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
-            } else if (choice == 6) {
+            } else if (choice == 7) {
                 String query = "UPDATE albums SET albumFormat = ? WHERE albumID = ?";
-
                 ps = con.prepareStatement(query);
                 ps.setString(1, Textvalue);
-
                 ps.setInt(2, id);
-
                 rowsAffected = ps.executeUpdate();
-            } else if (choice == 7) {
+            } else if (choice == 8) {
                 String query = "UPDATE albums SET releaseDate = ? WHERE albumID = ?";
                 ps = con.prepareStatement(query);
                 ps.setString(1, Textvalue);

@@ -222,8 +222,9 @@ public class GenreDao extends Dao implements GenreDaoInterface {
             if (choice == 1) {
                 String query = "UPDATE genre SET grenreID = ? WHERE genreID = ?";
 
+                int myInt = (int) NumericValue;
                 ps = con.prepareStatement(query);
-                ps.setDouble(1, NumericValue);
+                ps.setInt(1, myInt);
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();

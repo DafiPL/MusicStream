@@ -18,8 +18,8 @@ import java.util.ArrayList;
  *
  * @author kevin
  */
-public class ArtistDao extends Dao implements ArtistDaoInterface{
-    
+public class ArtistDao extends Dao implements ArtistDaoInterface {
+
     /**
      *
      * @param databaseName
@@ -27,7 +27,7 @@ public class ArtistDao extends Dao implements ArtistDaoInterface{
     public ArtistDao(String databaseName) {
         super(databaseName);
     }
-    
+
     @Override
     public int addArtist(Artist a) {
         Connection con = null;
@@ -42,7 +42,6 @@ public class ArtistDao extends Dao implements ArtistDaoInterface{
             ps.setInt(3, a.getArtistAge());
             ps.setString(4, a.getArtistBio());
             ps.setString(5, a.getArtistPicture());
-            
 
             rs = ps.executeUpdate();
 
@@ -69,7 +68,7 @@ public class ArtistDao extends Dao implements ArtistDaoInterface{
         }
         return rs;
     }
-    
+
     @Override
     public Artist getArtistById(int artistID) {
         ArrayList<Artist> artists = this.getAllArtists();
@@ -145,7 +144,7 @@ public class ArtistDao extends Dao implements ArtistDaoInterface{
                         rs.getInt("artistAge"),
                         rs.getString("artistBio"),
                         rs.getString("artistPicture"));
-                       
+
                 artists.add(i);
             }
         } catch (SQLException e) {
@@ -193,13 +192,13 @@ public class ArtistDao extends Dao implements ArtistDaoInterface{
             String query = "Select * from artists where artistName = '" + title + "' ";
             rs = st.executeQuery(query);
             while (rs.next()) {
-                 Artist i = new Artist(
+                Artist i = new Artist(
                         rs.getInt("artistID"),
                         rs.getString("artistName"),
                         rs.getInt("artistAge"),
                         rs.getString("artistBio"),
                         rs.getString("artistPicture"));
-                       
+
                 artists.add(i);
             }
         } catch (SQLException e) {
@@ -233,39 +232,58 @@ public class ArtistDao extends Dao implements ArtistDaoInterface{
         try {
             con = getConnection();
 
-            if (choice == 1) {
-                String query = "UPDATE artists SET artistName = ? WHERE artistID = ?";
-
-                ps = con.prepareStatement(query);
-                ps.setDouble(1, NumericValue);
-                ps.setInt(2, id);
-
-                rowsAffected = ps.executeUpdate();
-            } else if (choice == 2) {
-                String query = "UPDATE artists SET artistAge = ? WHERE artistID = ?";
-
-                ps = con.prepareStatement(query);
-                ps.setDouble(1, NumericValue);
-                ps.setInt(2, id);
-
-                rowsAffected = ps.executeUpdate();
-            } else if (choice == 3) {
-                String query = "UPDATE artists SET artistBio = ? WHERE artistID = ?";
-
-                ps = con.prepareStatement(query);
-                ps.setString(1, Textvalue);
-                ps.setInt(2, id);
-
-                rowsAffected = ps.executeUpdate();
-            } else if (choice == 4) {
-                String query = "UPDATE artists SET artistPicture = ? WHERE artistID = ?";
-                int myInt = (int) NumericValue;
-                ps = con.prepareStatement(query);
-                ps.setInt(1, myInt);
-                ps.setInt(2, id);
-
-                rowsAffected = ps.executeUpdate();
-            } 
+            switch (choice) {
+                case 1:
+                    {
+                        String query = "UPDATE artists SET artistId = ? WHERE artistID = ?";
+                        int myInt = (int) NumericValue;
+                        ps = con.prepareStatement(query);
+                        ps.setInt(1, myInt);
+                        ps.setInt(2, id);
+                        rowsAffected = ps.executeUpdate();
+                        break;
+                    }
+                case 2:
+                    {
+                        String query = "UPDATE artists SET artistName = ? WHERE artistID = ?";
+                        ps = con.prepareStatement(query);
+                        ps.setString(1, Textvalue);
+                        ps.setInt(2, id);
+                        rowsAffected = ps.executeUpdate();
+                        break;
+                    }
+                case 3:
+                    {
+                        String query = "UPDATE artists SET artistAge = ? WHERE artistID = ?";
+                        int myInt = (int) NumericValue;
+                        ps = con.prepareStatement(query);
+                        ps.setInt(1, myInt);
+                        
+                        ps.setInt(2, id);
+                        rowsAffected = ps.executeUpdate();
+                        break;
+                    }
+                case 4:
+                    {
+                        String query = "UPDATE artists SET artistBio = ? WHERE artistID = ?";
+                        ps = con.prepareStatement(query);
+                        ps.setString(1, Textvalue);
+                        ps.setInt(2, id);
+                        rowsAffected = ps.executeUpdate();
+                        break;
+                    }
+                case 5:
+                    {
+                        String query = "UPDATE artists SET artistPicture = ? WHERE artistID = ?";
+                        ps = con.prepareStatement(query);
+                        ps.setString(1, Textvalue);
+                        ps.setInt(2, id);
+                        rowsAffected = ps.executeUpdate();
+                        break;
+                    }
+                default:
+                    break;
+            }
 
         } catch (SQLException e) {
             System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
@@ -286,5 +304,3 @@ public class ArtistDao extends Dao implements ArtistDaoInterface{
         return rowsAffected;
     }
 }
-
-

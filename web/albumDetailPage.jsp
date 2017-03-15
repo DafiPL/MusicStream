@@ -186,8 +186,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
                         <div class="section" style="padding-bottom:20px;">
                             <h6 class="title-attr"><small>Amount : </small></h6>                    
 
-
-                            <input value="" type ="number" style="width:30%; margin-left: 35%; margin-right: 35%" />
+<form action="FrontController" method="post">
+                             <input type="hidden"  name="quantity" id="quantity" value ="1"/>
 
                         </div>                
 
@@ -200,13 +200,16 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-                            <button class="btn btn-success"><form action="FrontController" method="post">
+                            <button class="btn btn-success">
 
 
 
 
                                     <div class="form-group ">
+                                         <input type="hidden"  name="username" id="username" value ="<%=member.getUsername()%>"/>
                                         <input type="hidden"  name="albumID" id="albumID" value ="<%=selectedAlbum.getAlbumID()%>"/>
+                                       
+                                       
                                         <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy Now!" />
                                         <input type="hidden" name ="action" value="orderItem" />
                                     </div>

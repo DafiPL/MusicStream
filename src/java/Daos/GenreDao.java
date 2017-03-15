@@ -238,7 +238,7 @@ public class GenreDao extends Dao implements GenreDaoInterface {
             }
 
         } catch (SQLException e) {
-            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
+            System.out.println("Exception occured in the editAllGenreDetailsById() method: " + e.getMessage());
         } finally {
             try {
                 if (ps != null) {

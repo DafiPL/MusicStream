@@ -27,7 +27,13 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
     public AlbumDao(String databaseName) {
         super(databaseName);
     }
-
+/**
+     * This method allows the user to add a new Album to the Album table
+     * @param a Album to be added to the database..
+    
+     * 
+     * @return RS a Which is the album Added to the database
+     */
     @Override
     public int addAlbum(Album a) {
         Connection con = null;
@@ -72,6 +78,14 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
         }
         return rs;
     }
+      /**
+     * gets albums by ID in the database by
+     * matching the code supplied as a parameter. This method has
+     *
+     * @param albumID The the ID of album found in the database.
+     * 
+     * @return The ALBUM a Which is the album returned from the database
+     */
 
     @Override
     public Album getAlbumById(int albumID) {
@@ -85,7 +99,13 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
         }
         return album;
     }
-
+ /**
+     * This method allows the user to DELETE an Album from the Album table
+     * @param id name of the album to be found in database.
+     * 
+     * 
+     * @return true if an album was deleted successfully from the database.
+     */
     @Override
     public int deleteAlbum(int id) {
         Album m = getAlbumById(id);
@@ -323,7 +343,13 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
 
         return rowsAffected;
     }
-    
+     /**
+     * This method allows the user to UPDATE an Album Quantity After Purchase in the Album table
+     * @param amountInStock amoun of Stock of the album to be found in database.
+    * @param quantity The Amount Stock Is To Decrease of the album to be found in database.
+     * @param id name of the album to be found in database.
+     * @return true if an album was deleted successfully from the database.
+     */
     @Override
     public int updateQuantity(int amountInStock, int quantity, int id) {
 

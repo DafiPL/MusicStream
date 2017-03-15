@@ -14,18 +14,23 @@ public class Order {
     private String username;
     private int albumID;
      private int quantity;
+      private double price;
 
-    public Order(int orderID, String username, int albumID, int quantity) {
+    public Order(int orderID, String username, int albumID, int quantity,double price) {
         this.orderID = orderID;
         this.username = username;
         this.albumID = albumID;
         this.quantity = quantity;
+        
     }
-     public Order( String username, int albumID, int quantity) {
-        this.orderID = orderID;
+
+   
+     public Order( String username, int albumID, int quantity, double price) {
+      
         this.username = username;
         this.albumID = albumID;
         this.quantity = quantity;
+         this.price = price;
     }
     
      public Order() {
@@ -49,6 +54,13 @@ public class Order {
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
+    }
+     public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public String getUsername() {

@@ -13,17 +13,34 @@ public class Order {
     private int orderID;
     private String username;
     private int albumID;
+     private int quantity;
 
-    public Order(int orderID, String username, int albumID) {
+    public Order(int orderID, String username, int albumID, int quantity) {
         this.orderID = orderID;
         this.username = username;
         this.albumID = albumID;
+        this.quantity = quantity;
+    }
+     public Order( String username, int albumID, int quantity) {
+        this.orderID = orderID;
+        this.username = username;
+        this.albumID = albumID;
+        this.quantity = quantity;
     }
     
      public Order() {
         this.orderID = 2;
         this.username = "crackiso";
         this.albumID = 1;
+          this.quantity = 1;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public int getOrderID() {
@@ -77,7 +94,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "orderID=" + orderID + ", username=" + username + ", albumID=" + albumID + '}';
+        return "Order{" + "orderID=" + orderID + ", username=" + username + ", albumID=" + albumID + ", quantity=" + quantity +'}';
     }
     
     

@@ -1,3 +1,11 @@
+<%-- 
+    Document   : registerSuccess
+    Created on : 02-03-2017, 13:56:27
+    Author     : Dafi
+--%>
+
+
+
 <%@page import="Dtos.Artist"%>
 <%@page import="Dtos.Album"%>
 <%@page import="Daos.ArtistDao"%>

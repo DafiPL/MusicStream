@@ -34,11 +34,12 @@ public class OrderDao extends Dao implements OrderDaoInterface{
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO orders(orderID, username, albumID) VALUES (NULL, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO orders(username, albumID, quantity) VALUES (?, ?, ?)");
 
-            ps.setInt(1, o.getOrderID());
-            ps.setString(2, o.getUsername());
-            ps.setInt(3, o.getAlbumID());
+            
+            ps.setString(1, o.getUsername());
+            ps.setInt(2, o.getAlbumID());
+            ps.setInt(3, o.getQuantity());
             
 
             rs = ps.executeUpdate();
@@ -70,14 +71,14 @@ public class OrderDao extends Dao implements OrderDaoInterface{
     @Override
     public Order getOrderById(int orderID) {
         ArrayList<Order> orders = this.getAllOrders();
-        Order memberaddress = null;
+        Order order = null;
         for (int i = 0; i < orders.size(); i++) {
             if (orders.get(i).getOrderID()== orderID) {
-                memberaddress = orders.get(i);
+                order = orders.get(i);
             }
 
         }
-        return memberaddress;
+        return order;
     }
 
     @Override
@@ -139,7 +140,8 @@ public class OrderDao extends Dao implements OrderDaoInterface{
                 Order i = new Order(
                         rs.getInt("orderID"),
                         rs.getString("username"),
-                        rs.getInt("albumID"));
+                        rs.getInt("albumID"),
+                rs.getInt("quantity"));
                        
                 orders.add(i);
             }
@@ -191,7 +193,8 @@ public class OrderDao extends Dao implements OrderDaoInterface{
                  Order i = new Order(
                         rs.getInt("orderID"),
                         rs.getString("username"),
-                        rs.getInt("albumID"));
+                        rs.getInt("albumID"),
+                         rs.getInt("quantity"));
                        
                 orders.add(i);
             }
@@ -281,7 +284,8 @@ public class OrderDao extends Dao implements OrderDaoInterface{
             while (rs.next()) {
                 Order o = new Order(rs.getInt("OrderID"),
                         rs.getString("username"),
-                        rs.getInt("albumID")
+                        rs.getInt("albumID"),
+                        rs.getInt("quantity")
                 );
                 orders.add(o);
             }

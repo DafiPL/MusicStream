@@ -15,6 +15,7 @@ import Commands.RegisterCommand;
 import Commands.SearchCommand;
 import Commands.albumDetailCommand;
 import Commands.deleteCommand;
+import Commands.orderItemCommand;
 
 /**
  *
@@ -41,6 +42,9 @@ public class CommandFactory {
             return new EditProfile();
         } else if (action.equals("albumDetail")) {
             return new albumDetailCommand();
+        }
+         else if (action.equals("orderItem")) {
+            return new orderItemCommand();
         } else {
             return null;
         }

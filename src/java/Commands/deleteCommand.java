@@ -32,7 +32,7 @@ public class deleteCommand implements Command {
 //        Object loginValue = session.getAttribute("userLogin");
 //        User user = (User) loginValue;
 //        if (user.getAdminRole().equals("admin") && user != null) {
-        if (choice != null || Id !=null) {
+        if (choice != null && !choice.equals("") && Id != null && !Id.equals("")) {
 
             int rs = 0;
             if (choice.endsWith("song")) {

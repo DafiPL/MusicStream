@@ -24,7 +24,6 @@ public class EditCommand implements Command {
         String forwardToJsp = "";
         HttpSession session = request.getSession();
 
-        String username = request.getParameter("username");
         String control = request.getParameter("control");
         String choice = request.getParameter("editchoice");
         String itemId = request.getParameter("itemId");
@@ -37,60 +36,51 @@ public class EditCommand implements Command {
 //        User user = (User) loginValue;
 
 //        if (user.getAdminRole().equals("admin") && user != null) {
-        if (choice != null && itemId != null && newvalue != null) {
-
+        if (control != null && !control.equals("") && choice != null && !choice.equals("") && itemId != null && !itemId.equals("") && newvalue != null && !newvalue.equals("")) {
             int rs = 0;
+            if (convertcontrol == 1) {
+                SongDao songDao = new SongDao("musicdb");
+                if (choice.equals("3") || choice.equals("4")) {
+                    rs = songDao.editAllSongDetailsById(convertitemId, newvalue, 0, convertChoice);
+                } else if (choice.equals("1") || choice.equals("2")) {
+                    int convertValue = Integer.valueOf(newvalue);
+                    rs = songDao.editAllSongDetailsById(convertitemId, "", convertValue, convertChoice);
+                }
+            } else if (convertcontrol == 2) {
+                AlbumDao albumDao = new AlbumDao("musicdb");
+                if (choice.equals("4") || choice.equals("7") || choice.equals("8")) {
+                    rs = albumDao.editAllAlbumDetailsById(convertitemId, newvalue, 0, convertChoice);
+                } else if (choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("5") || choice.equals("6")) {
+                    int convertValue = Integer.valueOf(newvalue);
+                    rs = albumDao.editAllAlbumDetailsById(convertitemId, "", convertValue, convertChoice);
+                }
+            } else if (convertcontrol == 3) {
+                ArtistDao artistDao = new ArtistDao("musicdb");
+                if (choice.equals("2") || choice.equals("4") || choice.equals("5")) {
+                    rs = artistDao.editAllArtistDetailsById(convertitemId, newvalue, 0, convertChoice);
+                } else if (choice.equals("1") || choice.equals("3")) {
+                    int convertValue = Integer.valueOf(newvalue);
+                    rs = artistDao.editAllArtistDetailsById(convertitemId, "", convertValue, convertChoice);
+                }
+            } else if (convertcontrol == 4) {
 
-            switch (convertcontrol) {
-                case 1:
-                    SongDao songDao = new SongDao("musicdb");
-                    if (choice.equals("3") || choice.equals("4")) {
-                        rs = songDao.editAllSongDetailsById(convertitemId, newvalue, 0, convertChoice);
-                    } else if (choice.equals("1") || choice.equals("2")) {
-                        int convertValue = Integer.valueOf(newvalue);
-                        rs = songDao.editAllSongDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }
-                    break;
-                case 2:
-                    AlbumDao albumDao = new AlbumDao("musicdb");
-                    if (choice.equals("4") || choice.equals("7") || choice.equals("8")) {
-                        rs = albumDao.editAllAlbumDetailsById(convertitemId, newvalue, 0, convertChoice);
-                    } else if (choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("5") || choice.equals("6")) {
-                        int convertValue = Integer.valueOf(newvalue);
-                        rs = albumDao.editAllAlbumDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }
-                    break;
-                case 3:
-                    ArtistDao artistDao = new ArtistDao("musicdb");
-                    if (choice.equals("2") || choice.equals("4") || choice.equals("5")) {
-                        rs = artistDao.editAllArtistDetailsById(convertitemId, newvalue, 0, convertChoice);
-                    } else if (choice.equals("1") || choice.equals("3")) {
-                        int convertValue = Integer.valueOf(newvalue);
-                        rs = artistDao.editAllArtistDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }
-                    break;
-                case 4:
-                    GenreDao genreDao = new GenreDao("musicdb");
-                    if (choice.equals("2")) {
-                        rs = genreDao.editAllGenreDetailsById(convertitemId, newvalue, 0, convertChoice);
-                    } else if (choice.equals("1")) {
-                        int convertValue = Integer.valueOf(newvalue);
-                        rs = genreDao.editAllGenreDetailsById(convertitemId, "", convertValue, convertChoice);
-                    }
-                    break;
-
-                default:
-                    break;
+                GenreDao genreDao = new GenreDao("musicdb");
+                if (choice.equals("2")) {
+                    rs = genreDao.editAllGenreDetailsById(convertitemId, newvalue, 0, convertChoice);
+                } else if (choice.equals("1")) {
+                    int convertValue = Integer.valueOf(newvalue);
+                    rs = genreDao.editAllGenreDetailsById(convertitemId, "", convertValue, convertChoice);
+                }
             }
             if (rs > 0) {
                 forwardToJsp = "adminMenu.jsp";
             } else {
                 forwardToJsp = "error.jsp";
-                session.setAttribute("errorMessage", "Please select a choice to edit. ");
+                session.setAttribute("errorMessage", "Method didnt work");
             }
         } else {
             forwardToJsp = "error.jsp";
-            session.setAttribute("errorMessage", "user is not a admin you do not have permission for that action!");
+            session.setAttribute("errorMessage", "Please select a choice to edit.");
         }
         return forwardToJsp;
     }

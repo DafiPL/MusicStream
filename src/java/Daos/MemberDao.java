@@ -617,27 +617,22 @@ public class MemberDao extends Dao implements MemberDaoInterface {
             ps.setString(10, currentUser);
 
             rowsAffected = ps.executeUpdate();
-        }
-    
-    catch (SQLException e) {
-            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
-    }
-
-    
-        finally {
-            try {
-            if (ps != null) {
-                ps.close();
-            }
-            if (con != null) {
-                freeConnection(con);
-            }
         } catch (SQLException e) {
-            System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
-            e.getMessage();
+            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
+                e.getMessage();
+            }
         }
-    }
 
-    return rowsAffected ;
-}
+        return rowsAffected;
+    }
 }

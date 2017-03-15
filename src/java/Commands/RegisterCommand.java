@@ -76,13 +76,13 @@ public class RegisterCommand implements Command {
                 HttpSession session = request.getSession();
 
                 if (addMember > 0) {
-                    
+
                     try {
-                sendMail.generateAndSendEmail(email, password);
-            } catch (MessagingException ex) {
-               Logger.getLogger(forgotPassowrdCommand.class.getName()).log(Level.SEVERE, null, ex);
-           }
-                    
+                        sendMail.generateAndSendEmail(email, password);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(forgotPassowrdCommand.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                     session.setAttribute("regInfo", u);
                     HttpSession session2 = request.getSession();
                     session.setAttribute("theGeneratedPassword", password);

@@ -48,8 +48,7 @@ public class AddCommand implements Command {
         String artistAge = request.getParameter("artistAge");
         String artistBio = request.getParameter("artistBio");
         String artistPicture = request.getParameter("artistPicture");
-        
-        
+
         String genreName = request.getParameter("genreName");
         int albumId = Integer.valueOf(albumID);
         int genreId = Integer.valueOf(genreID);
@@ -64,6 +63,7 @@ public class AddCommand implements Command {
         if (choice != null) {
 
             if (choice.equals("song")) {
+
                 SongDao songDao = new SongDao("musicdb");
                 Song s = new Song(songId, albumId, songName, songRelease);
                 songDao.addSong(s);
@@ -75,7 +75,7 @@ public class AddCommand implements Command {
                 forwardToJsp = "adminMenu.jsp";
             } else if (choice.equals("artist")) {
                 ArtistDao artistDao = new ArtistDao("musicdb");
-                Artist a = new Artist(artistId, artistName, ArtistAge, artistBio, artistPicture );
+                Artist a = new Artist(artistName, ArtistAge, artistBio, artistPicture);
                 artistDao.addArtist(a);
                 forwardToJsp = "adminMenu.jsp";
             } else if (choice.equals("genre")) {

@@ -112,132 +112,96 @@ Please login/register here!: <a href="login.jsp">Login</a>
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <a class="panel-close close" data-dismiss="alert">Ã</a> 
           <i class="fa fa-coffee"></i>
           Welcome, <strong>Change</strong>Your Account Information Below
         </div>
         <h3>Personal info</h3>
         
-        <form class="form-horizontal" role="form">
+        <form  class="form-horizontal" role="form" action="FrontController" method="post">
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Jane">
+              <input class="form-control"  name="firstname" type="text" value="<%=member.getFirstName()%>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Bishop">
+              <input class="form-control" type="text" name="lastname" value="<%=member.getLastName()%>" >
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label">Company:</label>
+            <label class="col-lg-3 control-label">Phone Number</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="">
+              <input class="form-control" type="text" name="phone" value="<%=member.getPhone()%>" >
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="janesemail@gmail.com">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Time Zone:</label>
-            <div class="col-lg-8">
-              <div class="ui-select">
-                <select id="user_time_zone" class="form-control">
-                  <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                  <option value="Alaska">(GMT-09:00) Alaska</option>
-                  <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                  <option value="Arizona">(GMT-07:00) Arizona</option>
-                  <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                  <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                  <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                  <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                </select>
-              </div>
+              <input class="form-control" type="text" name="email" value="<%=member.getEmail()%>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Username:</label>
             <div class="col-md-8">
-              <input class="form-control" type="text" value="janeuser">
+              <input class="form-control" name="username" type="text" value="<%=member.getUsername()%>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="11111122333">
+              <input class="form-control"  name="password" type="password" value="<%=member.getPassword()%>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Confirm password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="11111122333">
+              <input class="form-control" type="password" name="confirmpassword" value="<%=member.getPassword()%>">
+            </div>
+          </div>
+            <div class="form-group">
+            <label class="col-md-3 control-label">Street:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" name="address" value="<%=member.getAddressLine1()%>">
+            </div>
+          </div>
+            <div class="form-group">
+            <label class="col-md-3 control-label">Town:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" name="town" value="<%=member.getTown()%>">
+            </div>
+          </div>
+            <div class="form-group">
+            <label class="col-md-3 control-label">County:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" name="county" value="<%=member.getCounty()%>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
-              <input type="button" class="btn btn-primary" value="Save Changes">
+              <input   type="submit" class="btn btn-primary" value="Save Changes">
               <span></span>
               <input type="reset" class="btn btn-default" value="Cancel">
             </div>
           </div>
+            <input type="hidden" name ="action" value="editprofile" />
         </form>
       </div>
   </div>
 
 <hr>
-                    <div class="span3 well" style = "width: 90%; margin-left: 5%; ">
-                        <legend>Your Profile</legend>
-                        <%
-                            if (member != null) {
-                        %>
-                        <form action="FrontController" method="post">
-                            <table>
-                                <tr>
-                                    <th>Username</th> <p>
-                                <th>First Name</th> 
-                                <th>Last Name</th>
-                                <th>Password</th>
-                                <th>Phone Number</th>
-                                <th>Email</th>
-                                <th>Street</th>
-                                <th>Town</th>
-                                <th>County</th>
-                                <th>Register Date</th>
-                                <th>ExpiryDate</th>
-
-                                </tr>
-
-                                <tr>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="username" value="<%=member.getUsername()%>"/></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="firstname" value="<%=member.getFirstName()%>" /></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="lastname" value="<%=member.getLastName()%> " /></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="password" value="<%=member.getPassword()%>" /></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="phone" value="<%=member.getPhone()%>" /></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="email" value="<%=member.getEmail()%>" /></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="address" value="<%=member.getAddressLine1()%>" /></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="town" value="<%=member.getTown()%>" /></td>
-                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="county" value="<%=member.getCounty()%>" /></td>
-                                    <td> <%=member.getDate()%></td>
-                                    <td> <%=member.getExpiryDate()%></td>
-
-                                <button class="btn btn-warning" type="submit" value="edit">Edit</button>
-                                <input type="hidden" name ="action" value="editprofile" />
-                                </tr>
-                            </table>
-                        </form>
+                  
+                        
                         <%
                             }
-}
+
                         %>
 
 
-                    </div>
+                    
                 </div>
             </div>
                          <div class ="col-xs-12 col-sm-4 col-md-2">

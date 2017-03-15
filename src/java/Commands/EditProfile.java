@@ -28,9 +28,10 @@ public class EditProfile implements Command {
 
         Object resultValue = session.getAttribute("userLogin");
         Member member = (Member) resultValue;
-        
+
         String currentuser = member.getUsername();
-       
+
+        String confirmPassword = request.getParameter("confirmpassword");
         String username = request.getParameter("username");
         String firstName = request.getParameter("firstname");
         String lastName = request.getParameter("lastname");
@@ -40,32 +41,30 @@ public class EditProfile implements Command {
         String street = request.getParameter("address");
         String town = request.getParameter("town");
         String county = request.getParameter("county");
-        
-         long convertedPhone = Long.valueOf(phone);
+
+        long convertedPhone = Long.valueOf(phone);
 //        Object loginValue = session.getAttribute("userLogin");
 //        User user = (User) loginValue;
 //        if (user.getAdminRole().equals("admin") && user != null) {
         if (username != null && !username.equals("") && firstName != null && !firstName.equals("") && lastName != null && !lastName.equals("") && password != null && !password.equals("") && email != null && !email.equals("") && street != null && !street.equals("") && town != null && !town.equals("") && county != null && !county.equals("") && phone != null && !phone.equals("")) {
+            if (password.equals(confirmPassword)) {
+                int rs = 0;
 
-            int rs = 0;
-
-           
-                    MemberDao memberDao = new MemberDao("musicdb");
-                    
-                    
-                        rs = memberDao.editAllMemberDetailsByUsername(currentuser, username, firstName, lastName, password,convertedPhone,email,street,town, county);
-                   
-               
-               
-            if (rs > 0) {
-                forwardToJsp = "adminMenu.jsp";
+                MemberDao memberDao = new MemberDao("musicdb");
+                rs = memberDao.editAllMemberDetailsByUsername(currentuser, username, firstName, lastName, password, convertedPhone, email, street, town, county);
+                if (rs > 0) {
+                    forwardToJsp = "adminMenu.jsp";
+                } else {
+                    forwardToJsp = "error.jsp";
+                    session.setAttribute("errorMessage", "Method did not work ");
+                }
             } else {
                 forwardToJsp = "error.jsp";
-                session.setAttribute("errorMessage", "Method did not work ");
+                session.setAttribute("errorMessage", "passwords must match");
             }
         } else {
             forwardToJsp = "error.jsp";
-            session.setAttribute("errorMessage", "user is not a admin you do not have permission for that action!");
+            session.setAttribute("errorMessage", "Must enter all Fields");
         }
         return forwardToJsp;
     }

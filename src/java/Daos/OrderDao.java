@@ -18,15 +18,16 @@ import java.util.ArrayList;
  *
  * @author kevin
  */
-public class OrderDao extends Dao implements OrderDaoInterface{
-      /**
+public class OrderDao extends Dao implements OrderDaoInterface {
+
+    /**
      *
      * @param databaseName
      */
     public OrderDao(String databaseName) {
         super(databaseName);
     }
-    
+
     @Override
     public int addOrder(Order o) {
         Connection con = null;
@@ -36,11 +37,9 @@ public class OrderDao extends Dao implements OrderDaoInterface{
             con = getConnection();
             ps = con.prepareStatement("INSERT INTO orders(username, albumID, quantity) VALUES (?, ?, ?)");
 
-            
             ps.setString(1, o.getUsername());
             ps.setInt(2, o.getAlbumID());
             ps.setInt(3, o.getQuantity());
-            
 
             rs = ps.executeUpdate();
 
@@ -67,13 +66,13 @@ public class OrderDao extends Dao implements OrderDaoInterface{
         }
         return rs;
     }
-    
+
     @Override
     public Order getOrderById(int orderID) {
         ArrayList<Order> orders = this.getAllOrders();
         Order order = null;
         for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).getOrderID()== orderID) {
+            if (orders.get(i).getOrderID() == orderID) {
                 order = orders.get(i);
             }
 
@@ -141,8 +140,8 @@ public class OrderDao extends Dao implements OrderDaoInterface{
                         rs.getInt("orderID"),
                         rs.getString("username"),
                         rs.getInt("albumID"),
-                rs.getInt("quantity"));
-                       
+                        rs.getInt("quantity"));
+
                 orders.add(i);
             }
         } catch (SQLException e) {
@@ -190,12 +189,12 @@ public class OrderDao extends Dao implements OrderDaoInterface{
             String query = "Select * from orders where username = '" + title + "' ";
             rs = st.executeQuery(query);
             while (rs.next()) {
-                 Order i = new Order(
+                Order i = new Order(
                         rs.getInt("orderID"),
                         rs.getString("username"),
                         rs.getInt("albumID"),
-                         rs.getInt("quantity"));
-                       
+                        rs.getInt("quantity"));
+
                 orders.add(i);
             }
         } catch (SQLException e) {
@@ -241,7 +240,7 @@ public class OrderDao extends Dao implements OrderDaoInterface{
                 String query = "UPDATE orders SET albumID = ? WHERE orderID = ?";
 
                 ps = con.prepareStatement(query);
-                 ps.setDouble(1, NumericValue);
+                ps.setDouble(1, NumericValue);
                 ps.setInt(2, id);
 
                 rowsAffected = ps.executeUpdate();
@@ -265,7 +264,7 @@ public class OrderDao extends Dao implements OrderDaoInterface{
 
         return rowsAffected;
     }
-    
+
     @Override
     public ArrayList<Order> selectAllOrdersByUser(String username) {
         Connection con = null;

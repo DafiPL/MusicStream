@@ -24,7 +24,13 @@ public class Artist {
         this.artistBio = artistBio;
         this.artistPicture = artistPicture;
     }
-    
+    public Artist( String artistName, int artistAge, String artistBio, String artistPicture) {
+        
+        this.artistName = artistName;
+        this.artistAge = artistAge;
+        this.artistBio = artistBio;
+        this.artistPicture = artistPicture;
+    }
     public Artist() {
         this.artistID = 1;
         this.artistName = "Bob Marley";

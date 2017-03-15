@@ -35,7 +35,7 @@ public class ArtistDao extends Dao implements ArtistDaoInterface {
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO artists(artistID, artistName, artistAge, artistBio, artistPicture) VALUES (NULL, ?, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO artists (artistID, artistName, artistAge, artistBio, artistPicture) VALUES (NULL, ?, ?, ?, ?)");
 
             
             ps.setString(1, a.getArtistName());

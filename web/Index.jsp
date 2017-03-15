@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+
+<% session = request.getSession(false);
+    Object resultValue = session.getAttribute("userLogin");
+    Member member = (Member) resultValue;
+   
+%>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -11,6 +17,8 @@ and open the template in the editor.
 <%@page import="Daos.AlbumDao"%>
 <%@page import="Dtos.Artist"%>
 <%@page import="Daos.ArtistDao"%>
+<%@page import="Dtos.Member"%>
+<%@page import="Daos.MemberDao"%>
 <%@page import="java.util.ArrayList"%>
 
 
@@ -241,11 +249,11 @@ and open the template in the editor.
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#">Register</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="login.html">Login</a></li>
+                            
+                          
                             <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="Register.jsp">Register</a></li>
                           </ul>
                         </li>
                         <li><a href="#">My cart (0) items</a></li>
@@ -260,27 +268,19 @@ and open the template in the editor.
 					<a href="#top">Soldier-up <strong>Designs</strong></a>
 				</li>
 				<li>
-					<a href="/" title="Go to Top">Home</a>
+					<a href="Index.jsp" title="Go to Top">Home</a>
 				</li>
 				<li>
-					<a href="/about" title="Go to About Us section">About</a>
+					<a href="brwoseItems.jsp" title="Go to About Us section">Browse Items</a>
 				</li>
+                                
+                        
+           
+				
 				<li>
-					<a href="/resume" title="Navigate to Jonathan Adcox IT Resume">Resume</a>
+					<a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;"> Log In !</a>
 				</li>
-				<li>
-					<a href="/portfolio" title="Navigate to 'Our Services' section">Portfolio</a>
-				</li>
-				<!-- Future Development
-				<li>
-					<a href="#portfolio">Portfolio</a>
-				</li> -->
-				<li>
-					<a href="/blog" title="Our Blog">Blog</a>
-				</li>
-				<li>
-					<a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;"> Hosting</a>
-				</li>
+           
 			</ul>
 		</nav>
 		<div class="container">
@@ -289,38 +289,41 @@ and open the template in the editor.
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h3>Login to Hosting Portal - Control Panel</h3>
+							<h3>Login to Your MusicStream Account - Profile</h3>
 						</div>
 						<div class="modal-body">
 							<article class="container-form center-block">
 								<!-- Form Content HERE! -->
-								<form method="post" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal" action="https://secure.yourwebhosting.com/secureLogin" enctype="application/x-www-form-urlencoded">
-									<fieldset>
-										<input type='hidden' name='__token_timestamp__' value='1426572610'>
-										<input type='hidden' name='__token_val__' value='4d96cad055fac46518825357fcb49390'>
-										<input type="hidden" name="destination" value="http://www.yourwebhosting.com/controlpanel/index.bml">
-										<!-- Name input-->
-										<div class="form-group">
-											<label class="sr-only" for="credential_0">Username: </label>
-											<div class="col-xs-12">
-												<input id="credential_0" name="credential_0" type="text" placeholder="Your Username" class="form-control">
-											</div>
-										</div>
-										<!-- Email input-->
-										<div class="form-group">
-											<label class="sr-only" for="credential_1">Password: </label>
-											<div class="col-xs-12">
-												<input id="email" type="password" name="credential_1" value="" placeholder="Your Password" class="form-control">
-											</div>
-										</div>
-										<!-- Form actions -->
-										<div class="form-group pull-right">
-											<div class="col-md-12 text-right">
-												<button type="submit" name="submit" value="Sign In" class="btn btn-lg">Submit</button>
-											</div>
-										</div>
-									</fieldset>
-								</form>
+								   <form action="FrontController" method="post">
+                        <div class="form-group">
+                            <label for="username" class="cols-sm-2 control-label">Username</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" required  pattern="[a-z]{1,15}" title="Username should only contain lowercase letters. e.g. john"/>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="password" class="cols-sm-2 control-label">Your Password</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+
+                                    <input name="password" class="form-control"   id="password" placeholder="Password" size=15 type="text" required />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group ">
+                            <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Login" />
+                            <input type="hidden" name ="action" value="login" />
+                        </div>
+
+                    </form>
 							</article>
 						</div>
 						<div class="modal-footer">
@@ -362,30 +365,31 @@ and open the template in the editor.
                         <div class="slide-1"></div>
                             <div class="hero">
                                 <hgroup>
-                                    <h1>We are creative</h1>        
-                                    <h3>Get start your next awesome project</h3>
+                                    <h1>Music is life.</h1>        
+                                    <h3>Register Now !</h3>
                                 </hgroup>
-                            <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                            <button class="btn btn-hero btn-lg" role="button"><a href="Register.jsp"></a>Register Here</button>
+                                      
                         </div>
                     </div>
                     <div class="item slides">
                         <div class="slide-2"></div>
                             <div class="hero">        
                                 <hgroup>
-                                    <h1>We are smart</h1>        
-                                    <h3>Get start your next awesome project</h3>
+                                    <h1>Music is amazing </h1>        
+                                    <h3>Already a Member? Log In</h3>
                                 </hgroup>       
-                                <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                                <button class="btn btn-hero btn-lg" role="button"><a href="login.html"></a>Login Here</button>
                             </div>
                         </div>
                         <div class="item slides">
                             <div class="slide-3"></div>
                                 <div class="hero">        
                                     <hgroup>
-                                        <h1>We are amazing</h1>        
-                                        <h3>Get start your next awesome project</h3>
+                                        <h1>Music is for everyone.</h1>        
+                                        <h3>Have a look at our products</h3>
                                     </hgroup>
-                                    <button class="btn btn-hero btn-lg" role="button">See all features</button>
+                                    <button class="btn btn-hero btn-lg" role="button"><a href="browseItems.jsp"></a>Browse Items</button>
                                 </div>
                             </div>
                         </div> 

@@ -36,6 +36,6 @@
 
 
 <div><a href="Register.jsp">Back to register</a></div>
-<div><a href="login.html">back to login</a></div>
+<div><a href="login.jsp">back to login</a></div>
     </body>
 </html>

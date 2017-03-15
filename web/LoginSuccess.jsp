@@ -11,7 +11,7 @@ and open the template in the editor.
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
 <br> 
-Please login/register here!: <a href="login.html">Login</a>
+Please login/register here!: <a href="login.jsp">Login</a>
 <%
 } else {
 %>

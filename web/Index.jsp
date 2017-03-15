@@ -94,7 +94,7 @@ and open the template in the editor.
                                     <h1>Music is amazing </h1>        
                                     <h3>Already a Member? Log In</h3>
                                 </hgroup>       
-                            <a href="login.html">    <button class="btn btn-hero btn-lg" role="button">Login Here</button></a>
+                            <a href="login.jsp">    <button class="btn btn-hero btn-lg" role="button">Login Here</button></a>
                             </div>
                         </div>
                         <div class="item slides">

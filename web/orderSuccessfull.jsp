@@ -115,9 +115,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
         
         
          <div class ="col-xs-12 col-sm-4 col-md-8">
-             <div class ="main-container">
+          
 
-<div class=" highlight" style="margin-left:0;">
+<div class=" highlight" style="margin-left:0; width: 100%">
 <h2>Order Successful !</h2>
 	<div class="row">
   
@@ -130,12 +130,14 @@ Please login/register here!: <a href="login.jsp">Login</a>
         </ul>
         </div>
         <div class="row">
-        <p>Order Details have been sent to your Email Address.</p>
-        <button class = "btn btn-primary">Buy Now</button>
-       <button class = "btn btn-warning" >Read More</button>
+        
+       
+          <a href="browseItems.jsp">    <button class="btn btn-warning" role="button">Keep Browsing</button></a>
+   
         </div>
+        <p>Order Details have been sent to your Email Address.</p>
     </div>
-	</div>
+	
 </div>
 </div>
                  

@@ -323,4 +323,43 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
 
         return rowsAffected;
     }
+    
+    @Override
+    public int updateQuantity(int amountInStock, int quantity, int id) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        int rowsAffected = 0;
+
+        try {
+            con = getConnection();
+int newAmount = (amountInStock-quantity);
+           
+                String query = "UPDATE albums SET amountInStock = ? WHERE albumID = ?";
+
+                ps = con.prepareStatement(query);
+                ps.setInt(1, newAmount);
+                ps.setInt(2, id);
+
+                rowsAffected = ps.executeUpdate();
+            
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
+                e.getMessage();
+            }
+        }
+
+        return rowsAffected;
+    }
 }

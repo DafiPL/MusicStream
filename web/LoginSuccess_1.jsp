@@ -1,5 +1,9 @@
-<%@page import="Dtos.Artist"%>
-<%@page import="Daos.ArtistDao"%>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <% session = request.getSession(false);
     Object resultValue = session.getAttribute("userLogin");
     Member member = (Member) resultValue;
@@ -12,46 +16,39 @@ Please login/register here!: <a href="login.jsp">Login</a>
 } else {
 %>
 
-
-
-<%@page import="java.util.Collections"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<link href="Css/common.css" rel="stylesheet" type="text/css"/>
 <%@page import="Dtos.Member"%>
 <%@page import="Dtos.Album"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="Daos.AlbumDao"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@page import="Dtos.Artist"%>
+<%@page import="Daos.ArtistDao"%>
+<%@page import="Dtos.Order"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Daos.OrderDao"%>
+
+<html lang="en">
     <head>
-       <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Shop</title>
+        <title>Your Profile</title>
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-       <link href="cssBoot/bootstrap.css" rel="stylesheet">
-    
-     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
-     
-      <!-- Website Font style -->
+        <link href="css/common.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+        <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-        <link href="Css/common.css" rel="stylesheet" type="text/css"/>
+       
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
-
-        <script>
-  $(document).ready(function() {
-    $('#example').DataTable( {
-        "pagingType": "full_numbers"
-    } );
-} );
-            </script>
-              <style>
+        <!-- Data Tables  -->
+       <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <style>
 
             body, html{
 
@@ -63,17 +60,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
             }
             
         </style>
-            
-    </head>
-    <body>
-
           <%
-
-            String userType = member.getUserType();
-            if (userType.equals("user")) {
-        %>
-       
-            <%
         
            AlbumDao albumDao = new AlbumDao("musicdb");
             ArrayList<Album> albums = albumDao.getAllAlbums();
@@ -85,13 +72,40 @@ Please login/register here!: <a href="login.jsp">Login</a>
             
           
     %>
+                  
+    </head>
+    <body>
+       
           <%@ include file="headerLoggedIn.jsp" %>
+   
+            
+             <%
 
+            String userType = member.getUserType();
+            if (userType.equals("user")) {
+        %>
+       
+                <%
+            OrderDao orderDao = new OrderDao("musicdb");
+            ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
+
+    
+
+
+        %>
+
+            
+            
+            
+            
+            
+            
+       
           <div class="row">
-        <div class ="col-xs-12 col-sm-4 col-md-2">
+        <div class ="col-xs-12 col-sm-4 col-md-3">
             <div class ="customDIV">
                 
-
+          
             
             
             
@@ -103,32 +117,32 @@ Please login/register here!: <a href="login.jsp">Login</a>
         
         
         
-         <div class ="col-xs-12 col-sm-4 col-md-8">
-             <div class ="customDIV" style ="background: white">
+         <div class ="col-xs-12 col-sm-4 col-md-6">
+             <div class ="customDIV"> 
              
-                 <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
+                  <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
         <thead >
             <tr>
-               <th>Artist Name</th>
-                    <th>Artist Age</th>
-                    <th>Artist Bio</th>
+               <th>Order ID</th>
+                    <th>Quantity</th>
+                   
                     <th>Image</th>
                  
             </tr>
         </thead>
         
         <tbody>
-              <%                for (Artist art : artists) {
+              <%                for (Order o : orders) {
                 %>
                 <tr>
 
 
 
-                    <td><%=art.getArtistName()%></td>
-                    <td><%=art.getArtistAge()%></td>
-                    <td><%=art.getArtistBio()%></td>
+                    <td><%=o.getOrderID()%></td>
+                    <td><%=o.getQuantity()%></td>
                     
-                    <td> <img src="<%=art.getArtistPicture()%>" alt="" height="100" width="120"></td>
+                    
+                    <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
                     
                 </tr>
                 <%
@@ -155,11 +169,27 @@ Please login/register here!: <a href="login.jsp">Login</a>
              </div>
                  
          </div>
-          <div class ="col-xs-12 col-sm-4 col-md-2">
+          <div class ="col-xs-12 col-sm-4 col-md-3">
               <div class ="customDIV">  </div></div>
       
-    </div>
-         <%
+    </div>   
+            
+     
+        
+   
+
+
+     
+        
+
+
+        
+
+       
+        
+
+
+        <%
                 } else if (userType.equals("admin")) {
                 %>
                 <a href="adminMenu.jsp">Admin Menu</a>
@@ -167,10 +197,26 @@ Please login/register here!: <a href="login.jsp">Login</a>
                 }
             
         %>
-        <% }%>
         
-        
-          <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
@@ -183,8 +229,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
 				$("[rel='tooltip']").tooltip();
 			});
 		</script>
-     
     </body>
 </html>
-
-
+<%
+    }
+%>

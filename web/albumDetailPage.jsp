@@ -161,32 +161,32 @@ Please login/register here!: <a href="login.jsp">Login</a>
                     <div class="col-xs-6 cols-sm-8 col-md-7" style="border:0px solid white;">
                         <!-- Details -->
                         <h3><%=selectedAlbum.getAlbumName()%></h3>    
-                        <h5 style="color:#337ab7">Sold By <a href="#">MusicStream</a> · <small style="color:#337ab7">(5054 purchases)</small></h5>
+                        <h5 style="color:#337ab7">Sold By <a href="#">MusicStream</a> · <p style="color:#337ab7">(5054 purchases)</p></h5>
 
                         <!-- Price -->
-                        <h6 class="title-price"><small>Price Offer:</small></h6>
+                        <h6 class="title-price"><p>Price Offer:</p></h6>
                         <h3 style="margin-top:0px;">U$S <%=selectedAlbum.getAlbumPrice()%></h3>
 
                         <!-- Album Details -->
                         <div class="section" style ="width:100%">
-                            <h6 class="title-attr" style="margin-top:15px;" ><small>Stock</small></h6>                    
+                            <h6 class="title-attr" style="margin-top:15px;" ><p>Stock</p></h6>                    
                             <div>
                                 <div class="attr" style="width:100%; height: 90%; background:green;"><%=selectedAlbum.getAmountInStock()%></div>
 
                             </div>
                         </div>
                         <div class="section" style="padding-bottom:5px;">
-                            <h6 class="title-attr"><small>Format :</small></h6>                    
+                            <h6 class="title-attr"><p>Format :</p></h6>                    
                             <div>
                                 <div class="attr2" style="width:100%; height: 90%; " ><%=selectedAlbum.getAlbumFormat()%></div>
 
                             </div>
                         </div>   
                         <div class="section" style="padding-bottom:20px;">
-                            <h6 class="title-attr"><small>Amount : </small></h6>                    
+                            <h6 class="title-attr"><p>Amount : </p></h6>                    
 
 <form action="FrontController" method="post">
-                             <input type="hidden"  name="quantity" id="quantity" value ="1"/>
+                             <input type ="number"  name="quantity" id="quantity" value ="1"/>
 
                         </div>                
 

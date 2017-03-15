@@ -38,32 +38,41 @@ public class orderItemCommand implements Command {
             OrderDao orderDao = new OrderDao("musicdb");
             MemberDao memberDao = new MemberDao("musicdb");
             AlbumDao albumDao = new AlbumDao("musicdb");
-           double price =  albumDao.getAlbumById(albumID).getAlbumPrice();
-           String albumName =  albumDao.getAlbumById(albumID).getAlbumName();
+            double price = albumDao.getAlbumById(albumID).getAlbumPrice();
+
+            String albumName = albumDao.getAlbumById(albumID).getAlbumName();
             Member m = null;
-           m= memberDao.getUserByUsername(username);
-           if(m != null){
-               Order o = new Order(username,albumID,albumQuantity);
-             int rs= orderDao.addOrder(o);
-           String email =  m.getEmail();
-             if(rs>0){
-                  try {
-                sendMail.generateAndSendEmailOrder(email,albumName,albumQuantity,username, price);
-            } catch (MessagingException ex) {
-                Logger.getLogger(forgotPassowrdCommand.class.getName()).log(Level.SEVERE, null, ex);
-            }
-             }
-             forwardToJsp = "orderSuccessfull.jsp";
-             session.setAttribute("orderDetials", o);
-           }
+            m = memberDao.getUserByUsername(username);
 
-            
+            if (albumDao.getAlbumById(albumID).getAmountInStock() > 0) {
+                if (m != null) {
+                    Order o = new Order(username, albumID, albumQuantity);
+                    int rs = orderDao.addOrder(o);
+                    String email = m.getEmail();
 
-           
+                    if (rs > 0) {
+                        int stock = albumDao.getAlbumById(albumID).getAmountInStock();
+                        int updateRs = 0;
 
-           else {
+                        updateRs = albumDao.updateQuantity(stock, albumQuantity, albumID);
+                        if (updateRs > 0) {
+                            try {
+                                sendMail.generateAndSendEmailOrder(email, albumName, albumQuantity, username, price);
+                            } catch (MessagingException ex) {
+                                Logger.getLogger(forgotPassowrdCommand.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            forwardToJsp = "loginError.jsp";
+                            session.setAttribute("userEntryError", "Couldnt Create Order!");
+                        }
+
+                    }
+                    forwardToJsp = "orderSuccessfull.jsp";
+                    session.setAttribute("orderDetials", o);
+                }
+            } else {
                 forwardToJsp = "loginError.jsp";
-                session.setAttribute("userEntryError", "invalid username or email adresss");
+                session.setAttribute("userEntryError", "Not ENough Stock!");
             }
         }
         return forwardToJsp;

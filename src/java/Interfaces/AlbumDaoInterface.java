@@ -24,4 +24,5 @@ public interface AlbumDaoInterface {
     public int editAllAlbumDetailsById(int id, String Textvalue, double NumericValue, int choice);
 
     public int addAlbum(Album a);
+    public int updateQuantity(int amountInStock, int quantity, int id);
 }

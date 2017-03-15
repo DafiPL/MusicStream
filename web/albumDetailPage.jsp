@@ -321,8 +321,27 @@ Please login/register here!: <a href="index.jsp">Index</a>
 
                         <!-- Buy -->
                         <div class="section" style="padding-bottom:20px;">
-                            <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> BUY</button>
+                            
+                            
+                       
+                            
+                            
+                            
+                            
+                            <button class="btn btn-success"><span style="margin-right:20px" class="" aria-hidden="true"></span> BUY</button>
 
+                             <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>   <form action="FrontController" method="post">
+                       
+
+
+
+                        <div class="form-group ">
+                            <input type="hidden"  name="albumID" id="albumID" value ="<%=selectedAlbum.getAlbumID()%>"/>
+                            <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Add To Cart" />
+                            <input type="hidden" name ="action" value="addToCart" />
+                        </div>
+
+                    </form></button>
 
                             <h6><a href="browseItems.jsp"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span>Return To Browse</a></h6>
                         </div>                                        

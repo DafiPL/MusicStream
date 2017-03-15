@@ -5,7 +5,7 @@
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
 <br> 
-Please login/register here!: <a href="index.jsp">Index</a>
+Please login/register here!: <a href="login.html">Login</a>
 <%
 } else {
 %>
@@ -172,9 +172,9 @@ Please login/register here!: <a href="index.jsp">Index</a>
         
         
          <div class ="col-xs-12 col-sm-4 col-md-7">
-             <div class ="customDIV"> MIDDLE SECTIONS 
+             <div class ="customDIV" style ="background: white">
              
-                 <table id="example" class="display" width="100%" cellspacing="0">
+                 <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
         <thead >
             <tr>
                <th>Album ID</th>

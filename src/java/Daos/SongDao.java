@@ -34,7 +34,7 @@ public class SongDao extends Dao implements SongDaoInterface{
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO songs(albumID, albumID, songName, songRelease) VALUES (NULL, ?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO `songs` (`songID`, `albumID`, `songName`, `songRelease`) VALUES (NULL, ?, ?, ?)");
 
             
             ps.setInt(1, s.getAlbum_id());

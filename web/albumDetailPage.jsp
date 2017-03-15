@@ -126,8 +126,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
         %>
 
         <%
-            OrderDao orderDao = new OrderDao("musicdb");
-            ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
+           
 
             ArtistDao artistDao = new ArtistDao("musicdb");
             GenreDao genreDao = new GenreDao("musicdb");

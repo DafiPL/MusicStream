@@ -216,7 +216,7 @@
            
 				
 				<li>
-					<a data-toggle="modal"  href="EditProfile.jsp" title="Go to Edit Profile">Edit Profile</a>
+					<a href="EditProfile.jsp" title="Go to Edit Profile section">Browse Items</a>
 				</li>
                                 <li>
                                       <div class="col-xs-12 col-sm-8 col-md-12">

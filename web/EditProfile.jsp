@@ -1,10 +1,38 @@
-<%@page import="Dtos.Member"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<% session = request.getSession(false);
+
+    Object albumDet = session.getAttribute("selectedAlbum");
+    Album selectedAlbum = (Album) albumDet;
+
+    Object resultValue = session.getAttribute("userLogin");
+    Member member = (Member) resultValue;
+    if (session == null || session.getAttribute("userLogin") == null) {
+%>
+<h1>Sorry you can't access this page as you're not logged in!</h1>
+<br> 
+Please login/register here!: <a href="login.jsp">Login</a>
+<%
+} else {
+%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<link href="Css/common.css" rel="stylesheet" type="text/css"/>
+<%@page import="Dtos.Member"%>
+<%@page import="Dtos.Album"%>
+<%@page import="Daos.AlbumDao"%>
+<%@page import="Dtos.Order"%>
+<%@page import="Daos.OrderDao"%>
+<%@page import="Daos.ArtistDao"%>
+<%@page import="Dtos.Artist"%>
+<%@page import="Daos.GenreDao"%>
+<%@page import="Dtos.Genre"%>
+<%@page import="java.util.ArrayList"%>
+
 <html lang="en">
     <head>
         <link href="Css/common.css" rel="stylesheet" type="text/css"/>
@@ -13,7 +41,7 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Your Profile</title>
+        <title>Edit Profile</title>
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
@@ -43,109 +71,21 @@ and open the template in the editor.
 
 
     </head>
-    <body>
-        <h1 style ="color: white">Your Profile Page</h1>
+    <body>   <%
+            AlbumDao albumDao = new AlbumDao("musicdb");
+            ArrayList<Album> albums = albumDao.getAllAlbums();
+            ArtistDao artDao = new ArtistDao("musicdb");
+            ArrayList<Artist> artists = artDao.getAllArtists();
 
-        <nav class="navbar navbar-default navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="Register.jsp">MusicStream</a>
-                </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="login.html">Log In!</a></li>
-                        <li><a href="Register.jsp">Register</a></li>
-                        <li><a href="forgotResetPassword.jsp">Forgot Password?</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse <span class="caret"></span></a>
-                            <ul  class="dropdown-menu" role="menu">
-                                <li><a href="browseItems.jsp">Shop</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="EditProfile.jsp">Edit Profile</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-        <%
-            Object resultValue = session.getAttribute("userLogin");
-            Member member = (Member) resultValue;
         %>
+       <%@ include file="headerLoggedIn.jsp" %>
+        
         <div class="row">
-            <div class ="col-xs-12 col-sm-4 col-md-3">
+            <div class ="col-xs-12 col-sm-4 col-md-2">
                 <div class ="customDIV"> LEft SIde Bar <br>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="well well-sm">
-                            <div class="row">
-                                <div class="col-sm-6 col-md-4">
-
-                                    <img src="<%=member.getDbImage()%>" alt="" class="img-rounded img-responsive">
-                                </div>
-                                <div class="col-sm-6 col-md-8">
-                                    <h4>
-                                        User : <%=member.getUsername()%></h4>
-                                    <small><cite title="<%=member.getTown()%>"><%=member.getTown()%> <i class="glyphicon glyphicon-map-marker">
-                                            </i></cite></small>
-                                    <p>
-
-
-                                        <small><cite title="<%=member.getEmail()%>"><%=member.getEmail()%> <i class="glyphicon glyphicon-envelope">
-                                                </i></cite></small>
-
-                                        <br />
-                                        <small><cite title="<%=member.getFirstName()%>"><%=member.getFirstName()%> <i class="glyphicon glyphicon-pencil">
-                                                </i></cite></small>
-
-
-
-                                        <br />
-
-
-
-                                        <small><cite title="<%=member.getPhone()%>"><%=member.getPhone()%> <i class="glyphicon glyphicon-phone">
-                                                </i></cite></small>
-                                        <!-- Split button -->
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary">
-                                            Social</button>
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                            <span class="caret"></span><span class="sr-only">Social</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Twitter</a></li>
-                                            <li><a href="https://plus.google.com">Google +</a></li>
-                                            <li><a href="https://www.facebook.com">Facebook</a></li>
-                                            <li class="divider"></li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+       
 
 
 
@@ -153,8 +93,104 @@ and open the template in the editor.
 
             </div>
 
-            <div class ="col-xs-12 col-sm-4 col-md-7">
+            <div class ="col-xs-12 col-sm-4 col-md-8">
                 <div class ="customDIV">
+                
+    <h1>Edit Profile</h1>
+  	<hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          
+          <input type="file" class="form-control">
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          Welcome, <strong>Change</strong>Your Account Information Below
+        </div>
+        <h3>Personal info</h3>
+        
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="Jane">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Last name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="Bishop">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Company:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="janesemail@gmail.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Time Zone:</label>
+            <div class="col-lg-8">
+              <div class="ui-select">
+                <select id="user_time_zone" class="form-control">
+                  <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                  <option value="Alaska">(GMT-09:00) Alaska</option>
+                  <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                  <option value="Arizona">(GMT-07:00) Arizona</option>
+                  <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                  <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                  <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                  <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Username:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" value="janeuser">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="11111122333">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Confirm password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="11111122333">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input type="button" class="btn btn-primary" value="Save Changes">
+              <span></span>
+              <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+
+<hr>
                     <div class="span3 well" style = "width: 90%; margin-left: 5%; ">
                         <legend>Your Profile</legend>
                         <%
@@ -190,18 +226,50 @@ and open the template in the editor.
                                     <td> <%=member.getDate()%></td>
                                     <td> <%=member.getExpiryDate()%></td>
 
-                                <button class="btn btn-warning" type="submit" value="edit">Delete</button>
+                                <button class="btn btn-warning" type="submit" value="edit">Edit</button>
                                 <input type="hidden" name ="action" value="editprofile" />
                                 </tr>
                             </table>
                         </form>
                         <%
                             }
+}
                         %>
 
 
                     </div>
                 </div>
             </div>
+                         <div class ="col-xs-12 col-sm-4 col-md-2">
+                <div class ="customDIV"> LEft SIde Bar <br>
+
+       
+
+
+
+                </div>
+
+            </div>
+        </div>
+                        
+                            <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="js/bootstrap.min.js"></script>
+
+
+
+            <script>
+                $(document).ready(function () {
+                    $("[rel='tooltip']").tooltip();
+                });
+                <%
+                    
+                
+                
+                
+                %>
+            </script>
     </body>
 </html>

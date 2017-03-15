@@ -26,7 +26,7 @@ public class orderItemCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";
-        int album_id = Integer.parseInt(request.getParameter("album"));
+        int album_id = Integer.parseInt(request.getParameter("quantity"));
         int user_id = Integer.parseInt(request.getParameter("user_id"));
          String email = request.getParameter("email");
          String username = request.getParameter("username");

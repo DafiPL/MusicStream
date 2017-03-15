@@ -11,6 +11,7 @@ import Daos.GenreDao;
 import Daos.MemberDao;
 import Daos.SongDao;
 import Dtos.Album;
+import Dtos.Artist;
 import Dtos.Genre;
 import Dtos.Song;
 import javax.servlet.http.HttpServletRequest;
@@ -41,10 +42,20 @@ public class AddCommand implements Command {
         String releaseDate = request.getParameter("releaseDate");
         String albumImage = request.getParameter("albumImage");
 
+        String songID = request.getParameter("songID");
+
+        String artistName = request.getParameter("artistName");
+        String artistAge = request.getParameter("artistAge");
+        String artistBio = request.getParameter("artistBio");
+        String artistPicture = request.getParameter("artistPicture");
+        
+        
         String genreName = request.getParameter("genreName");
         int albumId = Integer.valueOf(albumID);
         int genreId = Integer.valueOf(genreID);
         int artistId = Integer.valueOf(artistID);
+        int songId = Integer.valueOf(songID);
+        int ArtistAge = Integer.valueOf(artistAge);
         Double AlbumPrice = Double.valueOf(albumPrice);
         int AmountInStock = Integer.valueOf(amountInStock);
 //        Object loginValue = session.getAttribute("userLogin");
@@ -54,7 +65,7 @@ public class AddCommand implements Command {
 
             if (choice.equals("song")) {
                 SongDao songDao = new SongDao("musicdb");
-                Song s = new Song(albumId, songName, songRelease);
+                Song s = new Song(songId, albumId, songName, songRelease);
                 songDao.addSong(s);
                 forwardToJsp = "adminMenu.jsp";
             } else if (choice.equals("album")) {
@@ -63,9 +74,9 @@ public class AddCommand implements Command {
                 albumDao.addAlbum(a);
                 forwardToJsp = "adminMenu.jsp";
             } else if (choice.equals("artist")) {
-                SongDao songDao = new SongDao("musicdb");
-                Song s = new Song(albumId, songName, songRelease);
-                songDao.addSong(s);
+                ArtistDao artistDao = new ArtistDao("musicdb");
+                Artist a = new Artist(artistId, artistName, ArtistAge, artistBio, artistPicture );
+                artistDao.addArtist(a);
                 forwardToJsp = "adminMenu.jsp";
             } else if (choice.equals("genre")) {
                 GenreDao genreDao = new GenreDao("musicdb");

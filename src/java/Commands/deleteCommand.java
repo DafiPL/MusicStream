@@ -32,7 +32,7 @@ public class deleteCommand implements Command {
 //        Object loginValue = session.getAttribute("userLogin");
 //        User user = (User) loginValue;
 //        if (user.getAdminRole().equals("admin") && user != null) {
-        if (choice != null) {
+        if (choice != null || Id !=null) {
 
             int rs = 0;
             if (choice.endsWith("song")) {
@@ -66,13 +66,13 @@ public class deleteCommand implements Command {
                 forwardToJsp = "adminMenu.jsp";
             } else {
                 forwardToJsp = "error.jsp";
-                session.setAttribute("errorMessage", "album does not exist");
+                session.setAttribute("errorMessage", "User does not exist Enter Valid ID");
             }
         }
-//        else {
-//            forwardToJsp = "error.jsp";
-//            session.setAttribute("errorMessage", "user is not a admin you do not have permission for that action!");
-//        }
+        else {
+            forwardToJsp = "error.jsp";
+            session.setAttribute("errorMessage", "Please Select Values To Delete");
+        }
         return forwardToJsp;
 
     }

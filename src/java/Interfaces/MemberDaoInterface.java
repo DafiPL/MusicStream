@@ -29,5 +29,5 @@ public interface MemberDaoInterface {
 
     public ArrayList<Member> searchForMmeber(String username);
 
-    public int editAllMemberDetailsByUsername(String username, String Textvalue,  int choice);
+    public int editAllMemberDetailsByUsername(String currentUser, String username, String firstName, String lastName, String password, long convertedPhone, String email, String street, String town, String county);
 }

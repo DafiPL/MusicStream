@@ -592,9 +592,8 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         return rowsAffected;
     }
 
-    
     @Override
-    public int editAllMemberDetailsByUsername(String username, String Textvalue, int choice) {
+    public int editAllMemberDetailsByUsername(String currentUser, String username, String firstName, String lastName, String password, long convertedPhone, String email, String street, String town, String county) {
 
         Connection con = null;
         PreparedStatement ps = null;
@@ -603,41 +602,42 @@ public class MemberDao extends Dao implements MemberDaoInterface {
         try {
             con = getConnection();
 
-            if (choice == 1) {
-                String query = "UPDATE members SET username = ? WHERE username = ?";
+            String query = "UPDATE `members` SET `username`= ?,`firstName`=?,`lastName`= ?,`password`= ?,`phone`= ?,`email`= ?,`addressLine1`= ?,`town`= ?,`county`=? WHERE `username` = ?";
 
-                ps = con.prepareStatement(query);
-                ps.setString(1, Textvalue);
-                ps.setString(2, username);
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
+            ps.setString(4, password);
+            ps.setLong(5, convertedPhone);
+            ps.setString(6, email);
+            ps.setString(7, street);
+            ps.setString(8, town);
+            ps.setString(9, county);
+            ps.setString(10, currentUser);
 
-                rowsAffected = ps.executeUpdate();
-            } else if (choice == 2) {
-                String query = "UPDATE members SET firstName = ? WHERE username = ?";
-
-                ps = con.prepareStatement(query);
-                ps.setString(1, Textvalue);
-                ps.setString(2, username);
-
-                rowsAffected = ps.executeUpdate();
-            }  
-            
-
-        } catch (SQLException e) {
-            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    freeConnection(con);
-                }
-            } catch (SQLException e) {
-                System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
-                e.getMessage();
-            }
+            rowsAffected = ps.executeUpdate();
         }
-
-        return rowsAffected;
+    
+    catch (SQLException e) {
+            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
     }
+
+    
+        finally {
+            try {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                freeConnection(con);
+            }
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
+            e.getMessage();
+        }
+    }
+
+    return rowsAffected ;
+}
 }

@@ -8,6 +8,7 @@ package CommandFactory;
 import Commands.AddCommand;
 import Commands.Command;
 import Commands.EditCommand;
+import Commands.EditProfile;
 import Commands.LogOutCommand;
 import Commands.LoginCommand;
 import Commands.RegisterCommand;
@@ -32,15 +33,15 @@ public class CommandFactory {
             return new deleteCommand();
         } else if (action.equals("search")) {
             return new SearchCommand();
-        }  else if (action.equals("edit")) {
+        } else if (action.equals("edit")) {
             return new EditCommand();
         } else if (action.equals("add")) {
             return new AddCommand();
-        } 
-        else if (action.equals("albumDetail")) {
+        } else if (action.equals("editprofile")) {
+            return new EditProfile();
+        } else if (action.equals("albumDetail")) {
             return new albumDetailCommand();
-        } 
-        else {
+        } else {
             return null;
         }
     }

@@ -7,8 +7,8 @@ and open the template in the editor.
 -->
 <html lang="en">
     <head>
-        <link href="Css/common.css" rel="stylesheet" type="text/css"/><html lang="en">
-    <head>
+        <link href="Css/common.css" rel="stylesheet" type="text/css"/>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,10 +90,10 @@ and open the template in the editor.
             </div><!-- /.container-fluid -->
         </nav>
         <%
- Object resultValue = session.getAttribute("userLogin");
-    Member member = (Member) resultValue;
-    %>
- <div class="row">
+            Object resultValue = session.getAttribute("userLogin");
+            Member member = (Member) resultValue;
+        %>
+        <div class="row">
             <div class ="col-xs-12 col-sm-4 col-md-3">
                 <div class ="customDIV"> LEft SIde Bar <br>
 
@@ -153,52 +153,55 @@ and open the template in the editor.
 
             </div>
 
-    <div class ="col-xs-12 col-sm-4 col-md-7">
+            <div class ="col-xs-12 col-sm-4 col-md-7">
                 <div class ="customDIV">
-    <div class="span3 well" style = "width: 90%; margin-left: 5%; ">
-        <legend>Your Profile</legend>
-        <% 
-            if(member != null){
-                %>
-            <table>
-            <tr>
-                <th>Username</th> <p>
-                <th>First Name</th> 
-                <th>Last Name</th>
-                <th>Password</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Street</th>
-                <th>Town</th>
-                <th>County</th>
-                <th>Register Date</th>
-                <th>ExpiryDate</th>
+                    <div class="span3 well" style = "width: 90%; margin-left: 5%; ">
+                        <legend>Your Profile</legend>
+                        <%
+                            if (member != null) {
+                        %>
+                        <form action="FrontController" method="post">
+                            <table>
+                                <tr>
+                                    <th>Username</th> <p>
+                                <th>First Name</th> 
+                                <th>Last Name</th>
+                                <th>Password</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>Street</th>
+                                <th>Town</th>
+                                <th>County</th>
+                                <th>Register Date</th>
+                                <th>ExpiryDate</th>
 
-            </tr>
-            
-            <tr>
-                <td><%=member.getUsername()%></td>
-                <td><%=member.getFirstName()%></td>
-                <td><%=member.getLastName()%></td>
-                <td><%=member.getPassword()%></td>
-                <td><%=member.getPhone()%></td>
-                <td><%=member.getEmail()%></td>
-                <td><%=member.getAddressLine1()%></td>
-                <td><%=member.getTown()%></td>
-                <td><%=member.getCounty()%></td>
-                <td><%=member.getDate()%></td>
-                <td><%=member.getExpiryDate()%></td>
-               
+                                </tr>
 
-            </tr>
-        </table>
-            <%
-                    }
-        %>
-   
-    
-    </div>
+                                <tr>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="username" value="<%=member.getUsername()%>"/></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="firstname" value="<%=member.getFirstName()%>" /></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="lastname" value="<%=member.getLastName()%> " /></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="password" value="<%=member.getPassword()%>" /></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="phone" value="<%=member.getPhone()%>" /></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="email" value="<%=member.getEmail()%>" /></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="address" value="<%=member.getAddressLine1()%>" /></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="town" value="<%=member.getTown()%>" /></td>
+                                    <td> <input style ="width: 100%; height: 40px; color: black;" class ="a" type="JTextField" name="county" value="<%=member.getCounty()%>" /></td>
+                                    <td> <%=member.getDate()%></td>
+                                    <td> <%=member.getExpiryDate()%></td>
+
+                                <button class="btn btn-warning" type="submit" value="edit">Delete</button>
+                                <input type="hidden" name ="action" value="editprofile" />
+                                </tr>
+                            </table>
+                        </form>
+                        <%
+                            }
+                        %>
+
+
+                    </div>
                 </div>
-    </div>
-                                                </body>
+            </div>
+    </body>
 </html>

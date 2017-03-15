@@ -11,11 +11,15 @@ import javax.servlet.http.HttpSession;
 import Daos.MemberDao;
 import Dtos.Member;
 import EncryptionPass.SaltHashPass;
+import Mailer.sendMail;
 //import static encriptPassword.SaltHashPass.generateHash;
 //import static encriptPassword.SaltHashPass.generateSalt;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -72,6 +76,13 @@ public class RegisterCommand implements Command {
                 HttpSession session = request.getSession();
 
                 if (addMember > 0) {
+                    
+                    try {
+                sendMail.generateAndSendEmail(email, password);
+            } catch (MessagingException ex) {
+               Logger.getLogger(forgotPassowrdCommand.class.getName()).log(Level.SEVERE, null, ex);
+           }
+                    
                     session.setAttribute("regInfo", u);
                     HttpSession session2 = request.getSession();
                     session.setAttribute("theGeneratedPassword", password);
@@ -82,7 +93,7 @@ public class RegisterCommand implements Command {
             } else {
                 forwardToJsp = "loginError.jsp";
                 HttpSession session = request.getSession();
-                session.setAttribute("userEntryError", "must enter all feilds");
+                session.setAttribute("userEntryError", "Username Already Taken");
             }
         } else {
 

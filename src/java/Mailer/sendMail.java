@@ -54,7 +54,7 @@ public class sendMail {
  
 		// Enter your correct gmail UserID and Password
 		// if you have 2FA enabled then provide App Specific Password
-		transport.connect("smtp.gmail.com", "test@gmail.com", "test123");
+		transport.connect("smtp.gmail.com", "musicstreamtestemail1@gmail.com", "testtest123");
 		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
 		transport.close();
                 return 0;

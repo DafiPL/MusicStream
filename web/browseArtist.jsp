@@ -1,54 +1,79 @@
-<!DOCTYPE html>
-
+<%@page import="Dtos.Artist"%>
+<%@page import="Daos.ArtistDao"%>
 <% session = request.getSession(false);
     Object resultValue = session.getAttribute("userLogin");
     Member member = (Member) resultValue;
-   
+    if (session == null || session.getAttribute("userLogin") == null) {
 %>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<link href="Css/common.css" rel="stylesheet" type="text/css"/>
+<h1>Sorry you can't access this page as you're not logged in!</h1>
+<br> 
+Please login/register here!: <a href="login.html">Login</a>
+<%
+} else {
+%>
 
-<%@page import="Dtos.Album"%>
-<%@page import="Daos.AlbumDao"%>
-<%@page import="Dtos.Artist"%>
-<%@page import="Daos.ArtistDao"%>
+
+
+<%@page import="java.util.Collections"%>
 <%@page import="Dtos.Member"%>
-<%@page import="Daos.MemberDao"%>
+<%@page import="Dtos.Album"%>
 <%@page import="java.util.ArrayList"%>
-
-
-<html lang="en">
+<%@page import="Daos.AlbumDao"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
     <head>
-        <meta charset="utf-8">
+       <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Index Menu</title>
+        <title>Shop</title>
 
-     <!-- Bootstrap -->
+        <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-        <link href="Css/style.css" rel="stylesheet">
-
-
-        <!-- Website Font style -->
+       <link href="cssBoot/bootstrap.css" rel="stylesheet">
+    
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+     
+      <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link href="Css/common.css" rel="stylesheet" type="text/css"/>
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-        <style>
-  
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
+
+        <script>
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+            </script>
+              <style>
+
+            body, html{
+
+                background-image: url("images/headphonesBackground.jpg");
+  background-size: 100%;
+                
+                font-family: 'Oxygen', sans-serif;
+                background-size: cover;
+            }
+            
         </style>
-       
+            
     </head>
-    
-    <%
+    <body>
+
+          <%
+
+            String userType = member.getUserType();
+            if (userType.equals("user")) {
+        %>
+       
+            <%
         
            AlbumDao albumDao = new AlbumDao("musicdb");
             ArrayList<Album> albums = albumDao.getAllAlbums();
@@ -60,10 +85,9 @@ and open the template in the editor.
             
           
     %>
-    <body id="page-top" name="page-top" class="active">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <!-- Navigation -->
-    	<nav class="navbar navbar-inverse navbar-fixed-top">
+    	 	<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -235,7 +259,7 @@ and open the template in the editor.
                                               </a>
                                             </div><!-- /.carousel -->
                                             <li class="divider"></li>
-                                               <li><a href="browseArtist.jsp">Browse Artists <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                              <li><a href="browseArtist.jsp">Browse Artists <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
                 						</ul>
                 					</li>
                 				</ul>				
@@ -262,6 +286,7 @@ and open the template in the editor.
 			</div><!-- /.container-fluid -->
 		</nav>
 		<nav id="sidebar-wrapper">
+                    
 			<ul class="sidebar-nav">
 				<a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
 				<li class="sidebar-brand">
@@ -271,69 +296,80 @@ and open the template in the editor.
 					<a href="Index.jsp" title="Go to Top">Home</a>
 				</li>
 				<li>
-					<a href="browseItems.jsp" title="Go to About Us section">Browse Items</a>
+					<a href="brwoseItems.jsp" title="Go to About Us section">Browse Items</a>
 				</li>
                                 
                         
            
 				
 				<li>
-					<a data-toggle="modal" data-href="#loginModal" data-target="#loginModal" style="cursor:pointer;"> Log In !</a>
+					<a data-toggle="modal"  href="EditProfile.jsp" title="Go to Edit Profile">Edit Profile</a>
 				</li>
+                                <li>
+                                      <div class="col-xs-12 col-sm-8 col-md-12">
+            <div class="well well-sm">
+                <div class="row">
+                    
+                    <div class="col-sm-12 col-md-12">
+                         <img src="<%=member.getDbImage()%>" alt="" class="img-rounded img-responsive">
+                         <br>
+                        <h4>
+                            User : <%=member.getUsername()%></h4>
+                        <p> <%=member.getTown()%> <i class="glyphicon glyphicon-map-marker">
+                        </i></p>
+                        <p>
+                           
+                            
+                            <p><cite title="<%=member.getEmail()%>"><%=member.getEmail()%> <i class="glyphicon glyphicon-envelope">
+                        </i></cite></p>
+                                
+                         
+                            <p><cite title="<%=member.getFirstName()%>"><%=member.getFirstName()%> <i class="glyphicon glyphicon-pencil">
+                        </i></cite></p>
+                            
+                            
+                            
+                            
+                            
+                           
+                           
+                        
+                        
+                        
+                          <p><cite title="<%=member.getPhone()%>"><%=member.getPhone()%> <i class="glyphicon glyphicon-phone">
+                        </i></cite></p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">
+                                Options</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span><span class="sr-only">Social</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li> <form NAME="form1" action="FrontController" method="post" method="get"  >
+ <input class= "a"type="submit" value="Logout Here"/>
+            <input type="hidden" name="action" value="logout"/>
+                                </form>
+                                </li> 
+                                <li><a href="orders.jsp">Orders +</a></li>
+                                <li class="divider"></li>
+                                <li><a href="https://google.com">Search</a></li>
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                </li>
            
 			</ul>
+                
+                    
+                    
 		</nav>
-		<div class="container">
-			<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-				<div class="modal-dialog modal-default">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h3>Login to Your MusicStream Account - Profile</h3>
-						</div>
-						<div class="modal-body">
-							<article class="container-form center-block">
-								<!-- Form Content HERE! -->
-								   <form action="FrontController" method="post">
-                        <div class="form-group">
-                            <label for="username" class="cols-sm-2 control-label">Username</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                    <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" required  pattern="[a-z]{1,15}" title="Username should only contain lowercase letters. e.g. john"/>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="password" class="cols-sm-2 control-label">Your Password</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-
-                                    <input name="password" class="form-control"   id="password" placeholder="Password" size=15 type="text" required />
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group ">
-                            <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Login" />
-                            <input type="hidden" name ="action" value="login" />
-                        </div>
-
-                    </form>
-							</article>
-						</div>
-						<div class="modal-footer">
-							Login Problems?
-							<button type="submit" class="btn btn-dark" data-dismiss="modal" data-href="#collapseTwo" data-toggle="collapse" data-target="#collapseTwo" style="cursor:pointer;">Contact Me</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	
 		<aside id="accordion" class="social text-vertical-center">
 			<div class="accordion-social">
 				<ul class="panel-collapse collapse in nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
@@ -347,67 +383,98 @@ and open the template in the editor.
 				</ul>
 			</div>
 		</aside>
-       
-		<div class="masthead">
-            <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
 
+          <div class="row">
+        <div class ="col-xs-12 col-sm-4 col-md-3">
+            <div class ="customDIV"> LEft SIde Bar <br>
+                
 
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#bs-carousel" data-slide-to="1"></li>
-                    <li data-target="#bs-carousel" data-slide-to="2"></li>
-                </ol>
-      
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item slides active">
-                        <div class="slide-1"></div>
-                            <div class="hero">
-                                <hgroup>
-                                    <h1>Music is life.</h1>        
-                                    <h3>Register Now !</h3>
-                                </hgroup>
-                          <a href="Register.jsp">  <button class="btn btn-hero btn-lg" role="button">Register Here</button></a>
-                                      
-                        </div>
-                    </div>
-                    <div class="item slides">
-                        <div class="slide-2"></div>
-                            <div class="hero">        
-                                <hgroup>
-                                    <h1>Music is amazing </h1>        
-                                    <h3>Already a Member? Log In</h3>
-                                </hgroup>       
-                            <a href="login.html">    <button class="btn btn-hero btn-lg" role="button">Login Here</button></a>
-                            </div>
-                        </div>
-                        <div class="item slides">
-                            <div class="slide-3"></div>
-                                <div class="hero">        
-                                    <hgroup>
-                                        <h1>Music is for everyone.</h1>        
-                                        <h3>Have a look at our products</h3>
-                                    </hgroup>
-                                  <a href="browseItems.jsp">  <button class="btn btn-hero btn-lg" role="button">Browse Items</button></a>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-		        </div>
+            
+            
+            
             </div>
+                
         </div>
         
-		
-        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-          <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        
+        
+        
+        
+         <div class ="col-xs-12 col-sm-4 col-md-7">
+             <div class ="customDIV" style ="background: white">
+             
+                 <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
+        <thead >
+            <tr>
+               <th>Artist Name</th>
+                    <th>Artist Age</th>
+                    <th>Artist Bio</th>
+                    <th>Image</th>
+                 
+            </tr>
+        </thead>
+        
+        <tbody>
+              <%                for (Artist art : artists) {
+                %>
+                <tr>
+
+
+
+                    <td><%=art.getArtistName()%></td>
+                    <td><%=art.getArtistAge()%></td>
+                    <td><%=art.getArtistBio()%></td>
+                    
+                    <td> <img src="<%=art.getArtistPicture()%>" alt="" height="42" width="42"></td>
+                    
+                </tr>
+                <%
+                    }
+                %>
+        </tbody>
+                
+                
+              
+                
+            </table>
+
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             </div>
+                 
+         </div>
+          <div class ="col-xs-12 col-sm-4 col-md-2">
+              <div class ="customDIV"> RIGHT SIde Bar  </div></div>
+      
+    </div>
+         <%
+                } else if (userType.equals("admin")) {
+                %>
+                <a href="adminMenu.jsp">Admin Menu</a>
+                <%
+                }
+            
+        %>
+        <% }%>
+        
+        
+          <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
-        <script>
-    		$(document).ready(function(){
-				$("[rel='tooltip']").tooltip();
-			});
-		</script>
-</body>
+     
+    </body>
 </html>
+
+

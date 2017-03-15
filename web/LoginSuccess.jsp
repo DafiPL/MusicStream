@@ -251,7 +251,7 @@ Please login/register here!: <a href="login.html">Login</a>
                                               </a>
                                             </div><!-- /.carousel -->
                                             <li class="divider"></li>
-                                            <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                                <li><a href="browseArtist.jsp">Browse Artists <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
                 						</ul>
                 					</li>
                 				</ul>				

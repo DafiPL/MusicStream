@@ -259,7 +259,7 @@ Please login/register here!: <a href="login.html">Login</a>
                                               </a>
                                             </div><!-- /.carousel -->
                                             <li class="divider"></li>
-                                            <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                              <li><a href="browseArtist.jsp">Browse Artists <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
                 						</ul>
                 					</li>
                 				</ul>				
@@ -388,48 +388,7 @@ Please login/register here!: <a href="login.html">Login</a>
         <div class ="col-xs-12 col-sm-4 col-md-3">
             <div class ="customDIV"> LEft SIde Bar <br>
                 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="well well-sm">
-                <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        
-                      <img src="<%=member.getDbImage()%>" alt="" class="img-rounded img-responsive">
-                    </div>
-                    <div class="col-sm-6 col-md-8">
-                        <h4>
-                            User : <%=member.getUsername()%></h4>
-                        <small><cite title="<%=member.getTown()%>"><%=member.getTown()%> <i class="glyphicon glyphicon-map-marker">
-                        </i></cite></small>
-                        <p>
-                           
-                            
-                            <small><cite title="<%=member.getEmail()%>"><%=member.getEmail()%> <i class="glyphicon glyphicon-envelope">
-                        </i></cite></small>
-                                
-                            <br />
-                            <small><cite title="<%=member.getFirstName()%>"><%=member.getFirstName()%> <i class="glyphicon glyphicon-pencil">
-                        </i></cite></small>
-                            
-                            
-                            
-                            
-                            
-                           
-                            <br />
-                        
-                        
-                        
-                          <small><cite title="<%=member.getPhone()%>"><%=member.getPhone()%> <i class="glyphicon glyphicon-phone">
-                        </i></cite></small>
-                        <br>
-                      
-                <input class= "a"type="submit" value="Logout Here"/>
-            <input type="hidden" name="action" value="logout"/>
-                    
-                    </div>
-                </div>
-            </div>
-        </div>
+
             
             
             

@@ -100,7 +100,7 @@ and open the template in the editor.
                                                         
                                                     </form>
                                                                                   
-                                                    <button class="btn btn-primary" type="button"><%=albums.get(3).getAlbumPrice()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>       
+                                                    <button class="btn btn-primary" type="button"><%=albums.get(3).getAlbumPrice()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Cart</button>       
                                                 </div><!-- End Item -->
                                                 <div class="item">
                                                      <h4><%=albums.get(5).getAlbumName()%></h4> 
@@ -111,7 +111,7 @@ and open the template in the editor.
                             <input type="hidden" name ="action" value="albumDetail" />      
                                                         
                                                     </form>                                      
-                                                    <button class="btn btn-primary" type="button"><%=albums.get(5).getAlbumPrice()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>        
+                                                    <button class="btn btn-primary" type="button"><%=albums.get(5).getAlbumPrice()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Cart</button>        
                                                 </div><!-- End Item -->
                                                 <div class="item">
                                                       <h4><%=albums.get(6).getAlbumName()%></h4> 
@@ -122,7 +122,7 @@ and open the template in the editor.
                             <input type="hidden" name ="action" value="albumDetail" />      
                                                         
                                                     </form>                                      
-                                                    <button class="btn btn-primary" type="button"><%=albums.get(5).getAlbumPrice()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>      
+                                                    <button class="btn btn-primary" type="button"><%=albums.get(5).getAlbumPrice()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Cart</button>      
                                                 </div><!-- End Item -->                                
                                               </div><!-- End Carousel Inner -->
                                               <!-- Controls -->
@@ -211,17 +211,17 @@ and open the template in the editor.
                                                  <a href="#"><img src="<%=artists.get(0).getArtistPicture()%>" style ="width: 254px; height: 150px" class="img-responsive" alt="product 1"></a>
                                                    
                                                                                   
-                                                    <button class="btn btn-primary" type="button"><%=artists.get(0).getArtistName()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>       
+                                                    <button class="btn btn-primary" type="button"><%=artists.get(0).getArtistName()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Cart</button>       
                                                 </div><!-- End Item -->
                                                 <div class="item">
                                                     <a href="#"><img src="<%=artists.get(1).getArtistPicture()%>" style ="width: 254px; height: 150px" class="img-responsive" alt="product 2"></a>
                                                                                         
-                                                    <button class="btn btn-primary" type="button"><%=artists.get(1).getArtistName()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>        
+                                                    <button class="btn btn-primary" type="button"><%=artists.get(1).getArtistName()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Cart</button>        
                                                 </div><!-- End Item -->
                                                 <div class="item">
                                                     <a href="#"><img src="<%=artists.get(2).getArtistPicture()%>" style ="width: 254px; height: 150px" class="img-responsive" alt="product 3"></a>
                                                                                             
-                                                    <button class="btn btn-primary" type="button"><%=artists.get(2).getArtistName()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>      
+                                                    <button class="btn btn-primary" type="button"><%=artists.get(2).getArtistName()%></button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Cart</button>      
                                                 </div><!-- End Item -->                                
                                               </div><!-- End Carousel Inner -->
                                               <!-- Controls -->
@@ -271,7 +271,7 @@ and open the template in the editor.
 					<a href="Index.jsp" title="Go to Top">Home</a>
 				</li>
 				<li>
-					<a href="brwoseItems.jsp" title="Go to About Us section">Browse Items</a>
+					<a href="browseItems.jsp" title="Go to About Us section">Browse Items</a>
 				</li>
                                 
                         
@@ -368,7 +368,7 @@ and open the template in the editor.
                                     <h1>Music is life.</h1>        
                                     <h3>Register Now !</h3>
                                 </hgroup>
-                            <button class="btn btn-hero btn-lg" role="button"><a href="Register.jsp"></a>Register Here</button>
+                          <a href="Register.jsp">  <button class="btn btn-hero btn-lg" role="button">Register Here</button></a>
                                       
                         </div>
                     </div>
@@ -379,7 +379,7 @@ and open the template in the editor.
                                     <h1>Music is amazing </h1>        
                                     <h3>Already a Member? Log In</h3>
                                 </hgroup>       
-                                <button class="btn btn-hero btn-lg" role="button"><a href="login.html"></a>Login Here</button>
+                            <a href="login.html">    <button class="btn btn-hero btn-lg" role="button">Login Here</button></a>
                             </div>
                         </div>
                         <div class="item slides">
@@ -389,7 +389,7 @@ and open the template in the editor.
                                         <h1>Music is for everyone.</h1>        
                                         <h3>Have a look at our products</h3>
                                     </hgroup>
-                                    <button class="btn btn-hero btn-lg" role="button"><a href="browseItems.jsp"></a>Browse Items</button>
+                                  <a href="browseItems.jsp">  <button class="btn btn-hero btn-lg" role="button">Browse Items</button></a>
                                 </div>
                             </div>
                         </div> 

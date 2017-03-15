@@ -210,8 +210,9 @@ form.info {
 /*# LAYOUT */
 .customDIV{
     margin:3px;
+    margin-top: 2.9em;
     min-height: 1000px;
-    
+    background:silver;
     text-align: center;
     font-size: large;
 }

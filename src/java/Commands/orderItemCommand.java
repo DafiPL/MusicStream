@@ -39,6 +39,8 @@ public class orderItemCommand implements Command {
             MemberDao memberDao = new MemberDao("musicdb");
             AlbumDao albumDao = new AlbumDao("musicdb");
             double price = albumDao.getAlbumById(albumID).getAlbumPrice();
+            
+            double totalPrice = (price*albumQuantity);
 
             String albumName = albumDao.getAlbumById(albumID).getAlbumName();
             Member m = null;
@@ -46,7 +48,7 @@ public class orderItemCommand implements Command {
 
             if (albumDao.getAlbumById(albumID).getAmountInStock() > 0) {
                 if (m != null) {
-                    Order o = new Order(username, albumID, albumQuantity);
+                    Order o = new Order(username, albumID, albumQuantity,totalPrice);
                     int rs = orderDao.addOrder(o);
                     String email = m.getEmail();
 
@@ -57,7 +59,7 @@ public class orderItemCommand implements Command {
                         updateRs = albumDao.updateQuantity(stock, albumQuantity, albumID);
                         if (updateRs > 0) {
                             try {
-                                sendMail.generateAndSendEmailOrder(email, albumName, albumQuantity, username, price);
+                                sendMail.generateAndSendEmailOrder(email, albumName, albumQuantity, username, totalPrice);
                             } catch (MessagingException ex) {
                                 Logger.getLogger(forgotPassowrdCommand.class.getName()).log(Level.SEVERE, null, ex);
                             }

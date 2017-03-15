@@ -103,7 +103,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <div class="row">
             <div class ="col-xs-12 col-sm-4 col-md-3">
                 <div class ="customDIV">
-
+                    <h2>Your Playlist For Today</h2>
+ <iframe src="https://embed.spotify.com/?uri=spotify:album:5uP9oyMK5lpzbB7K6UeT3X" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 
 
 
@@ -123,7 +124,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
                         <thead >
                             <tr>
                                 <th>Order ID</th>
+                                <th>Album</th>
                                 <th>Quantity</th>
+                                    <th>Total Price</th>
                                 <th>Image</th>
 
                             </tr>
@@ -137,8 +140,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                                 <td><%=o.getOrderID()%></td>
+                                <td><%=albumDao.getAlbumById(o.getAlbumID()).getAlbumName()%></td>
                                 <td><%=o.getQuantity()%></td>
-
+                              <td><%=o.getPrice()%></td>
 
                                 <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
 
@@ -152,8 +156,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                     </table>
-
-
+                 
+                      
+.
 
 
 

@@ -27,7 +27,13 @@ public class GenreDao extends Dao implements GenreDaoInterface {
     public GenreDao(String databaseName) {
         super(databaseName);
     }
-
+/**
+     * This method allows the user to add a new Album to the Album table
+     * @param g Genre to be added to the database..
+    
+     * 
+     * @return RS a Which is the album Added to the database
+     */
     @Override
     public int addGenre(Genre g) {
         Connection con = null;
@@ -64,6 +70,14 @@ public class GenreDao extends Dao implements GenreDaoInterface {
         }
         return rs;
     }
+       /**
+     * gets Genres by ID in the database by
+     * matching the code supplied as a parameter. This method has
+     *
+     * @param genreID The the ID of Genre found in the database.
+     * 
+     * @return The Genre Which is the Genre returned from the database
+     */
 
     @Override
     public Genre getGenreById(int genreID) {
@@ -77,6 +91,13 @@ public class GenreDao extends Dao implements GenreDaoInterface {
         }
         return genre;
     }
+     /**
+     * This method allows the user to DELETE an Album from the Album table
+     * @param id name of the Genre to be found in database.
+     * 
+     * 
+     * @return rs = 1  if an Genre was deleted successfully from the database.
+     */
 
     @Override
     public int deleteGenre(int id) {

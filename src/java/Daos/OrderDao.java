@@ -27,6 +27,13 @@ public class OrderDao extends Dao implements OrderDaoInterface {
     public OrderDao(String databaseName) {
         super(databaseName);
     }
+    /**
+     * This method allows the user to ADD a SINGLE new Order to the Orders table
+     * @param o Order to be added to the database..
+    
+     * 
+     * @return RS a Which is the album Added to the database
+     */
 
     @Override
     public int addOrder(Order o) {
@@ -35,11 +42,12 @@ public class OrderDao extends Dao implements OrderDaoInterface {
         int rs = 0;
         try {
             con = getConnection();
-            ps = con.prepareStatement("INSERT INTO orders(username, albumID, quantity) VALUES (?, ?, ?)");
+            ps = con.prepareStatement("INSERT INTO orders(username, albumID, quantity, price) VALUES (?, ?, ?,?)");
 
             ps.setString(1, o.getUsername());
             ps.setInt(2, o.getAlbumID());
             ps.setInt(3, o.getQuantity());
+             ps.setDouble(4, o.getPrice());
 
             rs = ps.executeUpdate();
 
@@ -66,6 +74,14 @@ public class OrderDao extends Dao implements OrderDaoInterface {
         }
         return rs;
     }
+      /**
+     * gets Orders by ID in the database by
+     * matching the code supplied as a parameter. This method has
+     *
+     * @param orderID The the ID of Order found in the database.
+     * 
+     * @return The order a Which is the album returned from the database
+     */
 
     @Override
     public Order getOrderById(int orderID) {
@@ -79,7 +95,13 @@ public class OrderDao extends Dao implements OrderDaoInterface {
         }
         return order;
     }
-
+ /**
+     * This method allows the ADMIN to DELETE an Order from the Album table
+     * @param id name of the album to be found in database.
+     * 
+     * 
+     * @return true if an album was deleted successfully from the database.
+     */
     @Override
     public int deleteOrder(int id) {
         Order m = getOrderById(id);
@@ -140,7 +162,9 @@ public class OrderDao extends Dao implements OrderDaoInterface {
                         rs.getInt("orderID"),
                         rs.getString("username"),
                         rs.getInt("albumID"),
-                        rs.getInt("quantity"));
+                        rs.getInt("quantity"),
+                       rs.getDouble("price")
+                );
 
                 orders.add(i);
             }
@@ -193,7 +217,9 @@ public class OrderDao extends Dao implements OrderDaoInterface {
                         rs.getInt("orderID"),
                         rs.getString("username"),
                         rs.getInt("albumID"),
-                        rs.getInt("quantity"));
+                        rs.getInt("quantity"),
+                        rs.getInt("price")
+                );
 
                 orders.add(i);
             }
@@ -284,7 +310,8 @@ public class OrderDao extends Dao implements OrderDaoInterface {
                 Order o = new Order(rs.getInt("OrderID"),
                         rs.getString("username"),
                         rs.getInt("albumID"),
-                        rs.getInt("quantity")
+                        rs.getInt("quantity"),
+                        rs.getDouble("price")
                 );
                 orders.add(o);
             }

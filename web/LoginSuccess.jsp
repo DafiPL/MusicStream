@@ -39,172 +39,162 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
         <link href="css/common.css" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
         <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-       
+
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
         <!-- Data Tables  -->
-       <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <style>
 
             body, html{
 
                 background-image: url("images/headphonesBackground.jpg");
-  background-size: 100%;
-                
+                background-size: 100%;
+
                 font-family: 'Oxygen', sans-serif;
                 background-size: cover;
             }
-            
+
         </style>
         <script>
-  $(document).ready(function() {
-    $('#example').DataTable( {
-        "pagingType": "full_numbers"
-    } );
-} );
-            </script>
-          <%
-        
-           AlbumDao albumDao = new AlbumDao("musicdb");
+            $(document).ready(function () {
+                $('#example').DataTable({
+                    "pagingType": "full_numbers"
+                });
+            });
+        </script>
+        <%
+            AlbumDao albumDao = new AlbumDao("musicdb");
             ArrayList<Album> albums = albumDao.getAllAlbums();
-              ArtistDao artDao = new ArtistDao("musicdb");
+            ArtistDao artDao = new ArtistDao("musicdb");
             ArrayList<Artist> artists = artDao.getAllArtists();
-        
-         
 
-            
-          
-    %>
-                  
+
+        %>
+
     </head>
     <body>
-       
-          <%@ include file="headerLoggedIn.jsp" %>
-   
-            
-             <%
 
-            String userType = member.getUserType();
+        <%@ include file="headerLoggedIn.jsp" %>
+
+
+        <%                 String userType = member.getUserType();
             if (userType.equals("user")) {
         %>
-       
-                <%
+
+        <%
             OrderDao orderDao = new OrderDao("musicdb");
             ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
 
-    
-
 
         %>
 
-            
-            
-            
-            
-            
-            
-       
-          <div class="row">
-        <div class ="col-xs-12 col-sm-4 col-md-3">
-            <div class ="customDIV">
-                
-          
-            
-            
-            
+
+
+
+
+
+
+
+        <div class="row">
+            <div class ="col-xs-12 col-sm-4 col-md-3">
+                <div class ="customDIV">
+
+
+
+
+
+                </div>
+
             </div>
-                
-        </div>
-        
-        
-        
-        
-        
-         <div class ="col-xs-12 col-sm-4 col-md-6">
-             <div class ="customDIV"> 
-             
-                  <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
-        <thead >
-            <tr>
-               <th>Order ID</th>
-                    <th>Quantity</th>
-                   
-                    <th>Image</th>
-                 
-            </tr>
-        </thead>
-        
-        <tbody>
-              <%                for (Order o : orders) {
-                %>
-                <tr>
 
 
 
-                    <td><%=o.getOrderID()%></td>
-                    <td><%=o.getQuantity()%></td>
-                    
-                    
-                    <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
-                    
-                </tr>
-                <%
-                    }
-                %>
-        </tbody>
-                
-                
-              
-                
-            </table>
-
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             </div>
-                 
-         </div>
-          <div class ="col-xs-12 col-sm-4 col-md-3">
-              <div class ="customDIV">  </div></div>
-      
-    </div>   
-            
-     
-        
-   
 
 
-     
-        
+            <div class ="col-xs-12 col-sm-4 col-md-6">
+                <div class ="customDIV"> 
+
+                    <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
+                        <thead >
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Quantity</th>
+                                <th>Image</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <%                for (Order o : orders) {
+                            %>
+                            <tr>
 
 
-        
 
-       
-        
+                                <td><%=o.getOrderID()%></td>
+                                <td><%=o.getQuantity()%></td>
+
+
+                                <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
+
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+
+
+
+
+                    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+            <div class ="col-xs-12 col-sm-4 col-md-3">
+                <div class ="customDIV">  </div></div>
+
+        </div>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <%
-                } else if (userType.equals("admin")) {
-                %>
-                <a href="adminMenu.jsp">Admin Menu</a>
-                <%
-                }
-            
+        } else if (userType.equals("admin")) {
         %>
-        
+        <a href="adminMenu.jsp">Admin Menu</a>
+        <%
+            }
+
+        %>
 
 
 
@@ -223,21 +213,21 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
-        
-       
+
+
         <script>
-    		$(document).ready(function(){
-				$("[rel='tooltip']").tooltip();
-			});
-		</script>
+            $(document).ready(function () {
+                $("[rel='tooltip']").tooltip();
+            });
+        </script>
     </body>
 </html>
-<%
-    }
+<%    }
 %>

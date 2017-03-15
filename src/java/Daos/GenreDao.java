@@ -183,7 +183,8 @@ public class GenreDao extends Dao implements GenreDaoInterface {
             String query = "Select * from genre where genreName = '" + title + "' ";
             rs = st.executeQuery(query);
             while (rs.next()) {
-                Genre i = new Genre(rs.getInt("genreID"),
+                Genre i = new Genre(
+                        rs.getInt("genreID"),
                         rs.getString("genreName"));
                 genres.add(i);
             }

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Aaron
+ * @author Dafi
  */
 public class forgotPassowrdCommand {
 

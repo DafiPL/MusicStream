@@ -7,6 +7,9 @@ and open the template in the editor.
 <% session = request.getSession(false);
     Object resultValue = session.getAttribute("userLogin");
     Member member = (Member) resultValue;
+    
+    Object orderDet = session.getAttribute("orderDetials");
+    Order o = (Order) orderDet;
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
@@ -37,7 +40,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-        <link href="css/common.css" rel="stylesheet">
+        <link href="Css/style.css" rel="stylesheet">
 
 
         <!-- Website Font style -->
@@ -89,7 +92,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
             OrderDao orderDao = new OrderDao("musicdb");
             ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
 
-    
+   int id = o.getAlbumID();
 
 
         %>
@@ -102,14 +105,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
             
        
           <div class="row">
-        <div class ="col-xs-12 col-sm-4 col-md-3">
-            <div class ="customDIV">
-                
-          
-            
-            
-            
-            </div>
+        <div class ="col-xs-12 col-sm-4 col-md-2">
+           
                 
         </div>
         
@@ -117,27 +114,34 @@ Please login/register here!: <a href="login.jsp">Login</a>
         
         
         
-         <div class ="col-xs-12 col-sm-4 col-md-6">
-             <div class ="customDIV"> 
-             
-                
+         <div class ="col-xs-12 col-sm-4 col-md-8">
+             <div class ="main-container">
 
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             </div>
+<div class=" highlight" style="margin-left:0;">
+<h2>Order Successful !</h2>
+	<div class="row">
+  
+		
+            <img src ="<%=albumDao.getAlbumById(id).getAlbumImage()%>" /> 
+        <ul>
+            <li>Your Order Has Been Received.</li>
+
+           
+        </ul>
+        </div>
+        <div class="row">
+        <p>Order Details have been sent to your Email Address.</p>
+        <button class = "btn btn-primary">Buy Now</button>
+       <button class = "btn btn-warning" >Read More</button>
+        </div>
+    </div>
+	</div>
+</div>
+</div>
                  
          </div>
-          <div class ="col-xs-12 col-sm-4 col-md-3">
-              <div class ="customDIV">  </div></div>
+          <div class ="col-xs-12 col-sm-4 col-md-2">
+           
       
     </div>   
             

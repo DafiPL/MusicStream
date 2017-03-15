@@ -88,7 +88,7 @@ Please login/register here!: <a href="index.jsp">Index</a>
                             <ul  class="dropdown-menu" role="menu">
                                 <li><a href="browseItems.jsp">Shop</a></li>
                                 <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="EditProfile.jsp">Edit Profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>

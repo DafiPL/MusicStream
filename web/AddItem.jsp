@@ -155,7 +155,7 @@ and open the template in the editor.
                         <form action="FrontController" method="post">
                             <legend>Add Song</legend>
 
-
+                            <input class="span3" name="songID" placeholder="Song ID" type="text" /> 
                             <input class="span3" name="albumID" placeholder="Album ID" type="text" /> 
                             <input class="span3" name="songName" placeholder="Song Name" type="text" />
                             <input class="span3" name="songRelease" placeholder="Song Release" type="text" />

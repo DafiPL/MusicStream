@@ -13,12 +13,7 @@ import Commands.LoginCommand;
 import Commands.RegisterCommand;
 import Commands.SearchCommand;
 import Commands.albumDetailCommand;
-import Commands.deleteAlbumCommand;
-import Commands.deleteArtistCommand;
 import Commands.deleteCommand;
-import Commands.deleteGenreCommand;
-import Commands.deleteMemberCommand;
-import Commands.deleteSongCommand;
 
 /**
  *

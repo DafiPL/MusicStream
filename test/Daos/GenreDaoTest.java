@@ -44,24 +44,24 @@ public class GenreDaoTest {
     /**
      * Test of addGenre method, of class GenreDao.
      */
-//    @Test
-//    public void testAddGenre() {
-//      
-//        System.out.println("addGenre");
-//        GenreDao instance = new GenreDao(testDB);
-//        Genre g = new Genre();
-//
-//        
-//        g.setGenre("Test");
-//        
-//
-//        int expResult = 1;
-//        int result = instance.addGenre(g);
-//        
-//        assertEquals(expResult, result);
-//// search user to confirm
-//        instance.deleteGenre(9);
-//    }
+    @Test
+    public void testAddGenre() {
+      
+        System.out.println("addGenre");
+        GenreDao instance = new GenreDao(testDB);
+        Genre g = new Genre();
+
+        
+        g.setGenre("Test");
+        
+
+        int expResult = 1;
+        int result = instance.addGenre(g);
+        
+        assertEquals(expResult, result);
+// search user to confirm
+        instance.deleteGenre(9);
+    }
     
 
     /**
@@ -82,17 +82,17 @@ public class GenreDaoTest {
     /**
      * Test of deleteGenre method, of class GenreDao.
      */
-//    @Test
-//    public void testDeleteGenre() {
-//        System.out.println("deleteGenre");
-//        GenreDao instance = new GenreDao(testDB);
-//        int id = 13;
-//        
-//        int expResult = 1;
-//        int result = instance.deleteGenre(id);
-//        assertEquals(expResult, result);
-//        
-//    }
+    @Test
+    public void testDeleteGenre() {
+        System.out.println("deleteGenre");
+        GenreDao instance = new GenreDao(testDB);
+        int id = 13;
+        
+        int expResult = 1;
+        int result = instance.deleteGenre(id);
+        assertEquals(expResult, result);
+        
+    }
 
     /**
      * Test of getAllGenres method, of class GenreDao.

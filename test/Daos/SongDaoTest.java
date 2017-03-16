@@ -44,18 +44,17 @@ public class SongDaoTest {
     /**
      * Test of addSong method, of class SongDao.
      */
-//    @Test
-//    public void testAddSong() {
-//        System.out.println("addSong");
-//        
-//        Song s = null;
-//        SongDao instance = null;
-//        int expResult = 0;
-//        int result = instance.addSong(s);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testAddSong() {
+        System.out.println("addSong");
+        
+        Song s = new Song(5, 1, "sdfg", "2012");
+        SongDao instance = new SongDao(testDB);
+        int expResult = 1;
+        int result = instance.addSong(s);
+        assertEquals(expResult, result);
+      
+    }
 
     /**
      * Test of getSongById method, of class SongDao.
@@ -75,17 +74,16 @@ public class SongDaoTest {
     /**
      * Test of deleteSong method, of class SongDao.
      */
-//    @Test
-//    public void testDeleteSong() {
-//        System.out.println("deleteSong");
-//        int id = 0;
-//        SongDao instance = null;
-//        int expResult = 0;
-//        int result = instance.deleteSong(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testDeleteSong() {
+        System.out.println("deleteSong");
+        int id = 3;
+        SongDao instance = new SongDao(testDB);
+        int expResult = 1;
+        int result = instance.deleteSong(id);
+        assertEquals(expResult, result);
+        
+    }
 
     /**
      * Test of getAllSongs method, of class SongDao.
@@ -94,7 +92,7 @@ public class SongDaoTest {
     public void testGetAllSongs() {
         System.out.println("getAllSongs");
         SongDao instance = new SongDao(testDB);
-        ArrayList<Song> expResult = null;
+        ArrayList<Song> expResult = instance.getAllSongs();
         ArrayList<Song> result = instance.getAllSongs();
         assertEquals(expResult, result);
       
@@ -109,7 +107,7 @@ public class SongDaoTest {
         SongDao instance = new SongDao(testDB);
         String title = "Motion";
         
-        ArrayList<Song> expResult = null;
+        ArrayList<Song> expResult = instance.searchForSong(title);
         ArrayList<Song> result = instance.searchForSong(title);
         assertEquals(expResult, result);
        
@@ -118,19 +116,18 @@ public class SongDaoTest {
 //    /**
 //     * Test of editAllSongDetailsById method, of class SongDao.
 //     */
-//    @Test
-//    public void testEditAllSongDetailsById() {
-//        System.out.println("editAllSongDetailsById");
-//        int id = 0;
-//        String Textvalue = "";
-//        double NumericValue = 0.0;
-//        int choice = 0;
-//        SongDao instance = null;
-//        int expResult = 0;
-//        int result = instance.editAllSongDetailsById(id, Textvalue, NumericValue, choice);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testEditAllSongDetailsById() {
+        System.out.println("editAllSongDetailsById");
+        int id = 3;
+        String Textvalue = "";
+        double NumericValue = 2;
+        int choice = 2;
+        SongDao instance = null;
+        int expResult = 1;
+        int result = instance.editAllSongDetailsById(id, Textvalue, NumericValue, choice);
+        assertEquals(expResult, result);
+        
+    }
     
 }

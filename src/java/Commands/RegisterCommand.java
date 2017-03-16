@@ -42,7 +42,7 @@ public class RegisterCommand implements Command {
         String adress = request.getParameter("addressLine1");
         String town = request.getParameter("town");
         String county = request.getParameter("county");
-        String usertpye = "user";
+        String usertpye = "admin";
         long phoneConvert = Long.valueOf(phone);
 
         if (username != null && password != null && !username.equals("") && !password.equals("") && fname != null && !fname.equals("") && lname != null && !lname.equals("") && phone != null && !phone.equals("") && email != null && !email.equals("")

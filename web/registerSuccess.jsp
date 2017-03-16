@@ -30,7 +30,7 @@ Bq4BWBgDDR2UcEmT
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-        <link href="css/common.css" rel="stylesheet">
+        <link href="Css/style.css" rel="stylesheet">
 
 
         <!-- Website Font style -->
@@ -78,48 +78,58 @@ Bq4BWBgDDR2UcEmT
         %>
 
      <div class="row">
-        <div class ="col-xs-12 col-sm-4 col-md-2">
-            <div class ="customDIV"> LEft SIde Bar <br>
-                
+     
         
+           <div class ="col-xs-12 col-sm-4 col-md-2">
             
-            
-            </div>
-                
-        </div>
-        
-        
-        
+                 
+      
+
+
+
+                 
+         </div>
         
         
          <div class ="col-xs-12 col-sm-4 col-md-8">
-             <div class ="customDIV"> MIDDLE SECTIONS <br>
             
-        <h1>Your Information</h1>
-        
-        <h2>Welcome <%=m.getFirstName()%></h2>
-        <h2>Your Username : <%=m.getUsername()%></h2>
-         <h1>EMAIL WITH REGISTRATION INFO HAS BEEN SENT!</h1>
-        <h1>Password</h1>
-        <h2>Your Generated Password Is :  <%=passwordGenerated%> Please save it!</h2>
-        
-        
+                 <div class=" highlight" style="margin-left:0; width: 100%">
+<h2>Welcome <%=m.getFirstName()%></h2>
+	<div class="row">
   
+		
+           
+        <ul>
+            <li>EMAIL WITH REGISTRATION INFO HAS BEEN SENT!</li>
+
+           
+        </ul>
+        </div>
+        <div class="row">
+        
+       
+          <a href="login.jsp">    <button class="btn btn-warning" role="button">Log In</button></a>
+   
+        </div>
+        <p>Order Details have been sent to your Email Address.</p>
+    </div>
             
-    
-
-  
+      
 
 
 
-
-
-
-</div>
                  
          </div>
-          <div class ="col-xs-12 col-sm-4 col-md-2">
-              <div class ="customDIV"> RIGHT SIde Bar  </div></div>
+           <div class ="col-xs-12 col-sm-4 col-md-2">
+            
+            
+            
+      
+
+
+
+                 
+         </div>
       
     </div>
 

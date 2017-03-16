@@ -141,7 +141,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
         <div class="row">
-            <div class ="col-xs-12 col-sm-4 col-md-2">
+            <div class ="col-xs-12 col-sm-4 col-md-3">
 
 
             </div>
@@ -150,7 +150,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-            <div class ="col-xs-12 col-sm-4 col-md-8">
+            <div class ="col-xs-12 col-sm-4 col-md-9">
                 <div class ="customDIV">
                     <br>
 
@@ -348,12 +348,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                 </div>
-
+ii
             </div>
-            <div class ="col-xs-12 col-sm-4 col-md-2">
-
-
-            </div>
+            
 
 
 

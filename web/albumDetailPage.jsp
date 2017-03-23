@@ -215,6 +215,10 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
                                 </form></button>
 
+                                        
+                                        
+                                        
+                                        
                             <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
                                 <form action="FrontController" method="post">
 
@@ -223,6 +227,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
                                     <div class="form-group ">
                                         <input type="hidden"  name="albumID" id="albumID" value ="<%=selectedAlbum.getAlbumID()%>"/>
+                                     <input type ="number"  name="quantity" id="quantity" value ="1"/>
                                         <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Add To Cart" />
                                         <input type="hidden" name ="action" value="addToCart" />
                                     </div>

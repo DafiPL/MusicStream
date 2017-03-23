@@ -8,6 +8,7 @@ package Interfaces;
 import java.util.ArrayList;
 import java.util.List;
 import Dtos.Member;
+import java.io.InputStream;
 
 /**
  *
@@ -30,4 +31,6 @@ public interface MemberDaoInterface {
     public ArrayList<Member> searchForMmeber(String username);
 
     public int editAllMemberDetailsByUsername(String currentUser, String username, String firstName, String lastName, String password, long convertedPhone, String email, String street, String town, String county);
+
+    public int editProfilePic(InputStream picture);
 }

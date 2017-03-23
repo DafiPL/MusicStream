@@ -8,6 +8,8 @@ package Daos;
 import Dtos.Member;
 import Interfaces.MemberDaoInterface;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -635,4 +637,42 @@ public class MemberDao extends Dao implements MemberDaoInterface {
 
         return rowsAffected;
     }
+    
+     @Override
+    public int editProfilePic(InputStream picture) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        int rowsAffected = 0;
+
+        try {
+            con = getConnection();
+
+            String query = "UPDATE `members` SET `Avatar`= ? WHERE `username` = ?";
+
+            ps = con.prepareStatement(query);
+            ps.setBlob(1, picture);
+            
+
+            rowsAffected = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
+                e.getMessage();
+            }
+        }
+
+        return rowsAffected;
+    }
+    
+    
 }

@@ -72,20 +72,20 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
     </head>
     <body>   <%
-            AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-            ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
+        AlbumDao albumDao = new AlbumDao("musicdb");
+        ArrayList<Album> albums = albumDao.getAllAlbums();
+        ArtistDao artDao = new ArtistDao("musicdb");
+        ArrayList<Artist> artists = artDao.getAllArtists();
 
 
         %>
-       <%@ include file="headerLoggedIn.jsp" %>
-        
+        <%@ include file="headerLoggedIn.jsp" %>
+
         <div class="row">
             <div class ="col-xs-12 col-sm-4 col-md-2">
                 <div class ="customDIV"> LEft SIde Bar <br>
 
-       
+
 
 
 
@@ -217,22 +217,124 @@ Please login/register here!: <a href="login.jsp">Login</a>
       </div>
   </div>
 
-<hr>
-                  
-                        
-                        <%
-                            }
+                    <h1>Edit Profile</h1>
+                    <hr>
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <form method="post" action="FrontController" >
+                                    <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                                    <h6>Upload a different photo...</h6>
 
-                        %>
+                                    <input type="file" name="image"  class="form-control">
+                                    <input type="submit" name="submit" value="Upload" class="form-control">
+                                    <input type="hidden" name ="action" value="editprofilepicture" />
+                                </form>
+                            </div>
 
 
-                    
+                        </div>
+
+                        <!-- edit form column -->
+                        <div class="col-md-9 personal-info">
+                            <div class="alert alert-info alert-dismissable">
+                                <a class="panel-close close" data-dismiss="alert">Ã</a> 
+                                <i class="fa fa-coffee"></i>
+                                Welcome, <strong>Change</strong>Your Account Information Below
+                            </div>
+                            <h3>Personal info</h3>
+
+                            <form  class="form-horizontal" role="form" action="FrontController" method="post">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">First name:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control"  name="firstname" type="text" value="<%=member.getFirstName()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Last name:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" name="lastname" value="<%=member.getLastName()%>" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Phone Number</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" name="phone" value="<%=member.getPhone()%>" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Email:</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" name="email" value="<%=member.getEmail()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Username:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" name="username" type="text" value="<%=member.getUsername()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Password:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control"  name="password" type="password" value="<%=member.getPassword()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Confirm password:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" name="confirmpassword" value="<%=member.getPassword()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Street:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="text" name="address" value="<%=member.getAddressLine1()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Town:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="text" name="town" value="<%=member.getTown()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">County:</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="text" name="county" value="<%=member.getCounty()%>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"></label>
+                                    <div class="col-md-8">
+                                        <input   type="submit" class="btn btn-primary" value="Save Changes">
+                                        <span></span>
+                                        <input type="reset" class="btn btn-default" value="Cancel">
+                                    </div>
+                                </div>
+                                <input type="hidden" name ="action" value="editprofile" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <hr>
+
+
+                    <%
+                        }
+
+                    %>
+
+
+
                 </div>
             </div>
-                         <div class ="col-xs-12 col-sm-4 col-md-2">
+            <div class ="col-xs-12 col-sm-4 col-md-2">
                 <div class ="customDIV"> LEft SIde Bar <br>
 
-       
+
 
 
 
@@ -240,25 +342,21 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
             </div>
         </div>
-                        
-                            <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <!-- Include all compiled plugins (below), or include individual files as needed -->
-            <script src="js/bootstrap.min.js"></script>
+
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
 
 
 
-            <script>
-                $(document).ready(function () {
-                    $("[rel='tooltip']").tooltip();
-                });
-                <%
-                    
-                
-                
-                
-                %>
-            </script>
+        <script>
+            $(document).ready(function () {
+                $("[rel='tooltip']").tooltip();
+            });
+            <%
+            %>
+        </script>
     </body>
 </html>

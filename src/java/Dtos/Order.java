@@ -21,6 +21,7 @@ public class Order {
         this.username = username;
         this.albumID = albumID;
         this.quantity = quantity;
+        this.price = price;
         
     }
 

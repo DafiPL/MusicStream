@@ -104,7 +104,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
             <div class ="col-xs-12 col-sm-4 col-md-3">
                 <div class ="customDIV">
                     <h2>Your Playlist For Today</h2>
- <iframe src="https://embed.spotify.com/?uri=spotify:album:5uP9oyMK5lpzbB7K6UeT3X" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+                    <iframe src="https://embed.spotify.com/?uri=spotify:album:5uP9oyMK5lpzbB7K6UeT3X" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 
 
 
@@ -126,7 +126,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
                                 <th>Order ID</th>
                                 <th>Album</th>
                                 <th>Quantity</th>
-                                    <th>Total Price</th>
+                                <th>Total Price</th>
                                 <th>Image</th>
 
                             </tr>
@@ -142,7 +142,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
                                 <td><%=o.getOrderID()%></td>
                                 <td><%=albumDao.getAlbumById(o.getAlbumID()).getAlbumName()%></td>
                                 <td><%=o.getQuantity()%></td>
-                              <td><%=o.getPrice()%></td>
+                                <td><%=o.getPrice()%></td>
 
                                 <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
 
@@ -156,9 +156,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                     </table>
-                 
-                      
-.
+
+
+
 
 
 
@@ -173,7 +173,27 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
             </div>
             <div class ="col-xs-12 col-sm-4 col-md-3">
-                <div class ="customDIV">  </div></div>
+                <div class ="customDIV">  
+                    
+                    <form action="FrontController" method="post">
+                        <legend>Our Recommended</legend>
+                        <input class="btn btn-warning" type="submit" value="Refresh" />
+                        <input type="hidden" name ="action" value="search" />
+                        <input type="hidden" name ="searchchoice" value="RandomAlbum" />
+                    </form>
+
+                    <% ArrayList<Album> RandomAlbum = (ArrayList<Album>) session.getAttribute("searchRandomAlbum");
+                        if (RandomAlbum != null) { 
+                            
+                                }
+
+                    %> 
+
+
+                </div>
+
+
+            </div>
 
         </div>   
 
@@ -192,8 +212,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-        <%
-        } else if (userType.equals("admin")) {
+        <%        } else if (userType.equals("admin")) {
         %>
         <a href="adminMenu.jsp">Admin Menu</a>
         <%

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -27,11 +28,13 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
     public AlbumDao(String databaseName) {
         super(databaseName);
     }
-/**
+
+    /**
      * This method allows the user to add a new Album to the Album table
+     *
      * @param a Album to be added to the database..
-    
-     * 
+     *
+     *
      * @return RS a Which is the album Added to the database
      */
     @Override
@@ -43,7 +46,6 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
             con = getConnection();
             ps = con.prepareStatement("INSERT INTO albums(albumID, genreID, artistID, albumName, albumPrice, amountInStock, albumFormat, releaseDate, albumImage) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            
             ps.setInt(1, a.getGenreID());
             ps.setInt(2, a.getArtistID());
             ps.setString(3, a.getAlbumName());
@@ -78,12 +80,13 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
         }
         return rs;
     }
-      /**
-     * gets albums by ID in the database by
-     * matching the code supplied as a parameter. This method has
+
+    /**
+     * gets albums by ID in the database by matching the code supplied as a
+     * parameter. This method has
      *
      * @param albumID The the ID of album found in the database.
-     * 
+     *
      * @return The ALBUM a Which is the album returned from the database
      */
 
@@ -99,11 +102,13 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
         }
         return album;
     }
- /**
+
+    /**
      * This method allows the user to DELETE an Album from the Album table
+     *
      * @param id name of the album to be found in database.
-     * 
-     * 
+     *
+     *
      * @return true if an album was deleted successfully from the database.
      */
     @Override
@@ -251,6 +256,54 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
     }
 
     @Override
+    public ArrayList<Album> searchForRandomAlbum() {
+        Random rand = new Random();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Statement st = null;
+        ArrayList<Album> albums = new ArrayList();
+        int size  = getAllAlbums().size();
+        int randomid = rand.nextInt(size) + 1;
+        try {
+            con = getConnection();
+            st = con.createStatement();
+            String query = "Select * from albums where albumID = '" + randomid + "' ";
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                Album i = new Album(rs.getInt("albumID"),
+                        rs.getInt("genreID"),
+                        rs.getInt("artistID"),
+                        rs.getString("albumName"),
+                        rs.getDouble("albumPrice"),
+                        rs.getInt("amountInStock"),
+                        rs.getString("albumFormat"),
+                        rs.getString("releaseDate"),
+                        rs.getString("albumImage"));
+                albums.add(i);
+            }
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the getAllMembers() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getAllMembers() method: " + e.getMessage());
+            }
+        }
+
+        return albums;
+    }
+
+    @Override
     public int editAllAlbumDetailsById(int id, String Textvalue, double NumericValue, int choice) {
 
         Connection con = null;
@@ -343,10 +396,14 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
 
         return rowsAffected;
     }
-     /**
-     * This method allows the user to UPDATE an Album Quantity After Purchase in the Album table
+
+    /**
+     * This method allows the user to UPDATE an Album Quantity After Purchase in
+     * the Album table
+     *
      * @param amountInStock amoun of Stock of the album to be found in database.
-    * @param quantity The Amount Stock Is To Decrease of the album to be found in database.
+     * @param quantity The Amount Stock Is To Decrease of the album to be found
+     * in database.
      * @param id name of the album to be found in database.
      * @return true if an album was deleted successfully from the database.
      */
@@ -359,16 +416,15 @@ public class AlbumDao extends Dao implements AlbumDaoInterface {
 
         try {
             con = getConnection();
-int newAmount = (amountInStock-quantity);
-           
-                String query = "UPDATE albums SET amountInStock = ? WHERE albumID = ?";
+            int newAmount = (amountInStock - quantity);
 
-                ps = con.prepareStatement(query);
-                ps.setInt(1, newAmount);
-                ps.setInt(2, id);
+            String query = "UPDATE albums SET amountInStock = ? WHERE albumID = ?";
 
-                rowsAffected = ps.executeUpdate();
-            
+            ps = con.prepareStatement(query);
+            ps.setInt(1, newAmount);
+            ps.setInt(2, id);
+
+            rowsAffected = ps.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());

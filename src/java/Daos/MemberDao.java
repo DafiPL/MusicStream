@@ -637,42 +637,42 @@ public class MemberDao extends Dao implements MemberDaoInterface {
 
         return rowsAffected;
     }
-    
-     @Override
-    public int editProfilePic(InputStream picture) {
+
+    @Override
+    public String editProfilePic(InputStream inputStream, String CurrentUsername) {
 
         Connection con = null;
-        PreparedStatement ps = null;
-        int rowsAffected = 0;
+        String message = "";
+        con = getConnection();
 
         try {
-            con = getConnection();
+            String sql = "UPDATE `members` SET `Avatar`= ? WHERE `username` = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
 
-            String query = "UPDATE `members` SET `Avatar`= ? WHERE `username` = ?";
+            if (inputStream != null) {
+                // fetches input stream of the upload file for the blob column
+                statement.setBlob(1, inputStream);
+            }
 
-            ps = con.prepareStatement(query);
-            ps.setBlob(1, picture);
-            
-
-            rowsAffected = ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Exception occured in the editAllBookDetailsById() method: " + e.getMessage());
+            statement.setString(2, CurrentUsername);
+            // sends the statement to the database server
+            int row = statement.executeUpdate();
+            if (row > 0) {
+                message = "File uploaded and saved into database";
+            }
+        } catch (SQLException ex) {
+            message = "ERROR: " + ex.getMessage();
+            ex.printStackTrace();
         } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
+            if (con != null) {
+                // closes the database connection
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
-                if (con != null) {
-                    freeConnection(con);
-                }
-            } catch (SQLException e) {
-                System.out.println("Exception occured in the finally section of the editAllBookDetailsById() method");
-                e.getMessage();
             }
         }
-
-        return rowsAffected;
+        return message;
     }
-    
-    
 }

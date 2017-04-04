@@ -96,126 +96,14 @@ Please login/register here!: <a href="login.jsp">Login</a>
             <div class ="col-xs-12 col-sm-4 col-md-8">
                 <div class ="customDIV">
                 
-    <h1>Edit Profile</h1>
-  	<hr>
-	<div class="row">
-      <!-- left column -->
-      <div class="col-md-3">
-        <div class="text-center">
-          <img src="./images/avatar.png" class="avatar img-circle" alt="avatar">
-   <form method="post" action="uploadServlet" enctype="multipart/form-data">
-            <table border="0">
-                <tr>
-                    <td>First Name: </td>
-                    <td><input type="text" name="firstName" size="50"/></td>
-                </tr>
-                <tr>
-                    <td>Last Name: </td>
-                    <td><input type="text" name="lastName" size="50"/></td>
-                </tr>
-                <tr>
-                    <td>Portrait Photo: </td>
-                    <td><input type="file" name="photo" size="50"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="Save">
-                    </td>
-                </tr>
-            </table>
-        </form>
-          
-          
-          
-          <h6>Upload a different photo...</h6>
-          
-          
-          <input type="file" class="form-control">
-        </div>
-      </div>
+   
       
       <!-- edit form column -->
-      <div class="col-md-9 personal-info">
-        <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">Ã</a> 
-          <i class="fa fa-coffee"></i>
-          Welcome, <strong>Change</strong>Your Account Information Below
-        </div>
-        <h3>Personal info</h3>
+    
+       
+       
         
-        <form  class="form-horizontal" role="form" action="FrontController" method="post">
-          <div class="form-group">
-            <label class="col-lg-3 control-label">First name:</label>
-            <div class="col-lg-8">
-              <input class="form-control"  name="firstname" type="text" value="<%=member.getFirstName()%>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Last name:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="lastname" value="<%=member.getLastName()%>" >
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Phone Number</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="phone" value="<%=member.getPhone()%>" >
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-3 control-label">Email:</label>
-            <div class="col-lg-8">
-              <input class="form-control" type="text" name="email" value="<%=member.getEmail()%>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Username:</label>
-            <div class="col-md-8">
-              <input class="form-control" name="username" type="text" value="<%=member.getUsername()%>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Password:</label>
-            <div class="col-md-8">
-              <input class="form-control"  name="password" type="password" value="<%=member.getPassword()%>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Confirm password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password" name="confirmpassword" value="<%=member.getPassword()%>">
-            </div>
-          </div>
-            <div class="form-group">
-            <label class="col-md-3 control-label">Street:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="text" name="address" value="<%=member.getAddressLine1()%>">
-            </div>
-          </div>
-            <div class="form-group">
-            <label class="col-md-3 control-label">Town:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="text" name="town" value="<%=member.getTown()%>">
-            </div>
-          </div>
-            <div class="form-group">
-            <label class="col-md-3 control-label">County:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="text" name="county" value="<%=member.getCounty()%>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label"></label>
-            <div class="col-md-8">
-              <input   type="submit" class="btn btn-primary" value="Save Changes">
-              <span></span>
-              <input type="reset" class="btn btn-default" value="Cancel">
-            </div>
-          </div>
-            <input type="hidden" name ="action" value="editprofile" />
-        </form>
-      </div>
-  </div>
+        
 
                     <h1>Edit Profile</h1>
                     <hr>
@@ -223,17 +111,15 @@ Please login/register here!: <a href="login.jsp">Login</a>
                         <!-- left column -->
                         <div class="col-md-3">
                             <div class="text-center">
-                                <form method="post" action="FrontController" >
+                                <form method="post" action="uploadServlet" enctype="multipart/form-data">
+                                    
                                     <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
                                     <h6>Upload a different photo...</h6>
 
-                                    <input type="file" name="image"  class="form-control">
+                                    <input type="file" name="photo"  class="form-control">
                                     <input type="submit" name="submit" value="Upload" class="form-control">
-                                    <input type="hidden" name ="action" value="editprofilepicture" />
                                 </form>
                             </div>
-
-
                         </div>
 
                         <!-- edit form column -->

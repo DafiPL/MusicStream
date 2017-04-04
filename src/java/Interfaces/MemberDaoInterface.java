@@ -32,5 +32,5 @@ public interface MemberDaoInterface {
 
     public int editAllMemberDetailsByUsername(String currentUser, String username, String firstName, String lastName, String password, long convertedPhone, String email, String street, String town, String county);
 
-    public int editProfilePic(InputStream picture);
+     public String editProfilePic(InputStream inputStream, String CurrentUsername);
 }

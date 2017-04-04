@@ -9,7 +9,7 @@ import Commands.AddCommand;
 import Commands.Command;
 import Commands.EditCommand;
 import Commands.EditProfile;
-import Commands.EditProfilepicCommand;
+
 import Commands.LogOutCommand;
 import Commands.LoginCommand;
 import Commands.RegisterCommand;
@@ -45,9 +45,7 @@ public class CommandFactory {
             return new albumDetailCommand();
         } else if (action.equals("orderItem")) {
             return new orderItemCommand();
-        } else if (action.equals("editprofilepicture")) {
-            return new EditProfilepicCommand();
-        }
+        } 
         else {
             return null;
         }

@@ -44,6 +44,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
+          <link href="cssBoot/bootstrap.css" rel="stylesheet" media="screen">
 
 
 
@@ -53,8 +54,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-        <!-- Data Tables  -->
-
+        <!-- Loader  -->
+    <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/fakeLoader.css">
         <script>
             $(document).ready(function () {
                 //-- Click on detail
@@ -106,10 +108,19 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
         </style>
+       
 
 
     </head>
     <body>
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
         <%
             AlbumDao albumDao = new AlbumDao("musicdb");
             ArrayList<Album> albums = albumDao.getAllAlbums();
@@ -119,15 +130,13 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
         %>
         <%@ include file="headerLoggedIn.jsp" %>
-
+<div class="fakeloader"></div>
 
         <%            String userType = member.getUserType();
             if (userType.equals("user")) {
         %>
 
         <%
-           
-
             ArtistDao artistDao = new ArtistDao("musicdb");
             GenreDao genreDao = new GenreDao("musicdb");
 
@@ -141,16 +150,13 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
         <div class="row">
-            <div class ="col-xs-12 col-sm-4 col-md-3">
-
-
-            </div>
+            
 
 
 
 
 
-            <div class ="col-xs-12 col-sm-4 col-md-9">
+            <div class ="col-xs-12 col-sm-4 col-md-8">
                 <div class ="customDIV">
                     <br>
 
@@ -185,8 +191,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
                         <div class="section" style="padding-bottom:20px;">
                             <h6 class="title-attr"><p>Amount : </p></h6>                    
 
-<form action="FrontController" method="post">
-                             <input type ="number"  name="quantity" id="quantity" value ="1"/>
+                            <form action="FrontController" method="post">
+                                <input type ="number"  name="quantity" id="quantity" value ="1"/>
 
                         </div>                
 
@@ -204,35 +210,30 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-                                    <div class="form-group ">
-                                         <input type="hidden"  name="username" id="username" value ="<%=member.getUsername()%>"/>
-                                        <input type="hidden"  name="albumID" id="albumID" value ="<%=selectedAlbum.getAlbumID()%>"/>
-                                       
-                                       
-                                        <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy Now!" />
-                                        <input type="hidden" name ="action" value="orderItem" />
-                                    </div>
+                                <div class="form-group ">
+                                    <input type="hidden"  name="username" id="username" value ="<%=member.getUsername()%>"/>
+                                    <input type="hidden"  name="albumID" id="albumID" value ="<%=selectedAlbum.getAlbumID()%>"/>
+
+
+                                    <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy Now!" />
+                                    <input type="hidden" name ="action" value="orderItem" />
+                                </div>
 
                                 </form></button>
 
-                                        
-                                        
-                                        
-                                        
-                            <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
-                                <form action="FrontController" method="post">
 
+                            <form action="FrontController" method="post">
 
-
-
+                                <input type ="number"  name="amount" id="amount" value ="1"/>
+                                <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
                                     <div class="form-group ">
                                         <input type="hidden"  name="albumID" id="albumID" value ="<%=selectedAlbum.getAlbumID()%>"/>
-                                     <input type ="number"  name="quantity" id="quantity" value ="1"/>
+                                       
                                         <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Add To Cart" />
                                         <input type="hidden" name ="action" value="addToCart" />
                                     </div>
 
-                                </form></button>
+                            </form></button>
 
                             <h6><a href="browseItems.jsp"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span>Return To Browse</a></h6>
                         </div>                                        
@@ -353,29 +354,13 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                 </div>
-ii
+
             </div>
-            
-
-
-
-
-
-
-
-
-
-
-
-
-            <%
-            } else if (userType.equals("admin")) {
-            %>
-            <a href="adminMenu.jsp">Admin Menu</a>
-            <%
-                }
-
-            %>
+            <div class ="col-xs-12 col-sm-4 col-md-4">
+                <div class ="customDIV" ">
+                    <div class="fb-comments" style ="background:white" data-href="http://localhost:8084/musicStream/albumDetailPage.jsp" data-width="400" data-numposts="20"></div>
+                </div>
+        </div>
 
 
 
@@ -389,25 +374,57 @@ ii
 
 
 
+        <%
+        } else if (userType.equals("admin")) {
+        %>
+        <a href="adminMenu.jsp">Admin Menu</a>
+        <%
+            }
+
+        %>
 
 
 
 
 
 
-            <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <!-- Include all compiled plugins (below), or include individual files as needed -->
-            <script src="js/bootstrap.min.js"></script>
 
 
 
+
+
+
+
+
+
+
+
+
+
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+ <script src="js/fakeLoader.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $("[rel='tooltip']").tooltip();
+            });
+        </script>
             <script>
-                $(document).ready(function () {
-                    $("[rel='tooltip']").tooltip();
+            $(document).ready(function(){
+                $(".fakeloader").fakeLoader({
+                    timeToHide:1800,
+                    bgColor:"#3498db",
+                    spinner:"spinner5",
+                    
                 });
-            </script>
+            });
+        </script>
+        
     </body>
 </html>
 <%    }

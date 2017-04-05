@@ -1,3 +1,5 @@
+<%@page import="Daos.OrderDao"%>
+<%@page import="Dtos.Order"%>
 <%@page import="Dtos.Artist"%>
 <%@page import="Daos.ArtistDao"%>
 <% session = request.getSession(false);
@@ -80,7 +82,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
               ArtistDao artDao = new ArtistDao("musicdb");
             ArrayList<Artist> artists = artDao.getAllArtists();
         
-         
+             OrderDao orderDao = new OrderDao("musicdb");
 
             
           

@@ -11,10 +11,9 @@ import Dtos.Album;
 import Dtos.Member;
 import Dtos.Order;
 
-import static EncryptionPass.SaltHashPass.generateHash;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,11 +30,11 @@ public class addToCartCommand implements Command {
         String forwardToJsp = "";
         Member user = (Member) session.getAttribute("userLogin");
         int albumID = Integer.parseInt(request.getParameter("albumID"));
-        int cartQuantity = Integer.parseInt(request.getParameter("quantity"));
+        int cartQuantity = Integer.parseInt(request.getParameter("amount"));
         if (user != null) {
 
             MemberDao memDao = new MemberDao("musicdb");
-            AlbumDao albumDao = new AlbumDao("jmchotel");
+            AlbumDao albumDao = new AlbumDao("musicdb");
 
             ArrayList<Album> allAlbums = albumDao.getAllAlbums();
             ArrayList<Integer> albumIDs = new ArrayList();
@@ -58,8 +57,8 @@ public class addToCartCommand implements Command {
             if (albumIDs.size() > 0) {
 
                 Object b = session.getAttribute("basket");
-                for (Integer i : albumIDs) {
-                    Order r = new Order(user.getUsername(), i, cartQuantity, albumDao.getAlbumById(i).getAlbumPrice());
+                for (Integer id : albumIDs) {
+                    Order r = new Order(user.getUsername(), id, cartQuantity, albumDao.getAlbumById(id).getAlbumPrice());
 
                     if (b != null) {
                         ArrayList<Order> cartOrders = (ArrayList<Order>) b;
@@ -75,7 +74,7 @@ public class addToCartCommand implements Command {
                 }
 
             }
-            forwardToJsp = "index.jsp";
+            forwardToJsp = "LoginSuccess.jsp";
             session.setAttribute("message", "ALbum has been added into basket.");
         } else {
             forwardToJsp = "error.jsp";

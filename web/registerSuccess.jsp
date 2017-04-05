@@ -39,6 +39,10 @@ Bq4BWBgDDR2UcEmT
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+         <!-- Loader -->
+         <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/fakeLoader.css">
+        
         <style>
 
             body, html{
@@ -63,7 +67,7 @@ Bq4BWBgDDR2UcEmT
           
     %>
           <%@ include file="header.jsp" %>
-        
+        <div class="fakeloader"></div>
          <%
            
             Object mem = session.getAttribute("regInfo");
@@ -164,10 +168,21 @@ Bq4BWBgDDR2UcEmT
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+         <script src="js/fakeLoader.min.js"></script>
         <script>
     		$(document).ready(function(){
 				$("[rel='tooltip']").tooltip();
 			});
 		</script>
+                     <script>
+            $(document).ready(function(){
+                $(".fakeloader").fakeLoader({
+                    timeToHide:6800,
+                    bgColor:"#3498db",
+                    spinner:"spinner5",
+                    
+                });
+            });
+        </script>
     </body>
 </html>

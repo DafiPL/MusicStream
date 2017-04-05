@@ -14,9 +14,11 @@ import Commands.LogOutCommand;
 import Commands.LoginCommand;
 import Commands.RegisterCommand;
 import Commands.SearchCommand;
+import Commands.addToCartCommand;
 import Commands.albumDetailCommand;
 import Commands.deleteCommand;
 import Commands.orderItemCommand;
+import Commands.removeFromCartCommand;
 
 /**
  *
@@ -47,6 +49,10 @@ public class CommandFactory {
             return new orderItemCommand();
         } else if (action.equals("editprofilepicture")) {
             return new EditProfilepicCommand();
+        }else if (action.equals("addToCart")) {
+            return new addToCartCommand();
+        }else if (action.equals("removeFromCart")) {
+            return new removeFromCartCommand();
         }
         else {
             return null;

@@ -7,14 +7,17 @@ and open the template in the editor.
 <% session = request.getSession(false);
     Object resultValue = session.getAttribute("userLogin");
     Member member = (Member) resultValue;
+
+   
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
 <br> 
 Please login/register here!: <a href="login.jsp">Login</a>
 <%
-} else {
-%>
+    } else {
+
+   %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="Css/common.css" rel="stylesheet" type="text/css"/>
@@ -40,6 +43,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <link href="css/common.css" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+         <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/fakeLoader.css">
         <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
@@ -78,7 +83,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
     </head>
     <body>
-
+<div class="fakeloader"></div>
         <%@ include file="headerLoggedIn.jsp" %>
 
 
@@ -102,14 +107,18 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
         <div class="row">
             <div class ="col-xs-12 col-sm-4 col-md-3">
-                <div class ="customDIV">
+               
+                    
+
                     <h2>Your Playlist For Today</h2>
- <iframe src="https://embed.spotify.com/?uri=spotify:album:5uP9oyMK5lpzbB7K6UeT3X" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+                    <iframe src="https://embed.spotify.com/?uri=spotify:album:5uP9oyMK5lpzbB7K6UeT3X" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 
 
 
 
-                </div>
+
+
+                
 
             </div>
 
@@ -126,7 +135,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
                                 <th>Order ID</th>
                                 <th>Album</th>
                                 <th>Quantity</th>
-                                    <th>Total Price</th>
+                                <th>Total Price</th>
                                 <th>Image</th>
 
                             </tr>
@@ -142,7 +151,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
                                 <td><%=o.getOrderID()%></td>
                                 <td><%=albumDao.getAlbumById(o.getAlbumID()).getAlbumName()%></td>
                                 <td><%=o.getQuantity()%></td>
-                              <td><%=o.getPrice()%></td>
+                                <td><%=o.getPrice()%></td>
 
                                 <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
 
@@ -156,9 +165,11 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                     </table>
-                 
-                      
-.
+
+
+
+
+                    .
 
 
 
@@ -173,7 +184,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
             </div>
             <div class ="col-xs-12 col-sm-4 col-md-3">
-                <div class ="customDIV">  </div></div>
+                <div class ="customDIV"> </div></div>
 
         </div>   
 
@@ -224,7 +235,10 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+      
+         <script src="js/bootstrap.min.js"></script>
+        
+        <script src="js/fakeLoader.min.js"></script>
 
 
         <script>
@@ -232,6 +246,17 @@ Please login/register here!: <a href="login.jsp">Login</a>
                 $("[rel='tooltip']").tooltip();
             });
         </script>
+                  <script>
+            $(document).ready(function(){
+                $(".fakeloader").fakeLoader({
+                    timeToHide:1800,
+                    bgColor:"#3498db",
+                    spinner:"spinner5",
+                    
+                });
+            });
+        </script>
+        
     </body>
 </html>
 <%    }

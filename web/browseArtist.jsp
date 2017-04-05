@@ -19,6 +19,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
 <%@page import="Dtos.Album"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Daos.AlbumDao"%>
+<%@page import="Dtos.Order"%>
+
+<%@page import="Daos.OrderDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

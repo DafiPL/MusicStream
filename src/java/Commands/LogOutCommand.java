@@ -18,7 +18,7 @@ public class LogOutCommand implements Command{
         String forwardToJsp = "";
         HttpSession session = request.getSession();
         session.invalidate();
-        forwardToJsp = "login.html";
+        forwardToJsp = "login.jsp";
 
         return forwardToJsp;
 }

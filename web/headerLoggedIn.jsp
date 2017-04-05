@@ -1,3 +1,10 @@
+<%
+
+    Object resultValue1 = session.getAttribute("basket");
+    ArrayList<Order> basket = (ArrayList<Order>) resultValue1;
+
+%>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -191,9 +198,15 @@
 
                         <li class="divider"></li>
                         <li><a href="Register.jsp">Register</a></li>
+                        <li><form NAME="form1" action="FrontController" method="post" method="get" type="submit" >
+                                            <input class= "a"type="submit" value="Logout Here"/>
+                                            <input type="hidden" name="action" value="logout"/>
+                                        </form></li>
                     </ul>
                 </li>
-                <li><a href="#">My cart (0) items</a></li>
+                <li>
+                    <a data-toggle="modal" data-href="#loginModal2" data-target="#loginModal2" style="cursor:pointer;"> Cart!</a>
+                </li>
             </ul>
         </div><!-- /.nav-collapse -->
     </div><!-- /.container-fluid -->
@@ -203,7 +216,7 @@
     <ul class="sidebar-nav">
         <a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
         <li class="sidebar-brand">
-            <a href="#top">Soldier-up <strong>Designs</strong></a>
+            <a href="#top">Music <strong>Streamcart!!</strong></a>
         </li>
         <li>
             <a href="Index.jsp" title="Go to Top">Home</a>
@@ -285,6 +298,153 @@
 
 
 </nav>
+<div class="container">
+    <div class="modal fade" id="loginModal2" tabindex="-1" role="dialog" aria-labelledby="loginModal2" aria-hidden="true">
+        <div class="modal-dialog modal-default">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                    <h3>Your Shopping Cart</h3>
+                </div>
+
+
+                <%
+                    double totalPayed = 0;
+                    if (basket != null) {
+                        for (Order or : basket) {
+
+                %>
+
+
+
+
+
+
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-10 col-md-offset-1">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                            <%                                            double total = (or.getQuantity() * albumDao.getAlbumById(or.getAlbumID()).getAlbumPrice());
+                                                totalPayed = totalPayed + total;
+                                            %>
+                                        <th > Total</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        <td class="col-sm-1 col-md-1 text-center"><strong><%=or.getQuantity()%></strong></td>
+                                        <td class="col-sm-1 col-md-1 text-center"><strong>$<%=albumDao.getAlbumById(or.getAlbumID()).getAlbumPrice()%></strong></td>
+                                        <td class="col-sm-1 col-md-1 text-center"><strong>$<%=total%></strong></td>
+
+
+
+                                        <td class="col-sm-1 col-md-1">
+
+                                            <form action="FrontController" method="post">
+
+                                                <div class="form-group ">
+                                                    <input type="hidden"  name="basket" id="basket" value ="<%=basket%>"/>
+                                                    <input type="hidden"  name="albumIdRemove" id="albumIdRemove" value ="<%=or.getAlbumID()%>"/>
+                                                    <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Remove" />
+                                                    <input type="hidden" name ="action" value="removeFromCart" />
+                                                </div>
+
+
+
+                                            </form>
+                                        </td>
+
+
+
+                                <div class="media-body">
+
+
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="<%= albumDao.getAlbumById(or.getAlbumID()).getAlbumImage()%>" style="width: 72px; height: 72px;"> </a>
+
+
+                                    <h4 class="media-heading"><a href="#">Prod Name : <%= albumDao.getAlbumById(or.getAlbumID()).getAlbumName()%></a></h4>
+                                    <h5 class="media-heading"> by <a href="#"><%= artDao.getArtistById(albumDao.getAlbumById(or.getAlbumID()).getArtistID()).getArtistName()%></a></h5>
+                                    <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                </div>
+                                </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>     <%
+                    }
+                %>
+
+                <div class="modal-footer">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td>   </td>
+                                <td><h5>Subtotal</h5></td>
+                                <td class="text-right"><h5><strong><%=totalPayed%></strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td>  </td>
+                                <td>  </td>
+                                <td>   </td>
+                                <td><h5>Estimated shipping</h5></td>
+                                <td class="text-right"><h5><strong>$6.00</strong></h5></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td> </td>
+                                <td><h3>Total</h3></td>
+                                <td class="text-right"><h3><strong>$<%= totalPayed = (totalPayed + 6)%></strong></h3></td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        <span class="glyphicon-class">Continue Shopping</span>
+                    </button>
+
+                    <button type="button" class="btn btn-success">
+                        Checkout <span class="glyphicon glyphicon-play"></span>
+                    </button>
+                    <%
+                        }
+                    %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
 
 <aside id="accordion" class="social text-vertical-center">
     <div class="accordion-social">

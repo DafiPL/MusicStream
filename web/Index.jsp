@@ -32,20 +32,27 @@ and open the template in the editor.
 
      <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-        <link href="Css/style.css" rel="stylesheet">
+  
+   
+        <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/fakeLoader.css">
 
 
         <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        
+
         <style>
   
 
         </style>
-       
+        
+     
     </head>
     
     <%
@@ -61,6 +68,14 @@ and open the template in the editor.
           
     %>
     <body id="page-top" name="page-top" class="active">
+        <div class="fakeloader"></div>
+
+
+
+
+
+
+
    <%@ include file="header.jsp" %>
        
 		<div class="masthead">
@@ -119,10 +134,22 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        
+        <script src="js/fakeLoader.min.js"></script>
         <script>
     		$(document).ready(function(){
 				$("[rel='tooltip']").tooltip();
 			});
 		</script>
+                <script>
+            $(document).ready(function(){
+                $(".fakeloader").fakeLoader({
+                    timeToHide:1800,
+                    bgColor:"#3498db",
+                    spinner:"spinner5",
+                    
+                });
+            });
+        </script>
 </body>
 </html>

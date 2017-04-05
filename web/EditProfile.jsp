@@ -54,7 +54,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-        <!-- Data Tables  -->
+        <!-- Loader  -->
+        <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/fakeLoader.css">
 
         <style>
 
@@ -80,7 +82,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
         %>
         <%@ include file="headerLoggedIn.jsp" %>
-
+<div class="fakeloader"></div>
         <div class="row">
             <div class ="col-xs-12 col-sm-4 col-md-2">
                 <div class ="customDIV"> LEft SIde Bar <br>
@@ -347,9 +349,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-
-
+    <script src="js/bootstrap.min.js"></script>
+        
+        <script src="js/fakeLoader.min.js"></script>
 
         <script>
             $(document).ready(function () {
@@ -357,6 +359,16 @@ Please login/register here!: <a href="login.jsp">Login</a>
             });
             <%
             %>
+        </script>
+                <script>
+            $(document).ready(function(){
+                $(".fakeloader").fakeLoader({
+                    timeToHide:1800,
+                    bgColor:"#3498db",
+                    spinner:"spinner5",
+                    
+                });
+            });
         </script>
     </body>
 </html>

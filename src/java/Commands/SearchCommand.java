@@ -30,7 +30,7 @@ public class SearchCommand implements Command {
 
         String forwardToJsp = "";
         HttpSession session = request.getSession();
-
+        
         String choice = request.getParameter("searchchoice");
         String itemName = request.getParameter("itemName");
 //        User user = (User) loginValue;
@@ -40,7 +40,7 @@ public class SearchCommand implements Command {
         if (choice != null) {
 
             if (choice.equals("song")) {
-
+                session.setAttribute("setchoice", choice);
                 SongDao songDao = new SongDao("musicdb");
                 ArrayList<Song> songs = new ArrayList<>();
 
@@ -48,13 +48,14 @@ public class SearchCommand implements Command {
 
                 session.setAttribute("showSearchSong", songs);
                 if (!songs.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
+                    forwardToJsp = "showSearchResult.jsp";
                 } else {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Song match that title");
                 }
 
             } else if (choice.equals("album")) {
+                session.setAttribute("setchoice", choice);
                 AlbumDao albumDao = new AlbumDao("musicdb");
                 ArrayList<Album> albums = new ArrayList<>();
 
@@ -62,12 +63,26 @@ public class SearchCommand implements Command {
 
                 session.setAttribute("showSearchAlbum", albums);
                 if (!albums.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
+                    forwardToJsp = "showSearchResult.jsp";
                 } else {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Album match that title");
                 }
-            }else if (choice.equals("RandomAlbum")) {
+            } else if (choice.equals("artist")) {
+                session.setAttribute("setchoice", choice);
+                ArtistDao artistDao = new ArtistDao("musicdb");
+                ArrayList<Artist> artists = new ArrayList<>();
+
+                artists = artistDao.searchForArtist(itemName);
+
+                session.setAttribute("showSearchArtist", artists);
+                if (!artists.isEmpty()) {
+                    forwardToJsp = "showSearchResult.jsp";
+                } else {
+                    forwardToJsp = "error.jsp";
+                    session.setAttribute("errorMessage", "No Artist match that title");
+                }
+            } else if (choice.equals("RandomAlbum")) {
                 AlbumDao albumDao = new AlbumDao("musicdb");
                 ArrayList<Album> albums = new ArrayList<>();
 
@@ -80,20 +95,8 @@ public class SearchCommand implements Command {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Albums in database");
                 }
-            } else if (choice.equals("artist")) {
-                ArtistDao artistDao = new ArtistDao("musicdb");
-                ArrayList<Artist> artists = new ArrayList<>();
-
-                artists = artistDao.searchForArtist(itemName);
-
-                session.setAttribute("showSearchArtist", artists);
-                if (!artists.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
-                } else {
-                    forwardToJsp = "error.jsp";
-                    session.setAttribute("errorMessage", "No Artist match that title");
-                }
             } else if (choice.equals("genre")) {
+                session.setAttribute("setchoice", choice);
                 GenreDao genreDao = new GenreDao("musicdb");
                 ArrayList<Genre> genres = new ArrayList<>();
 
@@ -101,18 +104,19 @@ public class SearchCommand implements Command {
 
                 session.setAttribute("showSearchGenre", genres);
                 if (!genres.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
+                    forwardToJsp = "showSearchResult.jsp";
                 } else {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Genre match that title");
                 }
             } else if (choice.equals("member")) {
+                session.setAttribute("setchoice", choice);
                 MemberDao memberDao = new MemberDao("musicdb");
                 ArrayList<Member> members = new ArrayList<>();
 
                 members = memberDao.searchForMmeber(itemName);
 
-                session.setAttribute("adminMenu.jsp", members);
+                session.setAttribute("showSearchMember", members);
                 if (!members.isEmpty()) {
                     forwardToJsp = "showSearchResult.jsp";
                 } else {

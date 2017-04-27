@@ -6,11 +6,7 @@
 
 
 
-<%@page import="Dtos.Artist"%>
-<%@page import="Dtos.Album"%>
-<%@page import="Daos.ArtistDao"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Daos.AlbumDao"%>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -19,7 +15,7 @@ and open the template in the editor.
 Bq4BWBgDDR2UcEmT
 -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Dtos.Member"%>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -54,18 +50,7 @@ Bq4BWBgDDR2UcEmT
         </style>
     </head>
     <body>
-      <%
-        
-           AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-              ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-        
-         
-
-            
-          
-    %>
+   
           <%@ include file="header.jsp" %>
         <div class="fakeloader"></div>
          <%
@@ -115,7 +100,7 @@ Bq4BWBgDDR2UcEmT
           <a href="login.jsp">    <button class="btn btn-warning" role="button">Log In</button></a>
    
         </div>
-        <p>Order Details have been sent to your Email Address.</p>
+        <p>Email containing registration details have been sent to your Email Address.</p>
     </div>
             
       

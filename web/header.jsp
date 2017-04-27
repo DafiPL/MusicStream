@@ -7,18 +7,24 @@
 <%@page import="Dtos.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Daos.OrderDao"%>
-
 <%
 
+    Object resultValue1 = session.getAttribute("basket");
+    ArrayList<Order> basket = (ArrayList<Order>) resultValue1;
+
+
+    Object resultValue = session.getAttribute("userLogin");
+    Member member = (Member) resultValue;
     AlbumDao albumDao = new AlbumDao("musicdb");
     ArrayList<Album> albums = albumDao.getAllAlbums();
     ArtistDao artDao = new ArtistDao("musicdb");
     ArrayList<Artist> artists = artDao.getAllArtists();
 
-    
+  
 
-
-
+              
+        
+         
 
 
 %>

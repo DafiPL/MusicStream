@@ -63,7 +63,7 @@
                     <img height="20" width="20" src="./images/icon/MusicIcon.jpg" class="img-responsive pull-left" alt="Responsive image">
                      Music Stream</a>
                 <li class="dropdown mega-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Albums <span class="caret"></span></a>				
+                    <a href="#1" class="dropdown-toggle" data-toggle="dropdown">Albums <span class="caret"></span></a>				
                     <ul class="dropdown-menu mega-dropdown-menu">
                         <li class="col-sm-3">
                             <ul>
@@ -228,7 +228,16 @@
                 
             </ul>
 
-            <ul style ="margin-left: 47%" class="nav navbar-nav navbar-left">
+         
+
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<nav id="sidebar-wrapper">
+
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
+         <ul style ="margin-left: 47%" class="nav navbar-nav navbar-left">
 
 
                 <li>
@@ -242,16 +251,8 @@
 
 
             </ul>
-
-        </div><!-- /.nav-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-<nav id="sidebar-wrapper">
-
-    <ul class="sidebar-nav">
-        <a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
         <li class="sidebar-brand">
-            <a href="#top">Music <strong>Stream</strong></a>
+            <a href="Index.jsp">Music <strong>Stream</strong></a>
         </li>
         <li>
             <a href="Index.jsp" title="Go to Top">Home</a>

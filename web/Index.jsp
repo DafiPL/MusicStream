@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
 <% session = request.getSession(false);
-    Object resultValue = session.getAttribute("userLogin");
-    Member member = (Member) resultValue;
+   
    
 %>
 <!--
@@ -13,13 +12,6 @@ and open the template in the editor.
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="Css/common.css" rel="stylesheet" type="text/css"/>
 
-<%@page import="Dtos.Album"%>
-<%@page import="Daos.AlbumDao"%>
-<%@page import="Dtos.Artist"%>
-<%@page import="Daos.ArtistDao"%>
-<%@page import="Dtos.Member"%>
-<%@page import="Daos.MemberDao"%>
-<%@page import="java.util.ArrayList"%>
 
 
 <html lang="en">
@@ -57,13 +49,7 @@ and open the template in the editor.
     
     <%
         
-           AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-              ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-        
-         
-
+     
             
           
     %>
@@ -85,7 +71,7 @@ and open the template in the editor.
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#bs-carousel" data-slide-to="1"></li>
+                    <li data-.target="#bs-carousel" data-slide-to="1"></li>
                     <li data-target="#bs-carousel" data-slide-to="2"></li>
                 </ol>
       

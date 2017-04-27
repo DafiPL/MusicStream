@@ -5,8 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <% session = request.getSession(false);
-    Object resultValue = session.getAttribute("userLogin");
-    Member member = (Member) resultValue;
+    
 
    
     if (session == null || session.getAttribute("userLogin") == null) {
@@ -21,14 +20,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="Css/common.css" rel="stylesheet" type="text/css"/>
-<%@page import="Dtos.Member"%>
-<%@page import="Dtos.Album"%>
-<%@page import="Daos.AlbumDao"%>
-<%@page import="Dtos.Artist"%>
-<%@page import="Daos.ArtistDao"%>
-<%@page import="Dtos.Order"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Daos.OrderDao"%>
+
 
 <html lang="en">
     <head>
@@ -72,14 +64,15 @@ Please login/register here!: <a href="login.jsp">Login</a>
                 });
             });
         </script>
-        <%
-            AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-            ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-
-
-        %>
+      <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+       
 
     </head>
     <body>
@@ -92,10 +85,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
         %>
 
         <%
-            OrderDao orderDao = new OrderDao("musicdb");
-            ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
-
-
+            
         %>
 
 
@@ -108,10 +98,11 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <div class="row">
             <div class ="col-xs-12 col-sm-4 col-md-3">
                
-                    
+                  <br><br><br><br><br><br>
+                   <div style ="background:white" class="fb-comments" data-href="http://localhost:8084/musicStream/LoginSuccess.jsp" data-width="300" data-numposts="20"></div>  
 
-                    <h2>Your Playlist For Today</h2>
-                    <iframe src="https://embed.spotify.com/?uri=spotify:album:5uP9oyMK5lpzbB7K6UeT3X" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+                    
+                
 
 
 
@@ -127,7 +118,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
             <div class ="col-xs-12 col-sm-4 col-md-6">
-                <div class ="customDIV"> 
+                <br><br><br><Br>
+                <div style ="background: #000\9"> 
 
                     <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
                         <thead >
@@ -169,8 +161,6 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-                    .
-
 
 
 
@@ -184,7 +174,28 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
             </div>
             <div class ="col-xs-12 col-sm-4 col-md-3">
-                <div class ="customDIV"> </div></div>
+                <br><br><br><br><br>
+                <div class ="customDIV">  
+                    
+                    <form action="FrontController" method="post">
+                        <legend>Our Recommended</legend>
+                        <input class="btn btn-warning" type="submit" value="Refresh" />
+                        <input type="hidden" name ="action" value="search" />
+                        <input type="hidden" name ="searchchoice" value="RandomAlbum" />
+                    </form>
+
+                    <% ArrayList<Album> RandomAlbum = (ArrayList<Album>) session.getAttribute("searchRandomAlbum");
+                        if (RandomAlbum != null) { 
+                            
+                                }
+
+                    %> 
+
+
+                </div>
+
+
+            </div>
 
         </div>   
 
@@ -203,8 +214,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-        <%
-        } else if (userType.equals("admin")) {
+        <%        } else if (userType.equals("admin")) {
         %>
         <a href="adminMenu.jsp">Admin Menu</a>
         <%

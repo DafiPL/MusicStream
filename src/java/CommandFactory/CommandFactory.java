@@ -9,9 +9,10 @@ import Commands.AddCommand;
 import Commands.Command;
 import Commands.EditCommand;
 import Commands.EditProfile;
-import Commands.EditProfilepicCommand;
+
 import Commands.LogOutCommand;
 import Commands.LoginCommand;
+import Commands.MultipleOrderCartCommand;
 import Commands.RegisterCommand;
 import Commands.SearchCommand;
 import Commands.addToCartCommand;
@@ -47,14 +48,13 @@ public class CommandFactory {
             return new albumDetailCommand();
         } else if (action.equals("orderItem")) {
             return new orderItemCommand();
-        } else if (action.equals("editprofilepicture")) {
-            return new EditProfilepicCommand();
-        }else if (action.equals("addToCart")) {
+        } else if (action.equals("addToCart")) {
             return new addToCartCommand();
-        }else if (action.equals("removeFromCart")) {
+        } else if (action.equals("removeFromCart")) {
             return new removeFromCartCommand();
-        }
-        else {
+        } else if (action.equals("multipleOrderCart")) {
+            return new MultipleOrderCartCommand();
+        } else {
             return null;
         }
     }

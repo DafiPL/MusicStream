@@ -9,8 +9,7 @@ and open the template in the editor.
     Object albumDet = session.getAttribute("selectedAlbum");
     Album selectedAlbum = (Album) albumDet;
 
-    Object resultValue = session.getAttribute("userLogin");
-    Member member = (Member) resultValue;
+   
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
@@ -57,43 +56,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <!-- Loader  -->
     <link rel="stylesheet" href="cssBoot/demo.css">
         <link rel="stylesheet" href="cssBoot/fakeLoader.css">
-        <script>
-            $(document).ready(function () {
-                //-- Click on detail
-                $("ul.menu-items > li").on("click", function () {
-                    $("ul.menu-items > li").removeClass("active");
-                    $(this).addClass("active");
-                })
-
-                $(".attr,.attr2").on("click", function () {
-                    var clase = $(this).attr("class");
-
-                    $("." + clase).removeClass("active");
-                    $(this).addClass("active");
-                })
-
-                //-- Click on QUANTITY
-                $(".btn-minus").on("click", function () {
-                    var now = $(".section > div > input").val();
-                    if ($.isNumeric(now)) {
-                        if (parseInt(now) - 1 > 0) {
-                            now--;
-                        }
-                        $(".section > div > input").val(now);
-                    } else {
-                        $(".section > div > input").val("1");
-                    }
-                })
-                $(".btn-plus").on("click", function () {
-                    var now = $(".section > div > input").val();
-                    if ($.isNumeric(now)) {
-                        $(".section > div > input").val(parseInt(now) + 1);
-                    } else {
-                        $(".section > div > input").val("1");
-                    }
-                })
-            })
-        </script>
+      
         <style>
 
             body, html{
@@ -122,12 +85,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
         <%
-            AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-            ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-
-
+           
         %>
         <%@ include file="headerLoggedIn.jsp" %>
 <div class="fakeloader"></div>
@@ -150,16 +108,15 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
         <div class="row">
-            
-
+       
 
 
 
 
             <div class ="col-xs-12 col-sm-4 col-md-8">
                 <div class ="customDIV">
-                    <br>
-
+                    
+<br><br><br>
 
                     <div class="col-xs-6 col-sm-4 col-md-5 item-photo" style = "background: gray" >
                         <img style="max-width:100%;" src="<%=selectedAlbum.getAlbumImage()%>" />
@@ -167,7 +124,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
                     <div class="col-xs-6 cols-sm-8 col-md-7" style="border:0px solid white;">
                         <!-- Details -->
                         <h3><%=selectedAlbum.getAlbumName()%></h3>    
-                        <h5 style="color:#337ab7">Sold By <a href="#">MusicStream</a> · <p style="color:#337ab7">(5054 purchases)</p></h5>
+                        <h5 style="color:#337ab7">Sold By <a href="Index.jsp">MusicStream</a> · <p style="color:#337ab7">(5054 purchases)</p></h5>
 
                         <!-- Price -->
                         <h6 class="title-price"><p>Price Offer:</p></h6>
@@ -177,14 +134,14 @@ Please login/register here!: <a href="login.jsp">Login</a>
                         <div class="section" style ="width:100%">
                             <h6 class="title-attr" style="margin-top:15px;" ><p>Stock</p></h6>                    
                             <div>
-                                <div class="attr" style="width:100%; height: 90%; background:green;"><%=selectedAlbum.getAmountInStock()%></div>
+                                <div class="attr" style="width:100%; height: 90%; background:orange;"><%=selectedAlbum.getAmountInStock()%></div>
 
                             </div>
                         </div>
                         <div class="section" style="padding-bottom:5px;">
                             <h6 class="title-attr"><p>Format :</p></h6>                    
                             <div>
-                                <div class="attr2" style="width:100%; height: 90%; " ><%=selectedAlbum.getAlbumFormat()%></div>
+                                <div class="attr2" style="width:100%; height: 90%;background:orange; " ><%=selectedAlbum.getAlbumFormat()%></div>
 
                             </div>
                         </div>   
@@ -223,7 +180,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                             <form action="FrontController" method="post">
-
+                                <br>
                                 <input type ="number"  name="amount" id="amount" value ="1"/>
                                 <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
                                     <div class="form-group ">
@@ -242,10 +199,11 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
                     <div class="section" style="padding-bottom:20px;">
                         <ul class="menu-items">
-                            <li class="active">Product Details</li>
+                            <li class="active">Album Details</li>
 
 
                         </ul>
+                      
                         <div style="width:100%;border-top:1px solid silver">
                             <p style="padding:15px;">
                                 <small>
@@ -357,9 +315,11 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
             </div>
             <div class ="col-xs-12 col-sm-4 col-md-4">
-                <div class ="customDIV" ">
+                <div class ="customDIV">
+                    <br><br><br>
                     <div class="fb-comments" style ="background:white" data-href="http://localhost:8084/musicStream/albumDetailPage.jsp" data-width="400" data-numposts="20"></div>
                 </div>
+        </div>
         </div>
 
 

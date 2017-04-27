@@ -3,8 +3,8 @@
 <%@page import="Dtos.Artist"%>
 <%@page import="Daos.ArtistDao"%>
 <% session = request.getSession(false);
-    Object resultValue = session.getAttribute("userLogin");
-    Member member = (Member) resultValue;
+    Object res = session.getAttribute("userLogin");
+    Member members = (Member) res;
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
@@ -16,11 +16,6 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-<%@page import="java.util.Collections"%>
-<%@page import="Dtos.Member"%>
-<%@page import="Dtos.Album"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Daos.AlbumDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -71,22 +66,11 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
           <%
 
-            String userType = member.getUserType();
+            String userType = members.getUserType();
             if (userType.equals("user")) {
         %>
        
-            <%
-        
-           AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-              ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-        
-             OrderDao orderDao = new OrderDao("musicdb");
-
-            
           
-    %>
           <%@ include file="headerLoggedIn.jsp" %>
 
           <div class="row">
@@ -106,8 +90,10 @@ Please login/register here!: <a href="login.jsp">Login</a>
         
         
          <div class ="col-xs-12 col-sm-4 col-md-7">
-             <div class ="customDIV" style ="background: white">
-             
+             <div class ="customDIV" >
+                 <br>
+                 <br>
+                 <br>
                  <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
         <thead >
             <tr>

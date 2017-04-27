@@ -94,11 +94,7 @@ and open the template in the editor.
 
         <%
 
-            AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-            ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-
+          
 
         %>
 

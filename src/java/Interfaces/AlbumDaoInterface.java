@@ -25,4 +25,5 @@ public interface AlbumDaoInterface {
 
     public int addAlbum(Album a);
     public int updateQuantity(int amountInStock, int quantity, int id);
+    public ArrayList<Album> searchForRandomAlbum();
 }

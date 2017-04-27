@@ -1,9 +1,45 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="Dtos.Member"%>
+<%@page import="Dtos.Album"%>
+<%@page import="Daos.AlbumDao"%>
+<%@page import="Dtos.Artist"%>
+<%@page import="Daos.ArtistDao"%>
+<%@page import="Dtos.Order"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Daos.OrderDao"%>
 <%
 
     Object resultValue1 = session.getAttribute("basket");
     ArrayList<Order> basket = (ArrayList<Order>) resultValue1;
 
+
+    Object resultValue = session.getAttribute("userLogin");
+    Member member = (Member) resultValue;
+    AlbumDao albumDao = new AlbumDao("musicdb");
+    ArrayList<Album> albums = albumDao.getAllAlbums();
+    ArtistDao artDao = new ArtistDao("musicdb");
+    ArrayList<Artist> artists = artDao.getAllArtists();
+
+    OrderDao orderDao = new OrderDao("musicdb");
+    ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
+
+              
+        
+         
+
+
 %>
+<script>
+    $(document).ready(function () {
+        $('#cart-popover').popover({
+            html: true,
+            container: 'body',
+            content: function () {
+                return $('#popover_content_wrapper').html();
+            }
+        });
+    });
+</script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- Navigation -->
@@ -50,7 +86,7 @@
                                             <h4><%=albums.get(5).getAlbumName()%></h4> 
                                             <a href="#"><img src="<%=albums.get(5).getAlbumImage()%>"  style ="width: 254px; height: 150px" class="img-responsive" alt="product 2"></a>
                                             <form action="FrontController" method="post">
-                                                <input type="hidden"  name="albumName" id="albumName" value ="<%=albums.get(3).getAlbumID()%>"/>
+                                                <input type="hidden"  name="albumName" id="albumName" value ="<%=albums.get(5).getAlbumID()%>"/>
                                                 <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy" />
                                                 <input type="hidden" name ="action" value="albumDetail" />      
 
@@ -61,7 +97,7 @@
                                             <h4><%=albums.get(6).getAlbumName()%></h4> 
                                             <a href="#"><img src="<%=albums.get(6).getAlbumImage()%>"  style ="width: 254px; height: 150px" class="img-responsive" alt="product 3"></a>
                                             <form action="FrontController" method="post">
-                                                <input type="hidden"  name="albumName" id="albumName" value ="<%=albums.get(3).getAlbumID()%>"/>
+                                                <input type="hidden"  name="albumName" id="albumName" value ="<%=albums.get(6).getAlbumID()%>"/>
                                                 <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy" />
                                                 <input type="hidden" name ="action" value="albumDetail" />      
 
@@ -108,6 +144,9 @@
 
                     </ul>				
                 </li>
+                 <a class="navbar-brand" href="https://www.google.com/maps/place/Kingscourt,+Co.+Cavan,+Ireland/@53.906877,-6.8074116,17z/data=!3m1!4b1!4m5!3m4!1s0x4860acd6fb236a9d:0xa00c7a9973176a0!8m2!3d53.9068739!4d-6.8052229">
+                    <img height="20" width="20" src="./images/icon/Map.png" class="img-responsive pull-left" alt="Responsive image">
+                     Our Location</a>
                 <li class="dropdown mega-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Artists, and More <span class="caret"></span></a>				
                     <ul class="dropdown-menu mega-dropdown-menu">
@@ -146,6 +185,8 @@
 
                             </ul>
                         </li>
+                        
+
                         <li class="col-sm-3">
                             <ul>
                                 <li class="dropdown-header">Our Top Artists</li>                            
@@ -184,30 +225,24 @@
                         </li>
                     </ul>				
                 </li>
-                <a class="navbar-brand" href="https://www.google.com/maps/place/Kingscourt,+Co.+Cavan,+Ireland/@53.906877,-6.8074116,17z/data=!3m1!4b1!4m5!3m4!1s0x4860acd6fb236a9d:0xa00c7a9973176a0!8m2!3d53.9068739!4d-6.8052229">
-                    <img height="20" width="20" src="./images/icon/Map.png" class="img-responsive pull-left" alt="Responsive image">
-                     Our Location</a>
-
+                
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="login.html">Login</a></li>
+
+            <ul style ="margin-left: 47%" class="nav navbar-nav navbar-left">
 
 
-                        <li class="divider"></li>
-                        <li><a href="Register.jsp">Register</a></li>
-                        <li><form NAME="form1" action="FrontController" method="post" method="get" type="submit" >
-                                            <input class= "a"type="submit" value="Logout Here"/>
-                                            <input type="hidden" name="action" value="logout"/>
-                                        </form></li>
-                    </ul>
-                </li>
                 <li>
-                    <a data-toggle="modal" data-href="#loginModal2" data-target="#loginModal2" style="cursor:pointer;"> Cart!</a>
+                    <a id="cart-popover" class="btn" data-placement="bottom" title="Your Shopping Cart">
+                        <span class="glyphicon glyphicon-shopping-cart">Cart</span>
+
+                    </a>
                 </li>
+
+             
+
+
             </ul>
+
         </div><!-- /.nav-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -216,7 +251,7 @@
     <ul class="sidebar-nav">
         <a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
         <li class="sidebar-brand">
-            <a href="#top">Music <strong>Streamcart!!</strong></a>
+            <a href="#top">Music <strong>Stream</strong></a>
         </li>
         <li>
             <a href="Index.jsp" title="Go to Top">Home</a>
@@ -275,14 +310,12 @@
                                     <span class="caret"></span><span class="sr-only">Social</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li> <form NAME="form1" action="FrontController" method="post" method="get"  >
-                                            <input class= "a"type="submit" value="Logout Here"/>
-                                            <input type="hidden" name="action" value="logout"/>
-                                        </form>
-                                    </li> 
-                                    <li><a href="orders.jsp">Orders +</a></li>
+                                   
+                                    <li><a href="loginSuccessfull.jsp">Orders +</a></li>
                                     <li class="divider"></li>
                                     <li><a href="https://google.com">Search</a></li>
+                                      <li class="divider"></li>
+                                    <li><a href ="FrontController?action=logout">Log Out</a></li>
 
 
                                 </ul>
@@ -298,6 +331,16 @@
 
 
 </nav>
+
+
+
+
+
+
+
+
+
+
 <div class="container">
     <div class="modal fade" id="loginModal2" tabindex="-1" role="dialog" aria-labelledby="loginModal2" aria-hidden="true">
         <div class="modal-dialog modal-default">
@@ -428,14 +471,21 @@
                         </tbody>
 
                     </table>
-                    <button type="button" class="btn btn-default">
+                    <button href="browseItems.jsp" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-edit"></span>
                         <span class="glyphicon-class">Continue Shopping</span>
                     </button>
 
-                    <button type="button" class="btn btn-success">
-                        Checkout <span class="glyphicon glyphicon-play"></span>
-                    </button>
+                    <form action="FrontController" method="post">
+                        <div class="form-group ">
+                            <input type="hidden"  name="username" id="username" value ="<%=member.getUsername()%>"/>
+                            <input type="hidden"  name="basket" id="basket" value ="<%=basket%>"/>
+
+
+                            <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="CheckOut" />
+                            <input type="hidden" name ="action" value="multipleOrderCart" />
+                        </div>
+                    </form>
                     <%
                         }
                     %>
@@ -445,17 +495,48 @@
         </div>
     </div>
 </div>  
+<div id="popover_content_wrapper" style="display: none">
+
+    <p>Your Cart
+    <h1><%=member.getUsername()%></h1>
+</p>
+
+
+
+
+<div>
+
+    <h5>Total: <%=totalPayed%></h5>
+
+    <a data-toggle="modal" data-href="#loginModal2" data-target="#loginModal2"  class="btn btn-primary">
+
+        <span class="glyphicon glyphicon-shopping-cart"></span> View Cart
+    </a>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
 
 <aside id="accordion" class="social text-vertical-center">
     <div class="accordion-social">
         <ul class="panel-collapse collapse in nav nav-stacked" role="tabpanel" aria-labelledby="social-collapse" id="collapseOne">
-            <li><a href="https://www.facebook.com/soldierupdesigns" target="_blank"><i class="fa fa-lg fa-facebook"></i></a></li>
-            <li><a href="https://twitter.com/soldierupdesign" target="_blank"><i class="fa fa-lg fa-twitter"></i></a></li>
-            <li><a href="https://www.plus.google.com/+soldierupdesigns" target="_blank"><i class="fa fa-lg fa-google-plus"></i></a></li>
-            <li><a href="https://github.com/blayderunner123" target="_blank"><i class="fa fa-lg fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/in/blayderunner123" target="_blank"><i class="fa fa-lg fa-linkedin"></i></a></li>
-            <li><a href="skype:live:soldierupdesigns?call"><i class="fa fa-lg fa-skype" target="_blank"></i></a></li>
-            <li><a href="http://stackexchange.com/users/4992378/blayderunner123" target="_blank"><i class="fa fa-lg fa-stack-exchange"></i></a></li>
+
+            <iframe src="https://embed.spotify.com/?uri=spotify:album:5uP9oyMK5lpzbB7K6UeT3X" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+            <!--<li><a href="https://www.facebook.com/soldierupdesigns" target="_blank"><i class="fa fa-lg fa-facebook"></i></a></li>
+      <li><a href="https://twitter.com/soldierupdesign" target="_blank"><i class="fa fa-lg fa-twitter"></i></a></li>
+      <li><a href="https://www.plus.google.com/+soldierupdesigns" target="_blank"><i class="fa fa-lg fa-google-plus"></i></a></li>
+      <li><a href="https://github.com/blayderunner123" target="_blank"><i class="fa fa-lg fa-github"></i></a></li>
+      <li><a href="https://linkedin.com/in/blayderunner123" target="_blank"><i class="fa fa-lg fa-linkedin"></i></a></li>
+      <li><a href="skype:live:soldierupdesigns?call"><i class="fa fa-lg fa-skype" target="_blank"></i></a></li>
+      <li><a href="http://stackexchange.com/users/4992378/blayderunner123" target="_blank"><i class="fa fa-lg fa-stack-exchange"></i></a></li> -->
+
         </ul>
     </div>
 </aside>

@@ -1,3 +1,27 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="Dtos.Member"%>
+<%@page import="Dtos.Album"%>
+<%@page import="Daos.AlbumDao"%>
+<%@page import="Dtos.Artist"%>
+<%@page import="Daos.ArtistDao"%>
+<%@page import="Dtos.Order"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Daos.OrderDao"%>
+
+<%
+
+    AlbumDao albumDao = new AlbumDao("musicdb");
+    ArrayList<Album> albums = albumDao.getAllAlbums();
+    ArtistDao artDao = new ArtistDao("musicdb");
+    ArrayList<Artist> artists = artDao.getAllArtists();
+
+    
+
+
+
+
+
+%>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- Navigation -->
@@ -183,7 +207,7 @@
                      Our Location</a>
 
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -195,7 +219,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a data-toggle="modal" data-href="#loginModal2" data-target="#loginModal2" style="cursor:pointer;"> Cart!</a>
+                    
+                </li>
+                <li>
+                    
                 </li>
             </ul>
         </div><!-- /.nav-collapse -->

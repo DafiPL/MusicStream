@@ -1,8 +1,8 @@
 <%@page import="Dtos.Artist"%>
 <%@page import="Daos.ArtistDao"%>
 <% session = request.getSession(false);
-    Object resultValue = session.getAttribute("userLogin");
-    Member member = (Member) resultValue;
+    Object res = session.getAttribute("userLogin");
+    Member members = (Member) res;
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
@@ -14,14 +14,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-<%@page import="java.util.Collections"%>
-<%@page import="Dtos.Member"%>
-<%@page import="Dtos.Album"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Daos.AlbumDao"%>
-<%@page import="Dtos.Order"%>
 
-<%@page import="Daos.OrderDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,6 +47,15 @@ Please login/register here!: <a href="login.jsp">Login</a>
     } );
 } );
             </script>
+            <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+            
               <style>
 
             body, html{
@@ -72,28 +74,18 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
           <%
 
-            String userType = member.getUserType();
+            String userType = members.getUserType();
             if (userType.equals("user")) {
         %>
        
-            <%
-        
-           AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-              ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-        
-         
-
-            
-          
-    %>
+       
           <%@ include file="headerLoggedIn.jsp" %>
 
           <div class="row">
-        <div class ="col-xs-12 col-sm-4 col-md-2">
+        <div class ="col-xs-12 col-sm-4 col-md-3">
             <div class ="customDIV">
-                
+                <br><br><br><br><br><br><br>
+                <div class="fb-comments" style ="background: white;"data-href="http://localhost:8084/musicStream/browseArtist.jsp" data-width="300" data-numposts="20"></div>
 
             
             
@@ -107,7 +99,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
         
         
          <div class ="col-xs-12 col-sm-4 col-md-8">
-             <div class ="customDIV" style ="background: white">
+             <div class ="customDIV" >
+                 <br><br><br><br><br>
              
                  <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
         <thead >
@@ -158,7 +151,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
              </div>
                  
          </div>
-          <div class ="col-xs-12 col-sm-4 col-md-2">
+          <div class ="col-xs-12 col-sm-4 col-md-1">
               <div class ="customDIV">  </div></div>
       
     </div>

@@ -67,6 +67,19 @@ public class SearchCommand implements Command {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Album match that title");
                 }
+            }else if (choice.equals("RandomAlbum")) {
+                AlbumDao albumDao = new AlbumDao("musicdb");
+                ArrayList<Album> albums = new ArrayList<>();
+
+                albums = albumDao.searchForRandomAlbum();
+
+                session.setAttribute("searchRandomAlbum", albums);
+                if (!albums.isEmpty()) {
+                    forwardToJsp = "LoginSuccess.jsp";
+                } else {
+                    forwardToJsp = "error.jsp";
+                    session.setAttribute("errorMessage", "No Albums in database");
+                }
             } else if (choice.equals("artist")) {
                 ArtistDao artistDao = new ArtistDao("musicdb");
                 ArrayList<Artist> artists = new ArrayList<>();

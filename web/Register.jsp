@@ -1,8 +1,4 @@
-<%@page import="Dtos.Album"%>
-<%@page import="Dtos.Artist"%>
-<%@page import="Daos.ArtistDao"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Daos.AlbumDao"%>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -91,15 +87,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <%
-
-            AlbumDao albumDao = new AlbumDao("musicdb");
-            ArrayList<Album> albums = albumDao.getAllAlbums();
-            ArtistDao artDao = new ArtistDao("musicdb");
-            ArrayList<Artist> artists = artDao.getAllArtists();
-
-
-        %>
+    
 
         <%@ include file="header.jsp" %>
 

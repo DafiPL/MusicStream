@@ -9,7 +9,6 @@ and open the template in the editor.
     Object albumDet = session.getAttribute("selectedAlbum");
     Album selectedAlbum = (Album) albumDet;
 
-   
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
@@ -43,7 +42,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-          <link href="cssBoot/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="cssBoot/bootstrap.css" rel="stylesheet" media="screen">
 
 
 
@@ -54,9 +53,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
         <!-- Loader  -->
-    <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/demo.css">
         <link rel="stylesheet" href="cssBoot/fakeLoader.css">
-      
+
         <style>
 
             body, html{
@@ -71,24 +70,26 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
         </style>
-       
+
 
 
     </head>
     <body>
         <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-        <%
-           
-        %>
-        <%@ include file="headerLoggedIn.jsp" %>
-<div class="fakeloader"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            <%
+
+            %>
+            <%@ include file="headerLoggedIn.jsp" %>
+        <div class="fakeloader"></div>
 
         <%            String userType = member.getUserType();
             if (userType.equals("user")) {
@@ -108,15 +109,15 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
         <div class="row">
-       
+
 
 
 
 
             <div class ="col-xs-12 col-sm-4 col-md-8">
                 <div class ="customDIV">
-                    
-<br><br><br>
+
+                    <br><br><br>
 
                     <div class="col-xs-6 col-sm-4 col-md-5 item-photo" style = "background: gray" >
                         <img style="max-width:100%;" src="<%=selectedAlbum.getAlbumImage()%>" />
@@ -173,10 +174,42 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                                     <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy Now!" />
-                                    <input type="hidden" name ="action" value="orderItem" />
+                                    <input type="hidden" name ="action" value="orderItem" /> 
+
+                                    <br>
+                                    <br>
+
+
                                 </div>
 
+
                                 </form></button>
+
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+                                <!-- Identify your business so that you can collect the payments. -->
+                                <input type="hidden" name="business" value="musicstreamtestemail@gmail.com">
+
+                                <!-- Specify a Buy Now button. -->
+                                <input type="hidden" name="cmd" value="_xclick">
+
+                                <!-- Specify details about the item that buyers will purchase. -->
+                                <input type="hidden" name="item_name" value="<%=selectedAlbum.getAlbumName()%>">
+                                <input type="hidden" name="amount" value="<%=selectedAlbum.getAlbumPrice()%>">
+                                <input type="number" name="quantity" value="1">
+                             
+                                <input type="hidden" name="currency_code" value="EUR">
+
+                                <!-- Display the payment button. -->
+                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                            </form>
+
+
+
+
+
+
 
 
                             <form action="FrontController" method="post">
@@ -185,7 +218,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
                                 <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
                                     <div class="form-group ">
                                         <input type="hidden"  name="albumID" id="albumID" value ="<%=selectedAlbum.getAlbumID()%>"/>
-                                       
+
                                         <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Add To Cart" />
                                         <input type="hidden" name ="action" value="addToCart" />
                                     </div>
@@ -203,7 +236,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                         </ul>
-                      
+
                         <div style="width:100%;border-top:1px solid silver">
                             <p style="padding:15px;">
                                 <small>
@@ -319,7 +352,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
                     <br><br><br>
                     <div class="fb-comments" style ="background:white" data-href="http://localhost:8084/musicStream/albumDetailPage.jsp" data-width="400" data-numposts="20"></div>
                 </div>
-        </div>
+            </div>
         </div>
 
 
@@ -367,24 +400,24 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
 
- <script src="js/fakeLoader.min.js"></script>
+        <script src="js/fakeLoader.min.js"></script>
 
         <script>
             $(document).ready(function () {
                 $("[rel='tooltip']").tooltip();
             });
         </script>
-            <script>
-            $(document).ready(function(){
+        <script>
+            $(document).ready(function () {
                 $(".fakeloader").fakeLoader({
-                    timeToHide:1800,
-                    bgColor:"#3498db",
-                    spinner:"spinner5",
-                    
+                    timeToHide: 1800,
+                    bgColor: "#3498db",
+                    spinner: "spinner5",
+
                 });
             });
         </script>
-        
+
     </body>
 </html>
 <%    }

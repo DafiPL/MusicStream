@@ -7,8 +7,10 @@ package Commands;
 
 import Daos.AlbumDao;
 import Daos.MemberDao;
+import Daos.ReviewDao;
 import Dtos.Album;
 import Dtos.Member;
+import Dtos.Review;
 
 import static EncryptionPass.SaltHashPass.generateHash;
 import java.util.ArrayList;
@@ -29,29 +31,30 @@ public class albumDetailCommand implements Command {
         String forwardToJsp = "";
         HttpSession session = request.getSession();
         String albumName = request.getParameter("albumName");
-                int convertedID = Integer.valueOf(albumName);
-        
-      
+        int convertedID = Integer.valueOf(albumName);
+
         Member m = null;
         if (albumName != null && !albumName.equals("")) {
             AlbumDao albDao = new AlbumDao("musicdb");
-          
-         Album album = null;
-          album= albDao.getAlbumById(convertedID);
-          
-        if(album != null){
-              session.setAttribute("selectedAlbum", album);
-            forwardToJsp = "albumDetailPage.jsp";
-        }
-        
-         
-          else{
-                
-               
+
+            ArrayList<Review> reviews = new ArrayList<>();
+
+            ReviewDao reviewDao = new ReviewDao("musicdb");
+            reviews = reviewDao.getAllReviewsByAlbumId(convertedID);
+
+            Album album = null;
+            album = albDao.getAlbumById(convertedID);
+
+            if (album != null ) {
+                session.setAttribute("allreviews", reviews);
+                session.setAttribute("selectedAlbum", album);
+                forwardToJsp = "albumDetailPage.jsp";
+            } else {
+
                 session.setAttribute("userEntryError", "username and password do not match");
                 forwardToJsp = "loginError.jsp";
             }
-        } 
+        }
         return forwardToJsp;
 
     }

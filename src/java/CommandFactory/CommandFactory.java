@@ -6,6 +6,7 @@
 package CommandFactory;
 
 import Commands.AddCommand;
+import Commands.AddReviewCommand;
 import Commands.Command;
 import Commands.EditCommand;
 import Commands.EditProfile;
@@ -54,6 +55,8 @@ public class CommandFactory {
             return new removeFromCartCommand();
         } else if (action.equals("multipleOrderCart")) {
             return new MultipleOrderCartCommand();
+        } else if (action.equals("addreview")) {
+            return new AddReviewCommand();
         } else {
             return null;
         }

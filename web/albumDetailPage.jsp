@@ -1,3 +1,4 @@
+<%@page import="Dtos.Review"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -8,6 +9,8 @@ and open the template in the editor.
 
     Object albumDet = session.getAttribute("selectedAlbum");
     Album selectedAlbum = (Album) albumDet;
+
+    ArrayList<Review> reviews = (ArrayList<Review>) session.getAttribute("allreviews");
 
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
@@ -29,6 +32,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
 <%@page import="Dtos.Artist"%>
 <%@page import="Daos.GenreDao"%>
 <%@page import="Dtos.Genre"%>
+<%@page import="Daos.ReviewDao"%>
+<%@page import="Dtos.Review"%>
+
 <%@page import="java.util.ArrayList"%>
 
 
@@ -98,7 +104,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <%
             ArtistDao artistDao = new ArtistDao("musicdb");
             GenreDao genreDao = new GenreDao("musicdb");
-
+            ReviewDao reviewDao = new ReviewDao("musicdb");
         %>
 
 
@@ -174,42 +180,10 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                                     <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy Now!" />
-                                    <input type="hidden" name ="action" value="orderItem" /> 
-
-                                    <br>
-                                    <br>
-
-
+                                    <input type="hidden" name ="action" value="orderItem" />
                                 </div>
 
-
                                 </form></button>
-
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-
-                                <!-- Identify your business so that you can collect the payments. -->
-                                <input type="hidden" name="business" value="musicstreamtestemail@gmail.com">
-
-                                <!-- Specify a Buy Now button. -->
-                                <input type="hidden" name="cmd" value="_xclick">
-
-                                <!-- Specify details about the item that buyers will purchase. -->
-                                <input type="hidden" name="item_name" value="<%=selectedAlbum.getAlbumName()%>">
-                                <input type="hidden" name="amount" value="<%=selectedAlbum.getAlbumPrice()%>">
-                                <input type="number" name="quantity" value="1">
-                             
-                                <input type="hidden" name="currency_code" value="EUR">
-
-                                <!-- Display the payment button. -->
-                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                            </form>
-
-
-
-
-
-
 
 
                             <form action="FrontController" method="post">
@@ -255,6 +229,25 @@ Please login/register here!: <a href="login.jsp">Login</a>
                                             <p class="list-group-item-text"><%=artistDao.getArtistById(selectedAlbum.getArtistID()).getArtistBio()%></p>
                                         </a>
 
+                                        <a class="list-group-item active">
+                                            <h4 class="list-group-item-heading">Album Reviews</h4>
+                                        </a>
+                                        
+                                        <% for (int i = 0; i < reviews.size(); i++) {%>
+                                        <a  class="list-group-item ">
+                                             <p class="list-group-item-text"><%= reviews.get(i).getUsername().toString()%>:</p>
+                                            <p class="list-group-item-text"><%= reviews.get(i).getReview().toString()%></p>
+                                        </a>
+                                        <% }%>
+                                        <form action="FrontController" method="post">
+                                            <input type="text" name="review" placeholder="Enter Review Here!!"/> 
+
+
+                                            <input type="hidden" name ="action" value="addreview" />
+                                            <input type="hidden" name ="reviewalbumid" value="<%=selectedAlbum.getAlbumID()%>" />
+                                            <input class="btn btn-warning"  type="submit" value="add" />
+
+                                        </form>
                                     </div>
 
 
@@ -297,50 +290,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
                                     </a>
 
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
                             </small>
-
                         </div>
-
                     </div>      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

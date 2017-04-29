@@ -40,7 +40,7 @@ public class FrontController extends HttpServlet {
 
  String forwardToJsp = "";
         String action = request.getParameter("action");
-        
+       
         if (action != null)
         {
             // Choose which action to carry out

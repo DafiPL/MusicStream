@@ -5,18 +5,16 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <% session = request.getSession(false);
-    
 
-   
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
 <br> 
 Please login/register here!: <a href="login.jsp">Login</a>
 <%
-    } else {
+} else {
 
-   %>
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link href="Css/common.css" rel="stylesheet" type="text/css"/>
@@ -35,7 +33,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <link href="css/common.css" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
-         <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/demo.css">
         <link rel="stylesheet" href="cssBoot/fakeLoader.css">
         <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -64,99 +62,201 @@ Please login/register here!: <a href="login.jsp">Login</a>
                 });
             });
         </script>
-      <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-       
-
-    </head>
-    <body>
-<div class="fakeloader"></div>
-        <%@ include file="headerLoggedIn.jsp" %>
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id))
+                return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 
 
-        <%                 String userType = member.getUserType();
-            if (userType.equals("user")) {
-        %>
+</head>
+<body>
+    <div class="fakeloader"></div>
+    <%@ include file="headerLoggedIn.jsp" %>
 
-        <%
+
+    <%                 String userType = member.getUserType();
+        if (userType.equals("user")) {
+    %>
+
+    <%
+
+    %>
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class ="col-xs-12 col-sm-4 col-md-3">
+
+            <br><br><br><br><br><br>
+            <div style ="background:white" class="fb-comments" data-href="http://localhost:8084/musicStream/LoginSuccess.jsp" data-width="300" data-numposts="20"></div>  
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+        <div class ="col-xs-12 col-sm-4 col-md-6">
+            <br><br><br><Br>
+            <div style ="background: #000\9"> 
+
+                <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
+                    <thead >
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Album</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Image</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <%                for (Order o : orders) {
+                        %>
+                        <tr>
+
+
+
+                            <td><%=o.getOrderID()%></td>
+                            <td><%=albumDao.getAlbumById(o.getAlbumID()).getAlbumName()%></td>
+                            <td><%=o.getQuantity()%></td>
+                            <td><%=o.getPrice()%></td>
+
+                            <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
+
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </tbody>
+
+
+
+
+                </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+        <div class ="col-xs-12 col-sm-4 col-md-3">
+            <br><br><br><br><br>
+            <div class ="customDIV">  
+
+                <form action="FrontController" method="post">
+                    <legend>Our Recommended</legend>
+                    <input class="btn btn-warning" type="submit" value="Refresh" />
+                    <input type="hidden" name ="action" value="search" />
+                    <input type="hidden" name ="searchchoice" value="RandomAlbum" />
+                </form>
+
+
+
+
+            </div>
             
-        %>
+            <% ArrayList<Album> album = albumDao.searchForRandomAlbum(); %>
 
+            <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
+                <thead >
+                    <tr>
+                        <th>Name</th>
+                        <th>Stock</th>
+                        <th>Release Date</th>
+                        <th>Price</th>
+                        
 
+                    </tr>
+                </thead>
 
+                <tbody>
+                    <%                for (Album a : album) {
+                    %>
+                    <tr>
 
 
 
+                        <td><%=a.getAlbumName()%></td>
+                        <td><%=a.getAmountInStock()%></td>
+                        <td><%=a.getReleaseDate()%></td>
+                        <td><%=a.getAlbumPrice()%></td>
+                        
+                        
 
 
-        <div class="row">
-            <div class ="col-xs-12 col-sm-4 col-md-3">
-               
-                  <br><br><br><br><br><br>
-                   <div style ="background:white" class="fb-comments" data-href="http://localhost:8084/musicStream/LoginSuccess.jsp" data-width="300" data-numposts="20"></div>  
+                    </tr>
+                    <%
+                        }
+                    %>
+                </tbody>
 
-                    
-                
 
 
 
+            </table>
 
+        </div>
 
+    </div>   
 
-                
 
-            </div>
 
 
 
 
 
-            <div class ="col-xs-12 col-sm-4 col-md-6">
-                <br><br><br><Br>
-                <div style ="background: #000\9"> 
 
-                    <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
-                        <thead >
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Album</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
-                                <th>Image</th>
 
-                            </tr>
-                        </thead>
 
-                        <tbody>
-                            <%                for (Order o : orders) {
-                            %>
-                            <tr>
 
 
 
-                                <td><%=o.getOrderID()%></td>
-                                <td><%=albumDao.getAlbumById(o.getAlbumID()).getAlbumName()%></td>
-                                <td><%=o.getQuantity()%></td>
-                                <td><%=o.getPrice()%></td>
 
-                                <td> <img src="<%=albumDao.getAlbumById(o.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120"></td>
 
-                            </tr>
-                            <%
-                                }
-                            %>
-                        </tbody>
 
+    <%        } else if (userType.equals("admin")) {
+    %>
+    <a href="adminMenu.jsp">Admin Menu</a>
+    <%
+        }
 
+    %>
 
 
-                    </table>
 
 
 
@@ -170,104 +270,38 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
 
-                </div>
 
-            </div>
-            <div class ="col-xs-12 col-sm-4 col-md-3">
-                <br><br><br><br><br>
-                <div class ="customDIV">  
-                    
-                    <form action="FrontController" method="post">
-                        <legend>Our Recommended</legend>
-                        <input class="btn btn-warning" type="submit" value="Refresh" />
-                        <input type="hidden" name ="action" value="search" />
-                        <input type="hidden" name ="searchchoice" value="RandomAlbum" />
-                    </form>
 
-                    <% ArrayList<Album> RandomAlbum = (ArrayList<Album>) session.getAttribute("searchRandomAlbum");
-                        if (RandomAlbum != null) { 
-                            
-                                }
 
-                    %> 
 
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-                </div>
+    <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/fakeLoader.min.js"></script>
 
-            </div>
 
-        </div>   
+    <script>
+$(document).ready(function () {
+    $("[rel='tooltip']").tooltip();
+});
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".fakeloader").fakeLoader({
+                timeToHide: 1800,
+                bgColor: "#3498db",
+                spinner: "spinner5",
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <%        } else if (userType.equals("admin")) {
-        %>
-        <a href="adminMenu.jsp">Admin Menu</a>
-        <%
-            }
-
-        %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-      
-         <script src="js/bootstrap.min.js"></script>
-        
-        <script src="js/fakeLoader.min.js"></script>
-
-
-        <script>
-            $(document).ready(function () {
-                $("[rel='tooltip']").tooltip();
             });
-        </script>
-                  <script>
-            $(document).ready(function(){
-                $(".fakeloader").fakeLoader({
-                    timeToHide:1800,
-                    bgColor:"#3498db",
-                    spinner:"spinner5",
-                    
-                });
-            });
-        </script>
-        
-    </body>
+        });
+    </script>
+
+</body>
 </html>
 <%    }
 %>

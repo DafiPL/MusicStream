@@ -1,3 +1,6 @@
+<%@page import="Daos.GenreDao"%>
+<%@page import="Daos.ReviewDao"%>
+<%@page import="Daos.ArtistDao"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -5,8 +8,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <% session = request.getSession(false);
-    Object resultValue = session.getAttribute("userLogin");
-    Member member = (Member) resultValue;
+    
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
@@ -27,24 +29,21 @@ Please login/register here!: <a href="index.jsp">Index</a>
 
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Your Profile</title>
-
         <!-- Bootstrap -->
         <link href="cssBoot/bootstrap.min.css" rel="stylesheet">
-        <link href="css/common.css" rel="stylesheet">
+        <link href="cssBoot/bootstrap.css" rel="stylesheet" media="screen">
+
 
 
         <!-- Website Font style -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="Css/style.css">
         <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-        <!-- Data Tables  -->
+        <!-- Loader  -->
+        <link rel="stylesheet" href="cssBoot/demo.css">
+        <link rel="stylesheet" href="cssBoot/fakeLoader.css">
 
         <style>
 
@@ -62,58 +61,36 @@ Please login/register here!: <a href="index.jsp">Index</a>
 
     </head>
     <body>
-        <h1 style ="color: white">Your Profile Page</h1>
+<div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            <%
 
-        <nav class="navbar navbar-default navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="Register.jsp">MusicStream</a>
-                </div>
+            %>
+            <%@ include file="headerLoggedIn.jsp" %>
+        <div class="fakeloader"></div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="login.html">Log In!</a></li>
-                        <li><a href="Register.jsp">Register</a></li>
-                        <li><a href="forgotResetPassword.jsp">Forgot Password?</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse <span class="caret"></span></a>
-                            <ul  class="dropdown-menu" role="menu">
-                                <li><a href="browseItems.jsp">Shop</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="EditProfile.jsp">Edit Profile</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-
-
-
-        <%
-            String userType = member.getUserType();
+        <%            String userType = member.getUserType();
             if (userType.equals("admin")) {
         %>
+
+        <%
+            ArtistDao artistDao = new ArtistDao("musicdb");
+            GenreDao genreDao = new GenreDao("musicdb");
+            ReviewDao reviewDao = new ReviewDao("musicdb");
+        %>
+
+
+
+
+        
 
 
 

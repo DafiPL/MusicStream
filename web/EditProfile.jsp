@@ -9,7 +9,6 @@ and open the template in the editor.
     Object albumDet = session.getAttribute("selectedAlbum");
     Album selectedAlbum = (Album) albumDet;
 
-  
     if (session == null || session.getAttribute("userLogin") == null) {
 %>
 <h1>Sorry you can't access this page as you're not logged in!</h1>
@@ -65,7 +64,7 @@ Please login/register here!: <a href="login.jsp">Login</a>
     </head>
     <body>   
         <%@ include file="headerLoggedIn.jsp" %>
-<div class="fakeloader"></div>
+        <div class="fakeloader"></div>
         <div class="row">
             <div class ="col-xs-12 col-sm-4 col-md-2">
                 <div class ="customDIV"> LEft SIde Bar <br>
@@ -80,17 +79,17 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
             <div class ="col-xs-12 col-sm-4 col-md-8">
                 <div class ="customDIV">
-                
-   
-      
-      <!-- edit form column -->
-    
-       
-       
-        
-        
 
-             
+
+
+                    <!-- edit form column -->
+
+
+
+
+
+
+
                     <hr>
                     <div class="row">
                         <br>
@@ -99,11 +98,13 @@ Please login/register here!: <a href="login.jsp">Login</a>
                         <div class="col-md-3">
                             <div class="text-center">
                                 <form method="post" action="uploadServlet" enctype="multipart/form-data">
-                                    
+
                                     <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
                                     <h6>Upload a different photo...</h6>
 
                                     <input type="file" name="photo"  class="form-control">
+                                    <input type="hidden" name ="username" value="<%=member.getUsername() %>" />
+
                                     <input type="submit" name="submit" value="Upload" class="form-control">
                                 </form>
                             </div>
@@ -221,8 +222,8 @@ Please login/register here!: <a href="login.jsp">Login</a>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-        
+        <script src="js/bootstrap.min.js"></script>
+
         <script src="js/fakeLoader.min.js"></script>
 
         <script>
@@ -232,13 +233,13 @@ Please login/register here!: <a href="login.jsp">Login</a>
             <%
             %>
         </script>
-                <script>
-            $(document).ready(function(){
+        <script>
+            $(document).ready(function () {
                 $(".fakeloader").fakeLoader({
-                    timeToHide:1800,
-                    bgColor:"#3498db",
-                    spinner:"spinner5",
-                    
+                    timeToHide: 1800,
+                    bgColor: "#3498db",
+                    spinner: "spinner5",
+
                 });
             });
         </script>

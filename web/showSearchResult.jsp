@@ -240,7 +240,7 @@
     <%
 
         }
-    } else if (members != null && !members.isEmpty()) {
+    }  if (members != null && !members.isEmpty()) {
     %>
     <legend>Searched Member</legend>
     <table>

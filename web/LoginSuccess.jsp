@@ -177,74 +177,64 @@ Please login/register here!: <a href="login.jsp">Login</a>
             <br><br><br><br><br>
             <div class ="customDIV">  
 
-                <form action="FrontController" method="post">
-                    <legend>Our Recommended</legend>
-                    <input class="btn btn-warning" type="submit" value="Refresh" />
-                    <input type="hidden" name ="action" value="search" />
-                    <input type="hidden" name ="searchchoice" value="RandomAlbum" />
-                </form>
 
 
 
 
+
+
+
+                <% ArrayList<Album> album = albumDao.searchForRandomAlbum(); %>
+                <div class="span3 well" style = "width: 90%; margin-left: 5%;">
+                    <div class="text-center">
+                        <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
+                            <thead >
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Stock</th>
+                                    <th>Price</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <%                for (Album a : album) {
+                                %>
+                                <tr>
+
+
+
+                                    <td><%=a.getAlbumName()%></td>
+                                    <td><%=a.getAmountInStock()%></td>
+                                    <td><%=a.getAlbumPrice()%></td>
+
+                            <img src="<%=albumDao.getAlbumById(a.getAlbumID()).getAlbumImage()%>" alt="" height="100" width="120">
+
+                            <td>  <form action="FrontController" method="post">
+
+
+
+
+                                <div class="form-group ">
+                                    <input type="hidden"  name="albumName" id="albumName" value ="<%=a.getAlbumID()%>"/>
+                                    <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy" />
+                                    <input type="hidden" name ="action" value="albumDetail" />
+                                </div>
+
+                                </form> </td>
+                            </tr> 
+
+                            <%
+                                }
+                            %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            
-            <% ArrayList<Album> album = albumDao.searchForRandomAlbum(); %>
-
-            <table id="example" class="display" width="100%" cellspacing="0" style="background:#3399ff">
-                <thead >
-                    <tr>
-                        <th>Name</th>
-                        <th>Stock</th>
-                        <th>Release Date</th>
-                        <th>Price</th>
-                        
-
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <%                for (Album a : album) {
-                    %>
-                    <tr>
-
-
-
-                        <td><%=a.getAlbumName()%></td>
-                        <td><%=a.getAmountInStock()%></td>
-                        <td><%=a.getReleaseDate()%></td>
-                        <td><%=a.getAlbumPrice()%></td>
-                        
-                        
-
-
-                    </tr>
-                    <%
-                        }
-                    %>
-                </tbody>
-
-
-
-
-            </table>
-
-        </div>
-
-    </div>   
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>   
+    </div>
 
 
 
@@ -286,9 +276,9 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
     <script>
-$(document).ready(function () {
-    $("[rel='tooltip']").tooltip();
-});
+        $(document).ready(function () {
+            $("[rel='tooltip']").tooltip();
+        });
     </script>
     <script>
         $(document).ready(function () {

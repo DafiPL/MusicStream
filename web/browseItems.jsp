@@ -79,44 +79,55 @@ Please login/register here!: <a href="login.jsp">Login</a>
 
 
                     <% ArrayList<Album> album = albumDao.searchForRandomAlbum(); %>
-
-                    <table>
-                        <thead >
-                            <tr>
-                                <th>Name</th>
-                                <th>Stock</th>
-                                <th>Release Date</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%                for (Album a : album) {
-                            %>
-                            <tr>
-                                <td><%=a.getAlbumName()%></td>
-                                <td><%=a.getAmountInStock()%></td>
-                                <td><%=a.getReleaseDate()%></td>
-                                <td>€<%= a.getAlbumPrice() * 0.2%></td>
-                                <td> <img src="<%=a.getAlbumImage()%>" alt="" height="42" width="42"></td>
-
-
-                        <div class="form-group ">
-                            <input type="hidden"  name="albumName" id="albumName" value ="<%=a.getAlbumID()%>"/>
-                            <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy" />
-                            <input type="hidden" name ="action" value="albumDetail" />
-                        </div>
-
-                        </tr>
-                        <%
-                            }
-                        %>
-                        </tbody>
+                    <div class="span3 well" style = "width: 90%; margin-left: 5%;">
+                        <div class="text-center">
+                            <table>
+                                <thead >
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Stock</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%                for (Album a : album) {
+                                    %>
+                                    <tr>
+                                        <td><%=a.getAlbumName()%></td>
+                                        <td><%=a.getAmountInStock()%></td>
+                                        <td>€<%= a.getAlbumPrice() * 0.2%></td>
+                                        <td> <img src="<%=a.getAlbumImage()%>" alt="" height="42" width="42"></td>
+                                        <td> <form action="FrontController" method="post">
 
 
 
 
-                    </table>
+                                                <div class="form-group ">
+                                                    <input type="hidden"  name="albumName" id="albumName" value ="<%=a.getAlbumID()%>"/>
+                                                    <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy" />
+                                                    <input type="hidden" name ="action" value="albumDetail" />
+                                                </div>
 
+                                            </form></td>
+
+
+                                <div class="form-group ">
+                                    <input type="hidden"  name="albumName" id="albumName" value ="<%=a.getAlbumID()%>"/>
+                                    <input style ="width: 100%; height: 40px; color: black;" class ="a" type="submit" value="Buy" />
+                                    <input type="hidden" name ="action" value="albumDetail" />
+                                </div>
+
+                                </tr>
+                                <%
+                                    }
+                                %>
+                                </tbody>
+
+
+
+
+                            </table>
+                        </div></div>
                 </div>
 
             </div>

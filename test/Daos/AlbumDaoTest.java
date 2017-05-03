@@ -19,24 +19,24 @@ import static org.junit.Assert.*;
  * @author kevin
  */
 public class AlbumDaoTest {
-    
+
     private final String testDB = "testdb";
-    
+
     public AlbumDaoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -58,7 +58,7 @@ public class AlbumDaoTest {
         a.setAlbumFormat("dsfg");
         a.setReleaseDate("dfgn");
         a.setAlbumImage("dgbnfghnm");
-        
+
         int expResult = 1;
         int result = instance.addAlbum(a);
         assertEquals(expResult, result);
@@ -72,10 +72,21 @@ public class AlbumDaoTest {
         System.out.println("getAlbumById");
         int albumID = 1;
         AlbumDao instance = new AlbumDao(testDB);
-        Album expResult = new Album(1, 1, 1, "To Pimp A Butterfly", 111, -11, "Vinyl", "2015", "./images/albumPic/kendrick-to-pimp-butterfly.jpg" );
+        Album expResult = new Album(1, 1, 1, "To Pimp A Butterfly", 111, -11, "Vinyl", "2015", "./images/albumPic/kendrick-to-pimp-butterfly.jpg");
         Album result = instance.getAlbumById(albumID);
         assertEquals(expResult, result);
-        
+
+    }
+    
+    @Test
+    public void testGetAlbumByIdNotNull() {
+        System.out.println("getAlbumById");
+        int albumID = 1;
+        AlbumDao instance = new AlbumDao(testDB);
+        Album expResult = new Album(1, 1, 1, "To Pimp A Butterfly", 111, -11, "Vinyl", "2015", "./images/albumPic/kendrick-to-pimp-butterfly.jpg");
+        Album result = instance.getAlbumById(albumID);
+        assertNotNull(result);
+
     }
 
     /**
@@ -84,26 +95,51 @@ public class AlbumDaoTest {
     @Test
     public void testDeleteAlbum() {
         System.out.println("deleteAlbum");
-        
+
         int id = 13;
         AlbumDao instance = new AlbumDao(testDB);
-        int expResult = 1;
-        int result = instance.deleteAlbum(id);
+        Album expResult = null;
+        instance.deleteAlbum(id);
+        Album result = instance.getAlbumById(id);
         assertEquals(expResult, result);
-       
+
     }
 
+    @Test
+    public void testDeleteAlbumIsNull() {
+        System.out.println("deleteAlbum");
+
+        int id = 13;
+        AlbumDao instance = new AlbumDao(testDB);
+        Album expResult = null;
+        instance.deleteAlbum(id);
+        Album result = instance.getAlbumById(id);
+        assertNull(result);
+
+    }
     /**
      * Test of getAllAlbums method, of class AlbumDao.
      */
+    
+
     @Test
-    public void testGetAllAlbums() {
+    public void testGetAllAlbumsBySize() {
         System.out.println("getAllAlbums");
         AlbumDao instance = new AlbumDao(testDB);
-        ArrayList<Album> expResult = instance.getAllAlbums();
+        int expResult = 20;
         ArrayList<Album> result = instance.getAllAlbums();
-        assertEquals(expResult, result);
-        
+        assertEquals(expResult, result.size());
+
+    }
+    
+    @Test
+    public void testGetAllAlbumsBySizeNotNull() {
+        System.out.println("getAllAlbums");
+        AlbumDao instance = new AlbumDao(testDB);
+        int expResult = 20;
+        ArrayList<Album> result = instance.getAllAlbums();
+        assertNotNull( result.size());
+
     }
 
     /**
@@ -112,13 +148,49 @@ public class AlbumDaoTest {
     @Test
     public void testSearchForAlbum() {
         System.out.println("searchForAlbum");
-        
-        String title = "";
+
+        String title = "Maad City";
         AlbumDao instance = new AlbumDao(testDB);
         ArrayList<Album> expResult = instance.searchForAlbum(title);
         ArrayList<Album> result = instance.searchForAlbum(title);
         assertEquals(expResult, result);
-        
+
+    }
+    
+    @Test
+    public void testSearchForAlbumNotNull() {
+        System.out.println("searchForAlbum");
+
+        String title = "Maad City";
+        AlbumDao instance = new AlbumDao(testDB);
+        ArrayList<Album> expResult = instance.searchForAlbum(title);
+        ArrayList<Album> result = instance.searchForAlbum(title);
+        assertNotNull( result);
+
+    }
+
+    @Test
+    public void testSearchForAlbumBySize() {
+        System.out.println("searchForAlbum");
+
+        String title = "Maad City";
+        AlbumDao instance = new AlbumDao(testDB);
+        int expResult = 1;
+        ArrayList<Album> result = instance.searchForAlbum(title);
+        assertEquals(expResult, result.size());
+
+    }
+    
+    @Test
+    public void testSearchForAlbumBySizeNotNull() {
+        System.out.println("searchForAlbum");
+
+        String title = "Maad City";
+        AlbumDao instance = new AlbumDao(testDB);
+        int expResult = 1;
+        ArrayList<Album> result = instance.searchForAlbum(title);
+        assertNotNull( result.size());
+
     }
 
     /**
@@ -132,10 +204,13 @@ public class AlbumDaoTest {
         double NumericValue = 4;
         int choice = 3;
         AlbumDao instance = new AlbumDao(testDB);
-        int expResult = 1;
-        int result = instance.editAllAlbumDetailsById(id, Textvalue, NumericValue, choice);
-        
+        Album expResult = new Album(6, 2, 4, "Greatest Hits", 91, 7, "Vinyl", "2007", "");
+        instance.editAllAlbumDetailsById(id, Textvalue, NumericValue, choice);
+        Album result = instance.getAlbumById(id);
+        assertEquals(expResult, result);
     }
+    
+   
 
     /**
      * Test of updateQuantity method, of class AlbumDao.
@@ -147,10 +222,13 @@ public class AlbumDaoTest {
         int quantity = 12;
         int id = 1;
         AlbumDao instance = new AlbumDao(testDB);
-        int expResult = 1;
-        int result = instance.updateQuantity(amountInStock, quantity, id);
+        Album expResult = new Album(1, 1, 1, "To Pimp A Butterfly", 111, -11, "Vinyl", "", "");
+        instance.updateQuantity(amountInStock, quantity, id);
+        Album result = instance.getAlbumById(id);
         assertEquals(expResult, result);
-        
+
     }
     
+    
+
 }

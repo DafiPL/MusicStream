@@ -1,3 +1,5 @@
+<%@page import="org.apache.tomcat.util.codec.binary.Base64"%>
+<%@page import="Daos.MemberDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Dtos.Member"%>
 <%@page import="Dtos.Album"%>
@@ -12,7 +14,6 @@
     Object resultValue1 = session.getAttribute("basket");
     ArrayList<Order> basket = (ArrayList<Order>) resultValue1;
 
-
     Object resultValue = session.getAttribute("userLogin");
     Member member = (Member) resultValue;
     AlbumDao albumDao = new AlbumDao("musicdb");
@@ -23,9 +24,6 @@
     OrderDao orderDao = new OrderDao("musicdb");
     ArrayList<Order> orders = orderDao.selectAllOrdersByUser(member.getUsername());
 
-              
-        
-         
 
 
 %>
@@ -144,7 +142,7 @@
 
                     </ul>				
                 </li>
-                 <a class="navbar-brand" href="https://www.google.com/maps/place/Kingscourt,+Co.+Cavan,+Ireland/@53.906877,-6.8074116,17z/data=!3m1!4b1!4m5!3m4!1s0x4860acd6fb236a9d:0xa00c7a9973176a0!8m2!3d53.9068739!4d-6.8052229">
+                <a class="navbar-brand" href="https://www.google.com/maps/place/Kingscourt,+Co.+Cavan,+Ireland/@53.906877,-6.8074116,17z/data=!3m1!4b1!4m5!3m4!1s0x4860acd6fb236a9d:0xa00c7a9973176a0!8m2!3d53.9068739!4d-6.8052229">
                     <img height="20" width="20" src="./images/icon/Map.png" class="img-responsive pull-left" alt="Responsive image">
                      Our Location</a>
                 <li class="dropdown mega-dropdown">
@@ -185,7 +183,7 @@
 
                             </ul>
                         </li>
-                        
+
 
                         <li class="col-sm-3">
                             <ul>
@@ -225,10 +223,10 @@
                         </li>
                     </ul>				
                 </li>
-                   
+
             </ul>
 
-         
+
 
         </div><!-- /.nav-collapse -->
     </div><!-- /.container-fluid -->
@@ -237,20 +235,20 @@
 
     <ul class="sidebar-nav">
         <a id="menu-close" href="#" class="btn btn-danger pull-right hidden-md hidden-lg toggle"><i class="fa fa-times"></i></a>
-         <ul style ="margin-left: 47%" class="nav navbar-nav navbar-left">
+        <ul style ="margin-left: 47%" class="nav navbar-nav navbar-left">
 
 
-                <li>
-                    <a id="cart-popover" class="btn" data-placement="bottom" title="Your Shopping Cart">
-                        <span class="glyphicon glyphicon-shopping-cart">Cart</span>
+            <li>
+                <a id="cart-popover" class="btn" data-placement="bottom" title="Your Shopping Cart">
+                    <span class="glyphicon glyphicon-shopping-cart">Cart</span>
 
-                    </a>
-                </li>
-
-             
+                </a>
+            </li>
 
 
-            </ul>
+
+
+        </ul>
         <li class="sidebar-brand">
             <a href="Index.jsp">Music <strong>Stream</strong></a>
         </li>
@@ -267,16 +265,22 @@
         </li>
 
         <li>
-            <a href="EditProfile.jsp" title="Go to Edit Profile section">Edit Profile</a>
+                <a href="EditProfile.jsp" title="Go to Edit Profile section">Edit Profile</a>
+
+               
         </li>
 
         <li>
             <div class="col-xs-12 col-sm-8 col-md-12">
                 <div class="well well-sm">
                     <div class="row">
-
+<%                                        MemberDao memberdao = new MemberDao("musicdb");
+                                        byte image[] = memberdao.getAvatar(member.getUsername());
+                                        byte[] encodeBase64 = Base64.encodeBase64(image);
+                                        String base64DataString = new String(encodeBase64, "UTF-8");
+                                    %>
                         <div class="col-sm-12 col-md-12">
-                            <img src="<%=member.getDbImage()%>" alt="" class="img-rounded img-responsive">
+                                    <img src="data:image/jpeg;base64,<%=base64DataString %>" style="width:40%">
                             <br>
                             <h4>
                                 User : <%=member.getUsername()%></h4>
@@ -311,11 +315,11 @@
                                     <span class="caret"></span><span class="sr-only">Social</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                   
+
                                     <li><a href="loginSuccessfull.jsp">Orders +</a></li>
                                     <li class="divider"></li>
                                     <li><a href="https://google.com">Search</a></li>
-                                      <li class="divider"></li>
+                                    <li class="divider"></li>
                                     <li><a href ="FrontController?action=logout">Log Out</a></li>
 
 

@@ -1,3 +1,9 @@
+<%@page import="org.apache.tomcat.util.codec.binary.Base64"%>
+<%@page import="org.apache.tomcat.util.http.fileupload.IOUtils"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="Daos.MemberDao"%>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -97,16 +103,26 @@ Please login/register here!: <a href="login.jsp">Login</a>
                         <br> <!-- left column -->
                         <div class="col-md-3">
                             <div class="text-center">
+
+                                
                                 <form method="post" action="uploadServlet" enctype="multipart/form-data">
+                                   
+                                    <img src="data:image/jpeg;base64,<%=base64DataString%>" style="width: 80% ">
 
-                                    <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-                                    <h6>Upload a different photo...</h6>
+                                <h6>Upload a different photo...</h6>
 
+                                <%
+                                        if (base64DataString == null) { %>
+                                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                                <%  }
+                                %>
+                                    
                                     <input type="file" name="photo"  class="form-control">
-                                    <input type="hidden" name ="username" value="<%=member.getUsername() %>" />
+                                    <input type="hidden" name ="username" value="<%=member.getUsername()%>" />
 
                                     <input type="submit" name="submit" value="Upload" class="form-control">
                                 </form>
+
                             </div>
                         </div>
                         <br>

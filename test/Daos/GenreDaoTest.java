@@ -50,17 +50,18 @@ public class GenreDaoTest {
         System.out.println("addGenre");
         GenreDao instance = new GenreDao(testDB);
         Genre g = new Genre();
-
+        int id = 4;
         
-        g.setGenre("Test");
+        g.setGenre("calm");
         
 
-        int expResult = 1;
-        int result = instance.addGenre(g);
+        Genre expResult = new Genre(id, "calm");
+        instance.addGenre(g);
+        Genre result = instance.getGenreById(id);
         
         assertEquals(expResult, result);
-// search user to confirm
-        instance.deleteGenre(9);
+
+        
     }
     
 
@@ -73,9 +74,20 @@ public class GenreDaoTest {
         GenreDao instance = new GenreDao(testDB);
         int genreID = 1;
        
-        Genre expResult = new Genre(1 , "Metal");;
+        Genre expResult = new Genre(1 , "Metal");
         Genre result = instance.getGenreById(genreID);
         assertEquals(expResult, result);
+        
+    }
+    
+    @Test
+    public void testGetGenreByIdNotNull() {
+        System.out.println("getGenreById");
+        GenreDao instance = new GenreDao(testDB);
+        int genreID = 1;
+       
+        Genre result = instance.getGenreById(genreID);
+        assertNotNull( result);
         
     }
 
@@ -88,9 +100,23 @@ public class GenreDaoTest {
         GenreDao instance = new GenreDao(testDB);
         int id = 13;
         
-        int expResult = 1;
-        int result = instance.deleteGenre(id);
+        Genre expResult = null;
+        instance.deleteGenre(id);
+        Genre result = instance.getGenreById(id);
         assertEquals(expResult, result);
+        
+    }
+    
+    @Test
+    public void testDeleteGenreIsNull() {
+        System.out.println("deleteGenre");
+        GenreDao instance = new GenreDao(testDB);
+        int id = 13;
+        
+        Genre expResult = null;
+        instance.deleteGenre(id);
+        Genre result = instance.getGenreById(id);
+        assertNull( result);
         
     }
 
@@ -102,9 +128,19 @@ public class GenreDaoTest {
         System.out.println("getAllMembers");
         GenreDao instance = new GenreDao(testDB);
         //Only normal Users UserType = 'user'
-        int expResult = 5;
+        int expResult = 1;
         ArrayList<Genre> result = instance.getAllGenres();
         assertEquals(expResult, result.size());
+    }
+    
+    @Test
+    public void testGetAllGenresNotNull() {
+        System.out.println("getAllMembers");
+        GenreDao instance = new GenreDao(testDB);
+        //Only normal Users UserType = 'user'
+        int expResult = 3;
+        ArrayList<Genre> result = instance.getAllGenres();
+        assertNotNull( result.size());
     }
 
     /**
@@ -114,10 +150,50 @@ public class GenreDaoTest {
     public void testSearchForGenre() {
         System.out.println("searchForGenre");
         GenreDao instance = new GenreDao(testDB);
-        String genreName = "Metal";
+        String genreName = "Hard Rock";
+        Genre g = new Genre();
+        g.setId(3);
+        g.setGenre(genreName);
+        ArrayList<Genre> expResult = new ArrayList<Genre>();
+        expResult.add(g);
+        ArrayList<Genre> result = instance.searchForGenre(genreName);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSearchForGenreNotNull() {
+        System.out.println("searchForGenre");
+        GenreDao instance = new GenreDao(testDB);
+        String genreName = "Hard Rock";
+        Genre g = new Genre();
+        g.setId(2);
+        g.setGenre(genreName);
+        ArrayList<Genre> expResult = new ArrayList<Genre>();
+        expResult.add(g);
+        ArrayList<Genre> result = instance.searchForGenre(genreName);
+        assertNotNull( result);
+    }
+    
+    @Test
+    public void testSearchForGenreBySize() {
+        System.out.println("searchForGenre");
+        GenreDao instance = new GenreDao(testDB);
+        String genreName = "Hard Rock";
+        
         int expResult = 1;
         ArrayList<Genre> result = instance.searchForGenre(genreName);
         assertEquals(expResult, result.size());
+    }
+    
+    @Test
+    public void testSearchForGenreBySizeNotNull() {
+        System.out.println("searchForGenre");
+        GenreDao instance = new GenreDao(testDB);
+        String genreName = "Hard Rock";
+        
+        int expResult = 1;
+        ArrayList<Genre> result = instance.searchForGenre(genreName);
+        assertNotNull(result.size());
     }
 
     /**
@@ -128,12 +204,13 @@ public class GenreDaoTest {
         System.out.println("editAllGenreDetailsById");
         GenreDao instance = new GenreDao(testDB);
         int id = 1;
-        String Textvalue = "Metal";
+        String Textvalue = "rock";
         double NumericValue = 0.0;
         int choice = 2;
         
-        int expResult = 1;
-        int result = instance.editAllGenreDetailsById(id, Textvalue, NumericValue, choice);
+        Genre expResult = new Genre(1, Textvalue);
+        instance.editAllGenreDetailsById(id, Textvalue, NumericValue, choice);
+        Genre result = instance.getGenreById(id);
         assertEquals(expResult, result);
         
     }

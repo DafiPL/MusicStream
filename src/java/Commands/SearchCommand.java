@@ -48,7 +48,7 @@ public class SearchCommand implements Command {
 
                 session.setAttribute("showSearchSong", songs);
                 if (!songs.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
+                    forwardToJsp = "showSearchResult.jsp";
                 } else {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Song match that title");
@@ -62,7 +62,7 @@ public class SearchCommand implements Command {
 
                 session.setAttribute("showSearchAlbum", albums);
                 if (!albums.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
+                    forwardToJsp = "showSearchResult.jsp";
                 } else {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Album match that title");
@@ -88,7 +88,7 @@ public class SearchCommand implements Command {
 
                 session.setAttribute("showSearchArtist", artists);
                 if (!artists.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
+                    forwardToJsp = "showSearchResult.jsp";
                 } else {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Artist match that title");
@@ -101,7 +101,7 @@ public class SearchCommand implements Command {
 
                 session.setAttribute("showSearchGenre", genres);
                 if (!genres.isEmpty()) {
-                    forwardToJsp = "adminMenu.jsp";
+                    forwardToJsp = "showSearchResult.jsp";
                 } else {
                     forwardToJsp = "error.jsp";
                     session.setAttribute("errorMessage", "No Genre match that title");

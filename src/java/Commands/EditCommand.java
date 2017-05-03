@@ -10,6 +10,7 @@ import Daos.ArtistDao;
 import Daos.GenreDao;
 import Daos.MemberDao;
 import Daos.SongDao;
+import Dtos.Member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,10 +33,10 @@ public class EditCommand implements Command {
         int convertChoice = Integer.valueOf(choice);
         int convertitemId = Integer.valueOf(itemId);
         int convertcontrol = Integer.valueOf(control);
-//        Object loginValue = session.getAttribute("userLogin");
-//        User user = (User) loginValue;
+        Object loginValue = session.getAttribute("userLogin");
+        Member member = (Member) loginValue;
 
-//        if (user.getAdminRole().equals("admin") && user != null) {
+        if (member.getUserType().equals("admin") && member != null) {
         if (control != null && !control.equals("") && choice != null && !choice.equals("") && itemId != null && !itemId.equals("") && newvalue != null && !newvalue.equals("")) {
             int rs = 0;
             if (convertcontrol == 1) {
@@ -81,6 +82,9 @@ public class EditCommand implements Command {
         } else {
             forwardToJsp = "error.jsp";
             session.setAttribute("errorMessage", "Please select a choice to edit.");
+        }} else{ 
+            forwardToJsp = "error.jsp";
+            session.setAttribute("errorMessage", "You are not a admin");
         }
         return forwardToJsp;
     }

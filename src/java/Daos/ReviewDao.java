@@ -44,6 +44,7 @@ public class ReviewDao extends Dao implements ReviewDaoInterface{
 
             rs = ps.executeUpdate();
 
+            
         } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e) {
             System.out.println("Constraint Exception occurred: " + e.getMessage());
             // Set the rowsAffected to -1, this can be used as a flag for the display section
@@ -70,15 +71,15 @@ public class ReviewDao extends Dao implements ReviewDaoInterface{
     
     @Override
     public Review getReviewById(int ReviewID) {
-        ArrayList<Review> Reviews = this.getAllReviews();
-        Review memberaddress = null;
-        for (int i = 0; i < Reviews.size(); i++) {
-            if (Reviews.get(i).getId()== ReviewID) {
-                memberaddress = Reviews.get(i);
+        ArrayList<Review> reviews = this.getAllReviews();
+        Review review = null;
+        for (int i = 0; i < reviews.size(); i++) {
+            if (reviews.get(i).getId() == ReviewID) {
+                review = reviews.get(i);
             }
 
         }
-        return memberaddress;
+        return review;
     }
 
     @Override

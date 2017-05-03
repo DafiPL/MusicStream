@@ -10,6 +10,7 @@ import Daos.ArtistDao;
 import Daos.GenreDao;
 import Daos.MemberDao;
 import Daos.SongDao;
+import Dtos.Member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,9 +30,10 @@ public class deleteCommand implements Command {
 
         int id = Integer.parseInt(Id);
 
-//        Object loginValue = session.getAttribute("userLogin");
-//        User user = (User) loginValue;
-//        if (user.getAdminRole().equals("admin") && user != null) {
+        Object loginValue = session.getAttribute("userLogin");
+        Member member = (Member) loginValue;
+
+        if (member.getUserType().equals("admin") && member != null) {
         if (choice != null && !choice.equals("") && Id != null && !Id.equals("")) {
 
             int rs = 0;
@@ -72,7 +74,8 @@ public class deleteCommand implements Command {
         else {
             forwardToJsp = "error.jsp";
             session.setAttribute("errorMessage", "Please Select Values To Delete");
-        }
+        } } else{forwardToJsp = "error.jsp";
+            session.setAttribute("errorMessage", "Not a admin");}
         return forwardToJsp;
 
     }

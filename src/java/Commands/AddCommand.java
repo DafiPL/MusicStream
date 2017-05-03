@@ -13,6 +13,7 @@ import Daos.SongDao;
 import Dtos.Album;
 import Dtos.Artist;
 import Dtos.Genre;
+import Dtos.Member;
 import Dtos.Song;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,35 +58,40 @@ public class AddCommand implements Command {
         int ArtistAge = Integer.valueOf(artistAge);
         Double AlbumPrice = Double.valueOf(albumPrice);
         int AmountInStock = Integer.valueOf(amountInStock);
-//        Object loginValue = session.getAttribute("userLogin");
-//        User user = (User) loginValue;
-//        if (user.getAdminRole().equals("admin") && user != null) {
-        if (choice != null) {
+        Object loginValue = session.getAttribute("userLogin");
+        Member member = (Member) loginValue;
 
-            if (choice.equals("song")) {
+        if (member.getUserType().equals("admin") && member != null) {
+            if (choice != null) {
 
-                SongDao songDao = new SongDao("musicdb");
-                Song s = new Song(songId, albumId, songName, songRelease);
-                songDao.addSong(s);
-                forwardToJsp = "adminMenu.jsp";
-            } else if (choice.equals("album")) {
-                AlbumDao albumDao = new AlbumDao("musicdb");
-                Album a = new Album(genreId, artistId, albumName, AlbumPrice, AmountInStock, albumFormat, releaseDate, albumImage);
-                albumDao.addAlbum(a);
-                forwardToJsp = "adminMenu.jsp";
-            } else if (choice.equals("artist")) {
-                ArtistDao artistDao = new ArtistDao("musicdb");
-                Artist a = new Artist(artistName, ArtistAge, artistBio, artistPicture);
-                artistDao.addArtist(a);
-                forwardToJsp = "adminMenu.jsp";
-            } else if (choice.equals("genre")) {
-                GenreDao genreDao = new GenreDao("musicdb");
-                Genre g = new Genre(genreId, genreName);
-                genreDao.addGenre(g);
-                forwardToJsp = "adminMenu.jsp";
+                if (choice.equals("song")) {
+
+                    SongDao songDao = new SongDao("musicdb");
+                    Song s = new Song(songId, albumId, songName, songRelease);
+                    songDao.addSong(s);
+                    forwardToJsp = "adminMenu.jsp";
+                } else if (choice.equals("album")) {
+                    AlbumDao albumDao = new AlbumDao("musicdb");
+                    Album a = new Album(genreId, artistId, albumName, AlbumPrice, AmountInStock, albumFormat, releaseDate, albumImage);
+                    albumDao.addAlbum(a);
+                    forwardToJsp = "adminMenu.jsp";
+                } else if (choice.equals("artist")) {
+                    ArtistDao artistDao = new ArtistDao("musicdb");
+                    Artist a = new Artist(artistName, ArtistAge, artistBio, artistPicture);
+                    artistDao.addArtist(a);
+                    forwardToJsp = "adminMenu.jsp";
+                } else if (choice.equals("genre")) {
+                    GenreDao genreDao = new GenreDao("musicdb");
+                    Genre g = new Genre(genreId, genreName);
+                    genreDao.addGenre(g);
+                    forwardToJsp = "adminMenu.jsp";
+                } else {
+                    forwardToJsp = "error.jsp";
+                    session.setAttribute("errorMessage", "Please select a choice to edit. ");
+                }
             } else {
                 forwardToJsp = "error.jsp";
-                session.setAttribute("errorMessage", "Please select a choice to edit. ");
+                session.setAttribute("errorMessage", "not all fields are entered!");
             }
         } else {
             forwardToJsp = "error.jsp";

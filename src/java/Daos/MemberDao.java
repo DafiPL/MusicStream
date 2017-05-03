@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -45,6 +46,45 @@ public class MemberDao extends Dao implements MemberDaoInterface {
      * database.
      */
     //This Method can be sql injected
+    @Override
+    public byte[] getAvatar(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Statement st = null;
+        Blob image = null;
+        byte[] imgData = null;
+        try {
+            con = getConnection();
+            st = con.createStatement();
+            String query = "select Avatar from members where username = '" + username + "' ";
+            rs = st.executeQuery(query);
+            if (rs.next()) {
+                image = rs.getBlob("Avatar");
+               imgData = image.getBytes(1,(int)image.length());
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the getAllMembers() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the getAllMembers() method: " + e.getMessage());
+            }
+        }
+
+        return imgData;
+    }
+    
     @Override
     public ArrayList<Member> searchForMmeber(String username) {
         Connection con = null;

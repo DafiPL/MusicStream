@@ -50,13 +50,15 @@ public class ArtistDaoTest {
         Artist a = new Artist();
         a.setArtistName("Kevin");
         a.setArtistAge(19);
-        a.setArtistBio("dgshsd");
-        a.setArtistPicture("sdghfdsgh");
+        a.setArtistBio("nice");
+        a.setArtistPicture("");
         
         ArtistDao instance = new ArtistDao(testDB);
-        int expResult = 1;
-        int result = instance.addArtist(a);
+        Artist expResult = new Artist(10, "kevin", 19, "nice", "");
+        instance.addArtist(a);
+        Artist result =  instance.getArtistById(10);
         assertEquals(expResult, result);
+        
        
     }
     /**
@@ -65,12 +67,23 @@ public class ArtistDaoTest {
     @Test
     public void testGetArtistById() {
         System.out.println("getArtistById");
-        int artistID = 1;
+        int artistID = 2;
         ArtistDao instance = new ArtistDao(testDB);
-        Artist expResult = new Artist(1, "Kendrick Lamar", 27, "From Compton, LA", "./images/artists/kendrick.jpg");
+        Artist expResult = new Artist(2, "Skepta", 29, "Grime Music Revolutionary, crowned \"Lord of The Mic\". 4 studio albums as of January 2017", "./images/artists/Skepta.jpg");
         Artist result = instance.getArtistById(artistID);
         assertEquals(expResult, result);
-
+    }  
+    
+        
+        @Test
+    public void testGetArtistByIdNotNull() {
+        System.out.println("getArtistById");
+        int artistID = 2;
+        ArtistDao instance = new ArtistDao(testDB);
+        Artist expResult = new Artist(2, "Skepta", 29, "Grime Music Revolutionary, crowned \"Lord of The Mic\". 4 studio albums as of January 2017", "./images/artists/Skepta.jpg");
+        Artist result = instance.getArtistById(artistID);
+        assertNotNull( result);
+        
     }
 
     /**
@@ -81,27 +94,46 @@ public class ArtistDaoTest {
         System.out.println("deleteArtist");
         int id = 13;
         ArtistDao instance = new ArtistDao(testDB);
-        int expResult = 1;
-        int result = instance.deleteArtist(id);
+        Artist expResult = null;
+        instance.deleteArtist(id);
+        Artist result = instance.getArtistById(id);
         assertEquals(expResult, result);
+        
+    }
+    
+    @Test
+    public void testDeleteArtistIsNull() {
+        System.out.println("deleteArtist");
+        int id = 13;
+        ArtistDao instance = new ArtistDao(testDB);
+        Artist expResult = null;
+        instance.deleteArtist(id);
+        Artist result = instance.getArtistById(id);
+        assertNull( result);
         
     }
     /**
      * Test of getAllArtists method, of class ArtistDao.
      */
+    
+    
     @Test
     public void testGetAllArtists() {
         System.out.println("getAllArtists");
         ArtistDao instance = new ArtistDao(testDB);
-        Artist artist = new Artist(1, "Kendrick Lamaer", 27, "Well Lad!!", "./images/artists/kendrick.jpg");
-
-        
-        ArrayList<Artist> expResult = instance.getAllArtists();
+        int expResult = 25;
         ArrayList<Artist> result = instance.getAllArtists();
-        assertEquals(expResult, result);
-
+        assertEquals(expResult, result.size());
     }
 
+    @Test
+    public void testGetAllArtistsNotNull() {
+        System.out.println("getAllArtists");
+        ArtistDao instance = new ArtistDao(testDB);
+        int expResult = 25;
+        ArrayList<Artist> result = instance.getAllArtists();
+        assertNotNull( result.size());
+    }
     /**
      * Test of searchForArtist method, of class ArtistDao.
      */
@@ -115,6 +147,39 @@ public class ArtistDaoTest {
         assertEquals(expResult, result);
 
     }
+    
+        @Test
+    public void testSearchForArtistNotNull() {
+        System.out.println("searchForArtist");
+        String title = "Skepta";
+        ArtistDao instance = new ArtistDao(testDB);
+        ArrayList<Artist> expResult = instance.searchForArtist(title);
+        ArrayList<Artist> result = instance.searchForArtist(title);
+        assertNotNull( result);
+
+    }
+    
+    @Test
+    public void testSearchForArtistBySize() {
+        System.out.println("searchForArtist");
+        String title = "Skepta";
+        ArtistDao instance = new ArtistDao(testDB);
+        int expResult = 1;
+        ArrayList<Artist> result = instance.searchForArtist(title);
+        assertEquals(expResult, result.size());
+
+    }
+    
+    @Test
+    public void testSearchForArtistBySizeNotNull() {
+        System.out.println("searchForArtist");
+        String title = "Skepta";
+        ArtistDao instance = new ArtistDao(testDB);
+        int expResult = 1;
+        ArrayList<Artist> result = instance.searchForArtist(title);
+        assertNotNull(result.size());
+
+    }
 
     /**
      * Test of editAllArtistDetailsById method, of class ArtistDao.
@@ -122,13 +187,14 @@ public class ArtistDaoTest {
     @Test
     public void testEditAllArtistDetailsById() {
         System.out.println("editAllArtistDetailsById");
-        int id = 1;
-        String Textvalue = "Well Lad!!";
+        int id = 3;
+        String Textvalue = "king of the hill";
         double NumericValue = 0.0;
         int choice = 4;
         ArtistDao instance = new ArtistDao(testDB);
-        int expResult = 1;
-        int result = instance.editAllArtistDetailsById(id, Textvalue, NumericValue, choice);
+        Artist expResult = new Artist(3, "Guns n' Roses", 50, "Lgends, nothing more to add..", "./images/artists/guns.jpg");
+        instance.editAllArtistDetailsById(id, Textvalue, NumericValue, choice);
+        Artist result = instance.getArtistById(id);
         assertEquals(expResult, result);
 
     }

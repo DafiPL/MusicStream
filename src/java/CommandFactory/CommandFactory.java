@@ -57,6 +57,8 @@ public class CommandFactory {
             return new MultipleOrderCartCommand();
         } else if (action.equals("addreview")) {
             return new AddReviewCommand();
+        } else if (action.equals("getpicki")) {
+            return new AddReviewCommand();
         } else {
             return null;
         }

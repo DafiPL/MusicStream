@@ -190,7 +190,7 @@
         <%
 
             }
-        } else if (songs != null && !songs.isEmpty()) {
+        }  if (songs != null && !songs.isEmpty()) {
         %>
         <legend>Searched Song</legend>
     <table>
@@ -216,7 +216,7 @@
     <%
 
         }
-    } else if (genre != null && !genre.isEmpty()) {
+    } if (genre != null && !genre.isEmpty()) {
     %>
     <legend>Searched Genre</legend>
     <table>

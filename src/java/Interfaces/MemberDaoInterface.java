@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Dtos.Member;
 import java.io.InputStream;
+import java.sql.Blob;
 
 /**
  *
@@ -16,6 +17,8 @@ import java.io.InputStream;
  */
 public interface MemberDaoInterface {
 
+     public byte[] getAvatar(String username);
+    
     public ArrayList<Member> getAllMembers();
 
     public ArrayList<Member> getAllUsers();
